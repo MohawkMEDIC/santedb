@@ -40,10 +40,10 @@ OpenIZBre.AddBusinessRule("QuantityObservation", "BeforeInsert",
         var refData = null;
         switch (rct.genderConcept) {
             case "094941e9-a3db-48b5-862c-bc289bd7f86c":
-                refData = JSON.parse(OpenIZ.App.loadDataAsset("weight-ranges-female.json"));
+                refData = JSON.parse(SanteDB.App.loadDataAsset("weight-ranges-female.json"));
                 break;
             case "f4e3a6bb-612e-46b2-9f77-ff844d971198":
-                refData = JSON.parse(OpenIZ.App.loadDataAsset("weight-ranges-male.json"));
+                refData = JSON.parse(SanteDB.App.loadDataAsset("weight-ranges-male.json"));
                 break;
         }
 

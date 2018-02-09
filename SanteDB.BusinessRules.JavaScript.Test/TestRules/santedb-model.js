@@ -24,30 +24,32 @@
  * @namespace
  * @property {uuid} EmptyGuid A property which represents an empty UUID
  */
-var OpenIZModel = {
-    // OpenIZ.Core.Model.BaseEntityData, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+var SanteDBModel = SanteDBModel || {
+    // SanteDB.Core.Model.BaseEntityData, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.IdentifiedData
-     * @summary             Represents the root of all model classes in the OpenIZ Core            
+     * @extends SanteDBModel.IdentifiedData
+     * @summary             Represents the root of all model classes in the SanteDB Core            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.BaseEntityData} copyData Copy constructor (if present)
+     * @param {SanteDBModel.BaseEntityData} copyData Copy constructor (if present)
      */
-    BaseEntityData: function (copyData) {
+    BaseEntityData: function (copyData)
+    {
         this.$type = 'BaseEntityData';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -59,25 +61,27 @@ var OpenIZModel = {
             this.creationTime = copyData.creationTime;
         }
     },  // BaseEntityData 
-    // OpenIZ.Core.Model.Association`1, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Association`1, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.IdentifiedData
+     * @extends SanteDBModel.IdentifiedData
      * @summary             Represents a bse class for bound relational data            
      * @property {date} modifiedOn            Get the modification date            
      * @property {uuid} source            Gets or sets the source entity's key (where the relationship is FROM)            
-     * @property {OpenIZModel.IdentifiedData} sourceModel [Delay loaded from source],             The entity that this relationship targets            
+     * @property {SanteDBModel.IdentifiedData} sourceModel [Delay loaded from source],             The entity that this relationship targets            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.Association} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Association} copyData Copy constructor (if present)
      */
-    Association: function (copyData) {
+    Association: function (copyData)
+    {
         this.$type = 'Association';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -85,10 +89,10 @@ var OpenIZModel = {
             this.modifiedOn = copyData.modifiedOn;
         }
     },  // Association 
-    // OpenIZ.Core.Model.IdentifiedData, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.IdentifiedData, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
      * @summary             Represents data that is identified by a key            
@@ -96,40 +100,44 @@ var OpenIZModel = {
      * @property {string} $type            Gets the type            
      * @property {date} modifiedOn            Gets or sets the modified on time            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.IdentifiedData} copyData Copy constructor (if present)
+     * @param {SanteDBModel.IdentifiedData} copyData Copy constructor (if present)
      */
-    IdentifiedData: function (copyData) {
+    IdentifiedData: function (copyData)
+    {
         this.$type = 'IdentifiedData';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.modifiedOn = copyData.modifiedOn;
             this.id = copyData.id;
         }
     },  // IdentifiedData 
-    // OpenIZ.Core.Model.NonVersionedEntityData, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.NonVersionedEntityData, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Updateable entity data which is not versioned            
      * @property {string} updatedTime            Gets or sets the creation time in XML format            
      * @property {date} modifiedOn            Gets the time this item was modified            
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.NonVersionedEntityData} copyData Copy constructor (if present)
+     * @param {SanteDBModel.NonVersionedEntityData} copyData Copy constructor (if present)
      */
-    NonVersionedEntityData: function (copyData) {
+    NonVersionedEntityData: function (copyData)
+    {
         this.$type = 'NonVersionedEntityData';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -143,27 +151,29 @@ var OpenIZModel = {
             this.updatedTime = copyData.updatedTime;
         }
     },  // NonVersionedEntityData 
-    // OpenIZ.Core.Model.VersionedAssociation`1, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.VersionedAssociation`1, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.Association
+     * @extends SanteDBModel.Association
      * @summary             Represents a relational class which is bound on a version boundary            
      * @property {number} effectiveVersionSequence            Gets or sets the effective version of this type            
      * @property {number} obsoleteVersionSequence            Gets or sets the obsoleted version identifier            
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.VersionedEntityData} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.VersionedEntityData} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.VersionedAssociation} copyData Copy constructor (if present)
+     * @param {SanteDBModel.VersionedAssociation} copyData Copy constructor (if present)
      */
-    VersionedAssociation: function (copyData) {
+    VersionedAssociation: function (copyData)
+    {
         this.$type = 'VersionedAssociation';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -173,33 +183,35 @@ var OpenIZModel = {
             this.effectiveVersionSequence = copyData.effectiveVersionSequence;
         }
     },  // VersionedAssociation 
-    // OpenIZ.Core.Model.VersionedEntityData`1, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.VersionedEntityData`1, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Represents versioned based data, that is base data which has versions            
      * @property {string} etag            Override the ETag            
      * @property {uuid} previousVersion            Gets or sets the previous version key            
-     * @property {OpenIZModel.VersionedEntityData} previousVersionModel [Delay loaded from previousVersion],             Gets or sets the previous version            
+     * @property {SanteDBModel.VersionedEntityData} previousVersionModel [Delay loaded from previousVersion],             Gets or sets the previous version            
      * @property {uuid} version            Gets or sets the key which represents the version of the entity            
      * @property {number} sequence            The sequence number of the version (for ordering)            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.VersionedEntityData} copyData Copy constructor (if present)
+     * @param {SanteDBModel.VersionedEntityData} copyData Copy constructor (if present)
      */
-    VersionedEntityData: function (copyData) {
+    VersionedEntityData: function (copyData)
+    {
         this.$type = 'VersionedEntityData';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -215,12 +227,12 @@ var OpenIZModel = {
             this.etag = copyData.etag;
         }
     },  // VersionedEntityData 
-    // OpenIZ.Core.Model.Security.SecurityApplication, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Security.SecurityApplication, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Represents a security application            
      * @property {string} applicationSecret            Gets or sets the application secret used for authenticating the application            
      * @property {string} name            Gets or sets the name of the security device/user/role/devie            
@@ -229,18 +241,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.SecurityApplication} copyData Copy constructor (if present)
+     * @param {SanteDBModel.SecurityApplication} copyData Copy constructor (if present)
      */
-    SecurityApplication: function (copyData) {
+    SecurityApplication: function (copyData)
+    {
         this.$type = 'SecurityApplication';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -256,12 +270,12 @@ var OpenIZModel = {
             this.applicationSecret = copyData.applicationSecret;
         }
     },  // SecurityApplication 
-    // OpenIZ.Core.Model.Security.SecurityDevice, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Security.SecurityDevice, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Represents a security device            
      * @property {string} deviceSecret            Gets or sets the device secret            
      * @property {string} name            Gets or sets the name of the security device/user/role/devie            
@@ -270,18 +284,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.SecurityDevice} copyData Copy constructor (if present)
+     * @param {SanteDBModel.SecurityDevice} copyData Copy constructor (if present)
      */
-    SecurityDevice: function (copyData) {
+    SecurityDevice: function (copyData)
+    {
         this.$type = 'SecurityDevice';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -297,30 +313,32 @@ var OpenIZModel = {
             this.deviceSecret = copyData.deviceSecret;
         }
     },  // SecurityDevice 
-    // OpenIZ.Core.Model.Security.SecurityEntity, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Security.SecurityEntity, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Security Entity base class            
      * @property {string} updatedTime            Gets or sets the creation time in XML format            
      * @property {date} modifiedOn            Gets the time this item was modified            
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.NonVersionedEntityData} copyData Copy constructor (if present)
+     * @param {SanteDBModel.NonVersionedEntityData} copyData Copy constructor (if present)
      */
-    NonVersionedEntityData: function (copyData) {
+    NonVersionedEntityData: function (copyData)
+    {
         this.$type = 'NonVersionedEntityData';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -334,12 +352,12 @@ var OpenIZModel = {
             this.updatedTime = copyData.updatedTime;
         }
     },  // NonVersionedEntityData 
-    // OpenIZ.Core.Model.Security.SecurityPolicy, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Security.SecurityPolicy, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Represents a simply security policy            
      * @property {string} handler            Gets or sets the handler which may handle this policy            
      * @property {string} name            Gets or sets the name of the policy            
@@ -348,19 +366,21 @@ var OpenIZModel = {
      * @property {bool} canOverride            Whether the policy can be elevated over            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.SecurityPolicy} copyData Copy constructor (if present)
+     * @param {SanteDBModel.SecurityPolicy} copyData Copy constructor (if present)
      */
-    SecurityPolicy: function (copyData) {
+    SecurityPolicy: function (copyData)
+    {
         this.$type = 'SecurityPolicy';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -377,24 +397,26 @@ var OpenIZModel = {
             this.handler = copyData.handler;
         }
     },  // SecurityPolicy 
-    // OpenIZ.Core.Model.Security.SecurityPolicyInstance, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Security.SecurityPolicyInstance, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Association
+     * @extends SanteDBModel.Association
      * @summary             Represents a security policy instance            
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.NonVersionedEntityData} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.NonVersionedEntityData} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.SecurityPolicyInstance} copyData Copy constructor (if present)
+     * @param {SanteDBModel.SecurityPolicyInstance} copyData Copy constructor (if present)
      */
-    SecurityPolicyInstance: function (copyData) {
+    SecurityPolicyInstance: function (copyData)
+    {
         this.$type = 'SecurityPolicyInstance';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -402,12 +424,12 @@ var OpenIZModel = {
             this.modifiedOn = copyData.modifiedOn;
         }
     },  // SecurityPolicyInstance 
-    // OpenIZ.Core.Model.Security.SecurityRole, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Security.SecurityRole, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Security role            
      * @property {string} name            Gets or sets the name of the security role            
      * @property {string} description            Description of the role            
@@ -416,18 +438,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.NonVersionedEntityData} copyData Copy constructor (if present)
+     * @param {SanteDBModel.NonVersionedEntityData} copyData Copy constructor (if present)
      */
-    NonVersionedEntityData: function (copyData) {
+    NonVersionedEntityData: function (copyData)
+    {
         this.$type = 'NonVersionedEntityData';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -443,12 +467,12 @@ var OpenIZModel = {
             this.name = copyData.name;
         }
     },  // NonVersionedEntityData 
-    // OpenIZ.Core.Model.Security.SecurityUser, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Security.SecurityUser, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Security user represents a user for the purpose of security             
      * @property {string} email            Gets or sets the email address of the user            
      * @property {bool} emailConfirmed            Gets or sets whether the email address is confirmed            
@@ -462,24 +486,26 @@ var OpenIZModel = {
      * @property {string} lastLoginTime            Gets or sets the creation time in XML format            
      * @property {string} phoneNumber            Gets or sets the patient's phone number            
      * @property {bool} phoneNumberConfirmed            Gets or sets whether the phone number was confirmed            
-     * @property {uuid} userClass            Gets or sets the user class key            (see: {@link OpenIZModel.UserClassKeys} for values)
+     * @property {uuid} userClass            Gets or sets the user class key            (see: {@link SanteDBModel.UserClassKeys} for values)
      * @property {string} etag            Gets the etag            
      * @property {string} updatedTime            Gets or sets the creation time in XML format            
      * @property {date} modifiedOn            Gets the time this item was modified            
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.SecurityUser} copyData Copy constructor (if present)
+     * @param {SanteDBModel.SecurityUser} copyData Copy constructor (if present)
      */
-    SecurityUser: function (copyData) {
+    SecurityUser: function (copyData)
+    {
         this.$type = 'SecurityUser';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -506,314 +532,316 @@ var OpenIZModel = {
             this.email = copyData.email;
         }
     },  // SecurityUser 
-    // OpenIZ.Core.Model.Roles.Patient, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Roles.Patient, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Person
+     * @extends SanteDBModel.Person
      * @summary             Represents an entity which is a patient            
      * @property {date} deceasedDate            Gets or sets the date the patient was deceased            
      * @property {DatePrecision} deceasedDatePrecision            Gets or sets the precision of the date of deceased            
      * @property {number} multipleBirthOrder            Gets or sets the multiple birth order of the patient             
      * @property {uuid} genderConcept            Gets or sets the gender concept key            
-     * @property {OpenIZModel.Concept} genderConceptModel [Delay loaded from genderConcept],             Gets or sets the gender concept            
+     * @property {SanteDBModel.Concept} genderConceptModel [Delay loaded from genderConcept],             Gets or sets the gender concept            
      * @property {date} dateOfBirth            Gets or sets the person's date of birth            
      * @property {DatePrecision} dateOfBirthPrecision            Gets or sets the precision ofthe date of birth            
-     * @property {OpenIZModel.PersonLanguageCommunication} language            Gets the person's languages of communication            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.PersonLanguageCommunication} language            Gets the person's languages of communication            
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Patient} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Patient} copyData Copy constructor (if present)
      */
-    Patient: function (copyData) {
+    Patient: function (copyData)
+    {
         this.$type = 'Patient';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -857,311 +885,313 @@ var OpenIZModel = {
             this.deceasedDate = copyData.deceasedDate;
         }
     },  // Patient 
-    // OpenIZ.Core.Model.Roles.Provider, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Roles.Provider, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Person
+     * @extends SanteDBModel.Person
      * @summary             Represents a provider role of a person            
      * @property {uuid} providerSpecialty            Gets or sets the provider specialty key            
-     * @property {OpenIZModel.Concept} providerSpecialtyModel [Delay loaded from providerSpecialty],             Gets or sets the provider specialty            
+     * @property {SanteDBModel.Concept} providerSpecialtyModel [Delay loaded from providerSpecialty],             Gets or sets the provider specialty            
      * @property {date} dateOfBirth            Gets or sets the person's date of birth            
      * @property {DatePrecision} dateOfBirthPrecision            Gets or sets the precision ofthe date of birth            
-     * @property {OpenIZModel.PersonLanguageCommunication} language            Gets the person's languages of communication            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.PersonLanguageCommunication} language            Gets the person's languages of communication            
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Provider} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Provider} copyData Copy constructor (if present)
      */
-    Provider: function (copyData) {
+    Provider: function (copyData)
+    {
         this.$type = 'Provider';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -1202,311 +1232,313 @@ var OpenIZModel = {
             this.providerSpecialty = copyData.providerSpecialty;
         }
     },  // Provider 
-    // OpenIZ.Core.Model.Entities.UserEntity, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.UserEntity, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Person
+     * @extends SanteDBModel.Person
      * @summary             Represents a user entity            
      * @property {uuid} securityUser            Gets or sets the security user key            
-     * @property {OpenIZModel.SecurityUser} securityUserModel [Delay loaded from securityUser],             Gets or sets the security user key            
+     * @property {SanteDBModel.SecurityUser} securityUserModel [Delay loaded from securityUser],             Gets or sets the security user key            
      * @property {date} dateOfBirth            Gets or sets the person's date of birth            
      * @property {DatePrecision} dateOfBirthPrecision            Gets or sets the precision ofthe date of birth            
-     * @property {OpenIZModel.PersonLanguageCommunication} language            Gets the person's languages of communication            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.PersonLanguageCommunication} language            Gets the person's languages of communication            
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.UserEntity} copyData Copy constructor (if present)
+     * @param {SanteDBModel.UserEntity} copyData Copy constructor (if present)
      */
-    UserEntity: function (copyData) {
+    UserEntity: function (copyData)
+    {
         this.$type = 'UserEntity';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -1547,311 +1579,313 @@ var OpenIZModel = {
             this.securityUser = copyData.securityUser;
         }
     },  // UserEntity 
-    // OpenIZ.Core.Model.Entities.ApplicationEntity, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.ApplicationEntity, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Entity
+     * @extends SanteDBModel.Entity
      * @summary             An associative entity which links a SecurityApplication to an Entity            
      * @property {uuid} securityApplication            Gets or sets the security application            
-     * @property {OpenIZModel.SecurityApplication} securityApplicationModel [Delay loaded from securityApplication],             Gets or sets the security application            
+     * @property {SanteDBModel.SecurityApplication} securityApplicationModel [Delay loaded from securityApplication],             Gets or sets the security application            
      * @property {string} softwareName            Gets or sets the name of the software            
      * @property {string} versionName            Gets or sets the version of the software            
      * @property {string} vendorName            Gets or sets the vendoer name of the software            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.ApplicationEntity} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ApplicationEntity} copyData Copy constructor (if present)
      */
-    ApplicationEntity: function (copyData) {
+    ApplicationEntity: function (copyData)
+    {
         this.$type = 'ApplicationEntity';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -1892,310 +1926,312 @@ var OpenIZModel = {
             this.securityApplication = copyData.securityApplication;
         }
     },  // ApplicationEntity 
-    // OpenIZ.Core.Model.Entities.DeviceEntity, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.DeviceEntity, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Entity
+     * @extends SanteDBModel.Entity
      * @summary             Represents a device entity            
      * @property {uuid} securityDevice            Gets or sets the security device key            
-     * @property {OpenIZModel.SecurityDevice} securityDeviceModel [Delay loaded from securityDevice],             Gets or sets the security device            
+     * @property {SanteDBModel.SecurityDevice} securityDeviceModel [Delay loaded from securityDevice],             Gets or sets the security device            
      * @property {string} manufacturerModelName            Gets or sets the manufacturer model name            
      * @property {string} operatingSystemName            Gets or sets the operating system name            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.DeviceEntity} copyData Copy constructor (if present)
+     * @param {SanteDBModel.DeviceEntity} copyData Copy constructor (if present)
      */
-    DeviceEntity: function (copyData) {
+    DeviceEntity: function (copyData)
+    {
         this.$type = 'DeviceEntity';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -2235,306 +2271,308 @@ var OpenIZModel = {
             this.securityDevice = copyData.securityDevice;
         }
     },  // DeviceEntity 
-    // OpenIZ.Core.Model.Entities.Entity, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.Entity, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedEntityData
+     * @extends SanteDBModel.VersionedEntityData
      * @summary             Represents the base of all entities            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Entity} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Entity} copyData Copy constructor (if present)
      */
-    Entity: function (copyData) {
+    Entity: function (copyData)
+    {
         this.$type = 'Entity';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -2570,15 +2608,15 @@ var OpenIZModel = {
             this.template = copyData.template;
         }
     },  // Entity 
-    // OpenIZ.Core.Model.Entities.EntityAddress, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.EntityAddress, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Entity address            
-     * @property {uuid} use            Gets or sets the address use key            (see: {@link OpenIZModel.AddressUseKeys} for values)
-     * @property {OpenIZModel.Concept} useModel [Delay loaded from use],             Gets or sets the address use            
+     * @property {uuid} use            Gets or sets the address use key            (see: {@link SanteDBModel.AddressUseKeys} for values)
+     * @property {SanteDBModel.Concept} useModel [Delay loaded from use],             Gets or sets the address use            
      * @property {object} component            Gets or sets the component types            
      * @property {string} component.AdditionalLocator 
      * @property {string} component.AddressLine 
@@ -2613,15 +2651,17 @@ var OpenIZModel = {
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityAddress} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityAddress} copyData Copy constructor (if present)
      */
-    EntityAddress: function (copyData) {
+    EntityAddress: function (copyData)
+    {
         this.$type = 'EntityAddress';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -2634,27 +2674,29 @@ var OpenIZModel = {
             this.use = copyData.use;
         }
     },  // EntityAddress 
-    // OpenIZ.Core.Model.Entities.EntityAddressComponent, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.EntityAddressComponent, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.GenericComponentValues
+     * @extends SanteDBModel.GenericComponentValues
      * @summary             A single address component            
-     * @property {uuid} type            Gets or sets the component type key            (see: {@link OpenIZModel.AddressComponentKeys} for values)
-     * @property {OpenIZModel.Concept} typeModel [Delay loaded from type], 
+     * @property {uuid} type            Gets or sets the component type key            (see: {@link SanteDBModel.AddressComponentKeys} for values)
+     * @property {SanteDBModel.Concept} typeModel [Delay loaded from type], 
      * @property {string} value
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.EntityAddress} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.EntityAddress} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.AddressComponent} copyData Copy constructor (if present)
+     * @param {SanteDBModel.AddressComponent} copyData Copy constructor (if present)
      */
-    AddressComponent: function (copyData) {
+    AddressComponent: function (copyData)
+    {
         this.$type = 'AddressComponent';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -2665,15 +2707,15 @@ var OpenIZModel = {
             this.type = copyData.type;
         }
     },  // AddressComponent 
-    // OpenIZ.Core.Model.Entities.EntityName, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.EntityName, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents a name for an entity            
-     * @property {uuid} use            Gets or sets the name use key            (see: {@link OpenIZModel.NameUseKeys} for values)
-     * @property {OpenIZModel.Concept} useModel [Delay loaded from use],             Gets or sets the name use            
+     * @property {uuid} use            Gets or sets the name use key            (see: {@link SanteDBModel.NameUseKeys} for values)
+     * @property {SanteDBModel.Concept} useModel [Delay loaded from use],             Gets or sets the name use            
      * @property {object} component            Gets or sets the component types            
      * @property {string} component.Delimiter             The name component represents a delimeter in a name such as hyphen or space            
      * @property {string} component.Family             The name component represents the surname            
@@ -2686,15 +2728,17 @@ var OpenIZModel = {
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityName} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityName} copyData Copy constructor (if present)
      */
-    EntityName: function (copyData) {
+    EntityName: function (copyData)
+    {
         this.$type = 'EntityName';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -2707,30 +2751,32 @@ var OpenIZModel = {
             this.use = copyData.use;
         }
     },  // EntityName 
-    // OpenIZ.Core.Model.Entities.EntityNameComponent, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.EntityNameComponent, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.GenericComponentValues
+     * @extends SanteDBModel.GenericComponentValues
      * @summary             Represents a name component which is bound to a name            
      * @property {string} phoneticCode            Gets or sets the phonetic code of the reference term            
-     * @property {uuid} type            Gets or sets the component type key            (see: {@link OpenIZModel.NameComponentKeys} for values)
-     * @property {uuid} phoneticAlgorithm            Gets or sets the identifier of the phonetic code            (see: {@link OpenIZModel.PhoneticAlgorithmKeys} for values)
-     * @property {OpenIZModel.PhoneticAlgorithm} phoneticAlgorithmModel [Delay loaded from phoneticAlgorithm],             Gets or sets the phonetic algorithm            
-     * @property {OpenIZModel.Concept} typeModel [Delay loaded from type], 
+     * @property {uuid} type            Gets or sets the component type key            (see: {@link SanteDBModel.NameComponentKeys} for values)
+     * @property {uuid} phoneticAlgorithm            Gets or sets the identifier of the phonetic code            (see: {@link SanteDBModel.PhoneticAlgorithmKeys} for values)
+     * @property {SanteDBModel.PhoneticAlgorithm} phoneticAlgorithmModel [Delay loaded from phoneticAlgorithm],             Gets or sets the phonetic algorithm            
+     * @property {SanteDBModel.Concept} typeModel [Delay loaded from type], 
      * @property {string} value
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.EntityName} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.EntityName} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityNameComponent} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityNameComponent} copyData Copy constructor (if present)
      */
-    EntityNameComponent: function (copyData) {
+    EntityNameComponent: function (copyData)
+    {
         this.$type = 'EntityNameComponent';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -2744,34 +2790,36 @@ var OpenIZModel = {
             this.phoneticCode = copyData.phoneticCode;
         }
     },  // EntityNameComponent 
-    // OpenIZ.Core.Model.Entities.EntityRelationship, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.EntityRelationship, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents an association between two entities            
      * @property {uuid} target            The target of the association            
      * @property {uuid} holder            The entity that this relationship targets            
-     * @property {OpenIZModel.Entity} holderModel [Delay loaded from holder],             The entity that this relationship targets            
-     * @property {OpenIZModel.Entity} targetModel [Delay loaded from target],             Target entity reference            
-     * @property {uuid} relationshipType            Association type key            (see: {@link OpenIZModel.EntityRelationshipTypeKeys} for values)
+     * @property {SanteDBModel.Entity} holderModel [Delay loaded from holder],             The entity that this relationship targets            
+     * @property {SanteDBModel.Entity} targetModel [Delay loaded from target],             Target entity reference            
+     * @property {uuid} relationshipType            Association type key            (see: {@link SanteDBModel.EntityRelationshipTypeKeys} for values)
      * @property {bool} inversionInd            The inversion indicator            
-     * @property {OpenIZModel.Concept} relationshipTypeModel [Delay loaded from relationshipType],             Gets or sets the association type            
+     * @property {SanteDBModel.Concept} relationshipTypeModel [Delay loaded from relationshipType],             Gets or sets the association type            
      * @property {number} quantity            Represents the quantity of target in source            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityRelationship} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityRelationship} copyData Copy constructor (if present)
      */
-    EntityRelationship: function (copyData) {
+    EntityRelationship: function (copyData)
+    {
         this.$type = 'EntityRelationship';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -2789,29 +2837,31 @@ var OpenIZModel = {
             this.target = copyData.target;
         }
     },  // EntityRelationship 
-    // OpenIZ.Core.Model.Entities.EntityTelecomAddress, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.EntityTelecomAddress, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents an entity telecom address            
-     * @property {uuid} use            Gets or sets the name use key            (see: {@link OpenIZModel.TelecomAddressUseKeys} for values)
-     * @property {OpenIZModel.Concept} useModel [Delay loaded from use],             Gets or sets the name use            
+     * @property {uuid} use            Gets or sets the name use key            (see: {@link SanteDBModel.TelecomAddressUseKeys} for values)
+     * @property {SanteDBModel.Concept} useModel [Delay loaded from use],             Gets or sets the name use            
      * @property {string} value            Gets or sets the value of the telecom address            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityTelecomAddress} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityTelecomAddress} copyData Copy constructor (if present)
      */
-    EntityTelecomAddress: function (copyData) {
+    EntityTelecomAddress: function (copyData)
+    {
         this.$type = 'EntityTelecomAddress';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -2824,28 +2874,30 @@ var OpenIZModel = {
             this.use = copyData.use;
         }
     },  // EntityTelecomAddress 
-    // OpenIZ.Core.Model.Entities.GenericComponentValues`1, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.GenericComponentValues`1, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.Association
+     * @extends SanteDBModel.Association
      * @summary             A generic class representing components of a larger item (i.e. address, name, etc);            
      * @property {uuid} type            Component type key            
-     * @property {OpenIZModel.Concept} typeModel [Delay loaded from type],             Gets or sets the type of address component            
+     * @property {SanteDBModel.Concept} typeModel [Delay loaded from type],             Gets or sets the type of address component            
      * @property {string} value            Gets or sets the value of the name component            
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.IdentifiedData} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.IdentifiedData} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.GenericComponentValues} copyData Copy constructor (if present)
+     * @param {SanteDBModel.GenericComponentValues} copyData Copy constructor (if present)
      */
-    GenericComponentValues: function (copyData) {
+    GenericComponentValues: function (copyData)
+    {
         this.$type = 'GenericComponentValues';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -2856,314 +2908,316 @@ var OpenIZModel = {
             this.type = copyData.type;
         }
     },  // GenericComponentValues 
-    // OpenIZ.Core.Model.Entities.ManufacturedMaterial, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.ManufacturedMaterial, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Material
+     * @extends SanteDBModel.Material
      * @summary             Manufactured material            
      * @property {string} lotNumber            Gets or sets the lot number of the manufactured material            
      * @property {number} quantity            The base quantity of the object in the units. This differs from quantity on the relationship            which is a /per ...             
      * @property {uuid} formConcept            Gets or sets the form concept's key            
      * @property {uuid} quantityConcept            Gets or sets the quantity concept ref            
-     * @property {OpenIZModel.Concept} formConceptModel [Delay loaded from formConcept],             Gets or sets the concept which dictates the form of the material (solid, liquid, capsule, injection, etc.)            
-     * @property {OpenIZModel.Concept} quantityConceptModel [Delay loaded from quantityConcept],             Gets or sets the concept which dictates the unit of measure for a single instance of this entity            
+     * @property {SanteDBModel.Concept} formConceptModel [Delay loaded from formConcept],             Gets or sets the concept which dictates the form of the material (solid, liquid, capsule, injection, etc.)            
+     * @property {SanteDBModel.Concept} quantityConceptModel [Delay loaded from quantityConcept],             Gets or sets the concept which dictates the unit of measure for a single instance of this entity            
      * @property {date} expiryDate            Gets or sets the expiry date of the material            
      * @property {bool} isAdministrative            True if the material is simply administrative            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.ManufacturedMaterial} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ManufacturedMaterial} copyData Copy constructor (if present)
      */
-    ManufacturedMaterial: function (copyData) {
+    ManufacturedMaterial: function (copyData)
+    {
         this.$type = 'ManufacturedMaterial';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -3207,313 +3261,315 @@ var OpenIZModel = {
             this.lotNumber = copyData.lotNumber;
         }
     },  // ManufacturedMaterial 
-    // OpenIZ.Core.Model.Entities.Material, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.Material, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Entity
+     * @extends SanteDBModel.Entity
      * @summary             Represents a material             
      * @property {number} quantity            The base quantity of the object in the units. This differs from quantity on the relationship            which is a /per ...             
      * @property {uuid} formConcept            Gets or sets the form concept's key            
      * @property {uuid} quantityConcept            Gets or sets the quantity concept ref            
-     * @property {OpenIZModel.Concept} formConceptModel [Delay loaded from formConcept],             Gets or sets the concept which dictates the form of the material (solid, liquid, capsule, injection, etc.)            
-     * @property {OpenIZModel.Concept} quantityConceptModel [Delay loaded from quantityConcept],             Gets or sets the concept which dictates the unit of measure for a single instance of this entity            
+     * @property {SanteDBModel.Concept} formConceptModel [Delay loaded from formConcept],             Gets or sets the concept which dictates the form of the material (solid, liquid, capsule, injection, etc.)            
+     * @property {SanteDBModel.Concept} quantityConceptModel [Delay loaded from quantityConcept],             Gets or sets the concept which dictates the unit of measure for a single instance of this entity            
      * @property {date} expiryDate            Gets or sets the expiry date of the material            
      * @property {bool} isAdministrative            True if the material is simply administrative            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Material} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Material} copyData Copy constructor (if present)
      */
-    Material: function (copyData) {
+    Material: function (copyData)
+    {
         this.$type = 'Material';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -3556,308 +3612,310 @@ var OpenIZModel = {
             this.quantity = copyData.quantity;
         }
     },  // Material 
-    // OpenIZ.Core.Model.Entities.Organization, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.Organization, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Entity
+     * @extends SanteDBModel.Entity
      * @summary             Organization entity            
      * @property {uuid} industryConcept            Gets or sets the industry concept key            
-     * @property {OpenIZModel.Concept} industryConceptModel [Delay loaded from industryConcept],             Gets or sets the industry in which the organization operates            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.Concept} industryConceptModel [Delay loaded from industryConcept],             Gets or sets the industry in which the organization operates            
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Organization} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Organization} copyData Copy constructor (if present)
      */
-    Organization: function (copyData) {
+    Organization: function (copyData)
+    {
         this.$type = 'Organization';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -3895,309 +3953,311 @@ var OpenIZModel = {
             this.industryConcept = copyData.industryConcept;
         }
     },  // Organization 
-    // OpenIZ.Core.Model.Entities.Person, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.Person, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Entity
+     * @extends SanteDBModel.Entity
      * @summary             Represents an entity which is a person            
      * @property {date} dateOfBirth            Gets or sets the person's date of birth            
      * @property {DatePrecision} dateOfBirthPrecision            Gets or sets the precision ofthe date of birth            
-     * @property {OpenIZModel.PersonLanguageCommunication} language            Gets the person's languages of communication            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.EntityClassKeys} for values)
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.PersonLanguageCommunication} language            Gets the person's languages of communication            
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.EntityClassKeys} for values)
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Person} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Person} copyData Copy constructor (if present)
      */
-    Person: function (copyData) {
+    Person: function (copyData)
+    {
         this.$type = 'Person';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -4236,12 +4296,12 @@ var OpenIZModel = {
             this.dateOfBirth = copyData.dateOfBirth;
         }
     },  // Person 
-    // OpenIZ.Core.Model.Entities.PersonLanguageCommunication, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.PersonLanguageCommunication, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents a single preferred communication method for the entity            
      * @property {string} languageCode            Gets or sets the language code            
      * @property {bool} isPreferred            Gets or set the user's preference indicator            
@@ -4249,15 +4309,17 @@ var OpenIZModel = {
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.PersonLanguageCommunication} copyData Copy constructor (if present)
+     * @param {SanteDBModel.PersonLanguageCommunication} copyData Copy constructor (if present)
      */
-    PersonLanguageCommunication: function (copyData) {
+    PersonLanguageCommunication: function (copyData)
+    {
         this.$type = 'PersonLanguageCommunication';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -4269,310 +4331,312 @@ var OpenIZModel = {
             this.languageCode = copyData.languageCode;
         }
     },  // PersonLanguageCommunication 
-    // OpenIZ.Core.Model.Entities.Place, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.Place, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Entity
+     * @extends SanteDBModel.Entity
      * @summary             An entity which is a place where healthcare services are delivered            
-     * @property {uuid} classConcept            Gets or sets the class concept key            (see: {@link OpenIZModel.EntityClassKeys} for values)
+     * @property {uuid} classConcept            Gets or sets the class concept key            (see: {@link SanteDBModel.EntityClassKeys} for values)
      * @property {bool} isMobile            True if location is mobile            
      * @property {Double} lat            Gets or sets the latitude            
      * @property {Double} lng            Gets or sets the longitude            
-     * @property {OpenIZModel.PlaceService} service            Gets the services            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
-     * @property {uuid} determinerConcept            Determiner concept            (see: {@link OpenIZModel.DeterminerKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {SanteDBModel.PlaceService} service            Gets the services            
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {uuid} determinerConcept            Determiner concept            (see: {@link SanteDBModel.DeterminerKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} creationAct            Creation act reference            
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} determinerConceptModel [Delay loaded from determinerConcept],             Determiner concept            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Act} creationActModel [Delay loaded from creationAct],             Creation act reference            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this entity            
-     * @property {OpenIZModel.EntityIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.EntityIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated entities for this entity            
-     * @property {OpenIZModel.EntityRelationship} relationship.Access 
-     * @property {OpenIZModel.EntityRelationship} relationship.ActiveMoiety 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdministerableMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.AdoptedSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Affiliate 
-     * @property {OpenIZModel.EntityRelationship} relationship.Agent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aliquot 
-     * @property {OpenIZModel.EntityRelationship} relationship.Assigned 
-     * @property {OpenIZModel.EntityRelationship} relationship.AssignedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Aunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.Birthplace 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Brotherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Caregiver 
-     * @property {OpenIZModel.EntityRelationship} relationship.CaseSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.Child 
-     * @property {OpenIZModel.EntityRelationship} relationship.ChildInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Citizen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Claimant 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
-     * @property {OpenIZModel.EntityRelationship} relationship.ClinicalResearchSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CommissioningParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Contact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Cousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoverageSponsor 
-     * @property {OpenIZModel.EntityRelationship} relationship.CoveredParty 
-     * @property {OpenIZModel.EntityRelationship} relationship.Daughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.DaughterInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Dependent 
-     * @property {OpenIZModel.EntityRelationship} relationship.DistributedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.DomesticPartner 
-     * @property {OpenIZModel.EntityRelationship} relationship.EmergencyContact 
-     * @property {OpenIZModel.EntityRelationship} relationship.Employee 
-     * @property {OpenIZModel.EntityRelationship} relationship.ExposedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.FamilyMember 
-     * @property {OpenIZModel.EntityRelationship} relationship.Father 
-     * @property {OpenIZModel.EntityRelationship} relationship.Fatherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.FosterSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandchild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Granddaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Grandson 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.GreatGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guarantor 
-     * @property {OpenIZModel.EntityRelationship} relationship.GUARD 
-     * @property {OpenIZModel.EntityRelationship} relationship.Guardian 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Halfsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthcareProvider 
-     * @property {OpenIZModel.EntityRelationship} relationship.HealthChart 
-     * @property {OpenIZModel.EntityRelationship} relationship.HeldEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Husband 
-     * @property {OpenIZModel.EntityRelationship} relationship.IdentifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Individual 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvestigationSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.InvoicePayor 
-     * @property {OpenIZModel.EntityRelationship} relationship.Isolate 
-     * @property {OpenIZModel.EntityRelationship} relationship.LicensedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaintainedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.ManufacturedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.MaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.MilitaryPerson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Mother 
-     * @property {OpenIZModel.EntityRelationship} relationship.Motherinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.NamedInsured 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalBrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalDaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFather 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalFatherOfFetus 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalMother 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSister 
-     * @property {OpenIZModel.EntityRelationship} relationship.NaturalSon 
-     * @property {OpenIZModel.EntityRelationship} relationship.Nephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NextOfKin 
-     * @property {OpenIZModel.EntityRelationship} relationship.Niece 
-     * @property {OpenIZModel.EntityRelationship} relationship.NieceNephew 
-     * @property {OpenIZModel.EntityRelationship} relationship.NotaryPublic 
-     * @property {OpenIZModel.EntityRelationship} relationship.OwnedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.Parent 
-     * @property {OpenIZModel.EntityRelationship} relationship.ParentInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Part 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalAunt 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalCousin 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalGreatgrandparent 
-     * @property {OpenIZModel.EntityRelationship} relationship.PaternalUncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Patient 
-     * @property {OpenIZModel.EntityRelationship} relationship.Payee 
-     * @property {OpenIZModel.EntityRelationship} relationship.PersonalRelationship 
-     * @property {OpenIZModel.EntityRelationship} relationship.PlaceOfDeath 
-     * @property {OpenIZModel.EntityRelationship} relationship.PolicyHolder 
-     * @property {OpenIZModel.EntityRelationship} relationship.ProgramEligible 
-     * @property {OpenIZModel.EntityRelationship} relationship.QualifiedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.RegulatedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.ResearchSubject 
-     * @property {OpenIZModel.EntityRelationship} relationship.RetailedMaterial 
-     * @property {OpenIZModel.EntityRelationship} relationship.Roomate 
-     * @property {OpenIZModel.EntityRelationship} relationship.ServiceDeliveryLocation 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.SiblingInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.SignificantOther 
-     * @property {OpenIZModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Sisterinlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Son 
-     * @property {OpenIZModel.EntityRelationship} relationship.SonInlaw 
-     * @property {OpenIZModel.EntityRelationship} relationship.Specimen 
-     * @property {OpenIZModel.EntityRelationship} relationship.Spouse 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepbrother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepChild 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepdaughter 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepfather 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepmother 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepParent 
-     * @property {OpenIZModel.EntityRelationship} relationship.StepSibling 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepsister 
-     * @property {OpenIZModel.EntityRelationship} relationship.Stepson 
-     * @property {OpenIZModel.EntityRelationship} relationship.Student 
-     * @property {OpenIZModel.EntityRelationship} relationship.Subscriber 
-     * @property {OpenIZModel.EntityRelationship} relationship.TerritoryOfAuthority 
-     * @property {OpenIZModel.EntityRelationship} relationship.TherapeuticAgent 
-     * @property {OpenIZModel.EntityRelationship} relationship.Uncle 
-     * @property {OpenIZModel.EntityRelationship} relationship.Underwriter 
-     * @property {OpenIZModel.EntityRelationship} relationship.UsedEntity 
-     * @property {OpenIZModel.EntityRelationship} relationship.WarrantedProduct 
-     * @property {OpenIZModel.EntityRelationship} relationship.Wife 
-     * @property {OpenIZModel.EntityRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.EntityRelationship} relationship.Access 
+     * @property {SanteDBModel.EntityRelationship} relationship.ActiveMoiety 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdministerableMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.AdoptedSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Affiliate 
+     * @property {SanteDBModel.EntityRelationship} relationship.Agent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aliquot 
+     * @property {SanteDBModel.EntityRelationship} relationship.Assigned 
+     * @property {SanteDBModel.EntityRelationship} relationship.AssignedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Aunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.Birthplace 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Brotherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Caregiver 
+     * @property {SanteDBModel.EntityRelationship} relationship.CaseSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.Child 
+     * @property {SanteDBModel.EntityRelationship} relationship.ChildInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Citizen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Claimant 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchInvestigator 
+     * @property {SanteDBModel.EntityRelationship} relationship.ClinicalResearchSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CommissioningParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Contact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Cousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoverageSponsor 
+     * @property {SanteDBModel.EntityRelationship} relationship.CoveredParty 
+     * @property {SanteDBModel.EntityRelationship} relationship.Daughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.DaughterInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.DedicatedServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Dependent 
+     * @property {SanteDBModel.EntityRelationship} relationship.DistributedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.DomesticPartner 
+     * @property {SanteDBModel.EntityRelationship} relationship.EmergencyContact 
+     * @property {SanteDBModel.EntityRelationship} relationship.Employee 
+     * @property {SanteDBModel.EntityRelationship} relationship.ExposedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.FamilyMember 
+     * @property {SanteDBModel.EntityRelationship} relationship.Father 
+     * @property {SanteDBModel.EntityRelationship} relationship.Fatherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.FosterSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandchild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Granddaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Grandson 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.GreatGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guarantor 
+     * @property {SanteDBModel.EntityRelationship} relationship.GUARD 
+     * @property {SanteDBModel.EntityRelationship} relationship.Guardian 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Halfsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthcareProvider 
+     * @property {SanteDBModel.EntityRelationship} relationship.HealthChart 
+     * @property {SanteDBModel.EntityRelationship} relationship.HeldEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Husband 
+     * @property {SanteDBModel.EntityRelationship} relationship.IdentifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.IncidentalServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Individual 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvestigationSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.InvoicePayor 
+     * @property {SanteDBModel.EntityRelationship} relationship.Isolate 
+     * @property {SanteDBModel.EntityRelationship} relationship.LicensedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaintainedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.ManufacturedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.MaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.MilitaryPerson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Mother 
+     * @property {SanteDBModel.EntityRelationship} relationship.Motherinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.NamedInsured 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalBrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalDaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFather 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalFatherOfFetus 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalMother 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSister 
+     * @property {SanteDBModel.EntityRelationship} relationship.NaturalSon 
+     * @property {SanteDBModel.EntityRelationship} relationship.Nephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NextOfKin 
+     * @property {SanteDBModel.EntityRelationship} relationship.Niece 
+     * @property {SanteDBModel.EntityRelationship} relationship.NieceNephew 
+     * @property {SanteDBModel.EntityRelationship} relationship.NotaryPublic 
+     * @property {SanteDBModel.EntityRelationship} relationship.OwnedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.Parent 
+     * @property {SanteDBModel.EntityRelationship} relationship.ParentInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Part 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalAunt 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalCousin 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalGreatgrandparent 
+     * @property {SanteDBModel.EntityRelationship} relationship.PaternalUncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Patient 
+     * @property {SanteDBModel.EntityRelationship} relationship.Payee 
+     * @property {SanteDBModel.EntityRelationship} relationship.PersonalRelationship 
+     * @property {SanteDBModel.EntityRelationship} relationship.PlaceOfDeath 
+     * @property {SanteDBModel.EntityRelationship} relationship.PolicyHolder 
+     * @property {SanteDBModel.EntityRelationship} relationship.ProgramEligible 
+     * @property {SanteDBModel.EntityRelationship} relationship.QualifiedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.RegulatedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.ResearchSubject 
+     * @property {SanteDBModel.EntityRelationship} relationship.RetailedMaterial 
+     * @property {SanteDBModel.EntityRelationship} relationship.Roomate 
+     * @property {SanteDBModel.EntityRelationship} relationship.ServiceDeliveryLocation 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.SiblingInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.SignificantOther 
+     * @property {SanteDBModel.EntityRelationship} relationship.SigningAuthorityOrOfficer 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Sisterinlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Son 
+     * @property {SanteDBModel.EntityRelationship} relationship.SonInlaw 
+     * @property {SanteDBModel.EntityRelationship} relationship.Specimen 
+     * @property {SanteDBModel.EntityRelationship} relationship.Spouse 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepbrother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepChild 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepdaughter 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepfather 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepmother 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepParent 
+     * @property {SanteDBModel.EntityRelationship} relationship.StepSibling 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepsister 
+     * @property {SanteDBModel.EntityRelationship} relationship.Stepson 
+     * @property {SanteDBModel.EntityRelationship} relationship.Student 
+     * @property {SanteDBModel.EntityRelationship} relationship.Subscriber 
+     * @property {SanteDBModel.EntityRelationship} relationship.TerritoryOfAuthority 
+     * @property {SanteDBModel.EntityRelationship} relationship.TherapeuticAgent 
+     * @property {SanteDBModel.EntityRelationship} relationship.Uncle 
+     * @property {SanteDBModel.EntityRelationship} relationship.Underwriter 
+     * @property {SanteDBModel.EntityRelationship} relationship.UsedEntity 
+     * @property {SanteDBModel.EntityRelationship} relationship.WarrantedProduct 
+     * @property {SanteDBModel.EntityRelationship} relationship.Wife 
+     * @property {SanteDBModel.EntityRelationship} relationship.$other Unclassified
      * @property {object} telecom            Gets a list of all telecommunications addresses associated with the entity            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Pager             pager            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
-     * @property {OpenIZModel.EntityTelecomAddress} telecom.$other Unclassified
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.AnsweringService             answering service            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.EmergencyContact             Emergency contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.MobileContact             Mobile phone contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Pager             pager            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.Public             public (800 number example) contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.TemporaryAddress             temporary contact            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.WorkPlace             For use in the workplace            
+     * @property {SanteDBModel.EntityTelecomAddress} telecom.$other Unclassified
      * @property {object} extension            Gets a list of all extensions associated with the entity            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {object} name            Gets a list of all names associated with the entity            
-     * @property {OpenIZModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
-     * @property {OpenIZModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
-     * @property {OpenIZModel.EntityName} name.Artist             The name represents an artist name or stage name            
-     * @property {OpenIZModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
-     * @property {OpenIZModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
-     * @property {OpenIZModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
-     * @property {OpenIZModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
-     * @property {OpenIZModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
-     * @property {OpenIZModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
-     * @property {OpenIZModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
-     * @property {OpenIZModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
-     * @property {OpenIZModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
-     * @property {OpenIZModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
-     * @property {OpenIZModel.EntityName} name.Search             The name is to be used in the performing of matches only            
-     * @property {OpenIZModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
-     * @property {OpenIZModel.EntityName} name.Syllabic 
-     * @property {OpenIZModel.EntityName} name.$other Unclassified
+     * @property {SanteDBModel.EntityName} name.Alphabetic             The name used is an alphabetic representation of the name (ex: romaji in Japanese)            
+     * @property {SanteDBModel.EntityName} name.Anonymous             The name is an anonymous name for the object (not the real name but a name used for care delivery)            
+     * @property {SanteDBModel.EntityName} name.Artist             The name represents an artist name or stage name            
+     * @property {SanteDBModel.EntityName} name.Assigned             The name represents an assigned name (given or bestowed by an authority)            
+     * @property {SanteDBModel.EntityName} name.Ideographic             THe name represents an ideographic representation of the name            
+     * @property {SanteDBModel.EntityName} name.Indigenous             The name is an indigenous name or tribal name for the patient            
+     * @property {SanteDBModel.EntityName} name.Legal             The name represents the current legal name of an object (such as a corporate name)            
+     * @property {SanteDBModel.EntityName} name.License             The name represents a name as displayed on a license or known to a license authority            
+     * @property {SanteDBModel.EntityName} name.MaidenName             THe name is a maiden name (name of a patient before marriage)            
+     * @property {SanteDBModel.EntityName} name.OfficialRecord             The name as it appears on an official record            
+     * @property {SanteDBModel.EntityName} name.Phonetic             The name represents a phonetic representation of a name such as a SOUNDEX code            
+     * @property {SanteDBModel.EntityName} name.Pseudonym             The name is a pseudonym for the object or an synonym name            
+     * @property {SanteDBModel.EntityName} name.Religious             The name is to be used for religious purposes (such as baptismal name)            
+     * @property {SanteDBModel.EntityName} name.Search             The name is to be used in the performing of matches only            
+     * @property {SanteDBModel.EntityName} name.Soundex             The name represents the computed soundex code of a name            
+     * @property {SanteDBModel.EntityName} name.Syllabic 
+     * @property {SanteDBModel.EntityName} name.$other Unclassified
      * @property {object} address            Gets a list of all addresses associated with the entity            
-     * @property {OpenIZModel.EntityAddress} address.Alphabetic 
-     * @property {OpenIZModel.EntityAddress} address.BadAddress 
-     * @property {OpenIZModel.EntityAddress} address.Direct 
-     * @property {OpenIZModel.EntityAddress} address.HomeAddress 
-     * @property {OpenIZModel.EntityAddress} address.Ideographic 
-     * @property {OpenIZModel.EntityAddress} address.Phonetic 
-     * @property {OpenIZModel.EntityAddress} address.PhysicalVisit 
-     * @property {OpenIZModel.EntityAddress} address.PostalAddress 
-     * @property {OpenIZModel.EntityAddress} address.PrimaryHome 
-     * @property {OpenIZModel.EntityAddress} address.Public 
-     * @property {OpenIZModel.EntityAddress} address.Soundex 
-     * @property {OpenIZModel.EntityAddress} address.Syllabic 
-     * @property {OpenIZModel.EntityAddress} address.TemporaryAddress 
-     * @property {OpenIZModel.EntityAddress} address.VacationHome 
-     * @property {OpenIZModel.EntityAddress} address.WorkPlace 
-     * @property {OpenIZModel.EntityAddress} address.$other Unclassified
+     * @property {SanteDBModel.EntityAddress} address.Alphabetic 
+     * @property {SanteDBModel.EntityAddress} address.BadAddress 
+     * @property {SanteDBModel.EntityAddress} address.Direct 
+     * @property {SanteDBModel.EntityAddress} address.HomeAddress 
+     * @property {SanteDBModel.EntityAddress} address.Ideographic 
+     * @property {SanteDBModel.EntityAddress} address.Phonetic 
+     * @property {SanteDBModel.EntityAddress} address.PhysicalVisit 
+     * @property {SanteDBModel.EntityAddress} address.PostalAddress 
+     * @property {SanteDBModel.EntityAddress} address.PrimaryHome 
+     * @property {SanteDBModel.EntityAddress} address.Public 
+     * @property {SanteDBModel.EntityAddress} address.Soundex 
+     * @property {SanteDBModel.EntityAddress} address.Syllabic 
+     * @property {SanteDBModel.EntityAddress} address.TemporaryAddress 
+     * @property {SanteDBModel.EntityAddress} address.VacationHome 
+     * @property {SanteDBModel.EntityAddress} address.WorkPlace 
+     * @property {SanteDBModel.EntityAddress} address.$other Unclassified
      * @property {string} note            Gets a list of all notes associated with the entity            
      * @property {object} tag            Gets a list of all tags associated with the entity            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Gets the acts in which this entity participates            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Entity} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Place} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Place} copyData Copy constructor (if present)
      */
-    Place: function (copyData) {
+    Place: function (copyData)
+    {
         this.$type = 'Place';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -4612,29 +4676,31 @@ var OpenIZModel = {
             this.classConcept = copyData.classConcept;
         }
     },  // Place 
-    // OpenIZ.Core.Model.Entities.PlaceService, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Entities.PlaceService, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents a service for a place            
      * @property {Object} serviceSchedule            The schedule that the service is offered            
      * @property {uuid} serviceConcept            Gets or sets the service concept key            
-     * @property {OpenIZModel.Concept} serviceConceptModel [Delay loaded from serviceConcept],             Gets or sets the service concept            
+     * @property {SanteDBModel.Concept} serviceConceptModel [Delay loaded from serviceConcept],             Gets or sets the service concept            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.PlaceService} copyData Copy constructor (if present)
+     * @param {SanteDBModel.PlaceService} copyData Copy constructor (if present)
      */
-    PlaceService: function (copyData) {
+    PlaceService: function (copyData)
+    {
         this.$type = 'PlaceService';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -4647,12 +4713,12 @@ var OpenIZModel = {
             this.serviceSchedule = copyData.serviceSchedule;
         }
     },  // PlaceService 
-    // OpenIZ.Core.Model.DataTypes.AssigningAuthority, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.AssigningAuthority, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Represents a model class which is an assigning authority            
      * @property {string} name            Gets or sets the name of the assigning authority            
      * @property {string} domainName            Gets or sets the domain name of the assigning authority            
@@ -4662,22 +4728,24 @@ var OpenIZModel = {
      * @property {uuid} scope            Represents scopes to which the authority is bound            
      * @property {uuid} assigningDevice            Assigning device identifier            
      * @property {object} scopeModel [Delay loaded from scope],             Gets concept sets to which this concept is a member            
-     * @property {OpenIZModel.Concept} scope.classifier  where classifier is from {@link OpenIZModel.Concept} mnemonic
+     * @property {SanteDBModel.Concept} scope.classifier  where classifier is from {@link SanteDBModel.Concept} mnemonic
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.AssigningAuthority} copyData Copy constructor (if present)
+     * @param {SanteDBModel.AssigningAuthority} copyData Copy constructor (if present)
      */
-    AssigningAuthority: function (copyData) {
+    AssigningAuthority: function (copyData)
+    {
         this.$type = 'AssigningAuthority';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -4697,12 +4765,12 @@ var OpenIZModel = {
             this.name = copyData.name;
         }
     },  // AssigningAuthority 
-    // OpenIZ.Core.Model.DataTypes.CodeSystem, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.CodeSystem, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Represents a code system which is a collection of reference terms            
      * @property {string} name            Gets or sets the name of the code system            
      * @property {string} oid            Gets or sets the Oid of the code system            
@@ -4716,18 +4784,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.CodeSystem} copyData Copy constructor (if present)
+     * @param {SanteDBModel.CodeSystem} copyData Copy constructor (if present)
      */
-    CodeSystem: function (copyData) {
+    CodeSystem: function (copyData)
+    {
         this.$type = 'CodeSystem';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -4748,51 +4818,53 @@ var OpenIZModel = {
             this.name = copyData.name;
         }
     },  // CodeSystem 
-    // OpenIZ.Core.Model.DataTypes.Concept, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.Concept, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedEntityData
-     * @summary             A class representing a generic concept used in the OpenIZ datamodel            
+     * @extends SanteDBModel.VersionedEntityData
+     * @summary             A class representing a generic concept used in the SanteDB datamodel            
      * @property {bool} isReadonly            Gets or sets an indicator which dictates whether the concept is a system concept            
      * @property {string} mnemonic            Gets or sets the unchanging mnemonic for the concept            
-     * @property {uuid} statusConcept            Gets or sets the status concept key            (see: {@link OpenIZModel.StatusKeys} for values)
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Gets or sets the status of the concept            
+     * @property {uuid} statusConcept            Gets or sets the status concept key            (see: {@link SanteDBModel.StatusKeys} for values)
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Gets or sets the status of the concept            
      * @property {object} relationship            Gets a list of concept relationships            
-     * @property {OpenIZModel.ConceptRelationship} relationship.InverseOf             Inverse of            
-     * @property {OpenIZModel.ConceptRelationship} relationship.MemberOf             Member of            
-     * @property {OpenIZModel.ConceptRelationship} relationship.NegationOf             Negation of            
-     * @property {OpenIZModel.ConceptRelationship} relationship.SameAs             Same as relationship            
-     * @property {OpenIZModel.ConceptRelationship} relationship.$other Unclassified
-     * @property {uuid} conceptClass            Gets or sets the class identifier            (see: {@link OpenIZModel.ConceptClassKeys} for values)
-     * @property {OpenIZModel.ConceptClass} conceptClassModel [Delay loaded from conceptClass],             Gets or sets the classification of the concept            
+     * @property {SanteDBModel.ConceptRelationship} relationship.InverseOf             Inverse of            
+     * @property {SanteDBModel.ConceptRelationship} relationship.MemberOf             Member of            
+     * @property {SanteDBModel.ConceptRelationship} relationship.NegationOf             Negation of            
+     * @property {SanteDBModel.ConceptRelationship} relationship.SameAs             Same as relationship            
+     * @property {SanteDBModel.ConceptRelationship} relationship.$other Unclassified
+     * @property {uuid} conceptClass            Gets or sets the class identifier            (see: {@link SanteDBModel.ConceptClassKeys} for values)
+     * @property {SanteDBModel.ConceptClass} conceptClassModel [Delay loaded from conceptClass],             Gets or sets the classification of the concept            
      * @property {object} referenceTerm            Gets a list of concept reference terms            
-     * @property {OpenIZModel.ConceptReferenceTerm} referenceTerm.classifier  where classifier is from {@link OpenIZModel.ConceptReferenceTerm} term
+     * @property {SanteDBModel.ConceptReferenceTerm} referenceTerm.classifier  where classifier is from {@link SanteDBModel.ConceptReferenceTerm} term
      * @property {object} name            Gets the concept names            
-     * @property {string} name.classifier  where classifier is from {@link OpenIZModel.ConceptName} language
+     * @property {string} name.classifier  where classifier is from {@link SanteDBModel.ConceptName} language
      * @property {uuid} conceptSet            Concept sets as identifiers for XML purposes only            
      * @property {object} conceptSetModel [Delay loaded from conceptSet],             Gets concept sets to which this concept is a member            
-     * @property {OpenIZModel.ConceptSet} conceptSet.classifier  where classifier is from {@link OpenIZModel.ConceptSet} mnemonic
+     * @property {SanteDBModel.ConceptSet} conceptSet.classifier  where classifier is from {@link SanteDBModel.ConceptSet} mnemonic
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Concept} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Concept} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Concept} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Concept} copyData Copy constructor (if present)
      */
-    Concept: function (copyData) {
+    Concept: function (copyData)
+    {
         this.$type = 'Concept';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -4819,12 +4891,12 @@ var OpenIZModel = {
             this.isReadonly = copyData.isReadonly;
         }
     },  // Concept 
-    // OpenIZ.Core.Model.DataTypes.ConceptClass, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ConceptClass, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Identifies a classification for a concept            
      * @property {string} name            Gets or sets the name of the concept class            
      * @property {string} mnemonic            Gets or sets the mnemonic            
@@ -4833,18 +4905,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ConceptClass} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ConceptClass} copyData Copy constructor (if present)
      */
-    ConceptClass: function (copyData) {
+    ConceptClass: function (copyData)
+    {
         this.$type = 'ConceptClass';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -4860,31 +4934,33 @@ var OpenIZModel = {
             this.name = copyData.name;
         }
     },  // ConceptClass 
-    // OpenIZ.Core.Model.DataTypes.ConceptName, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ConceptName, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents a name (human name) that a concept may have            
      * @property {string} language            Gets or sets the language code of the object            
      * @property {string} value            Gets or sets the name of the reference term            
      * @property {string} phoneticCode            Gets or sets the phonetic code of the reference term            
-     * @property {uuid} phoneticAlgorithm            Gets or sets the identifier of the phonetic code            (see: {@link OpenIZModel.PhoneticAlgorithmKeys} for values)
-     * @property {OpenIZModel.PhoneticAlgorithm} phoneticAlgorithmModel [Delay loaded from phoneticAlgorithm],             Gets or sets the phonetic algorithm            
+     * @property {uuid} phoneticAlgorithm            Gets or sets the identifier of the phonetic code            (see: {@link SanteDBModel.PhoneticAlgorithmKeys} for values)
+     * @property {SanteDBModel.PhoneticAlgorithm} phoneticAlgorithmModel [Delay loaded from phoneticAlgorithm],             Gets or sets the phonetic algorithm            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Concept} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Concept} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ConceptName} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ConceptName} copyData Copy constructor (if present)
      */
-    ConceptName: function (copyData) {
+    ConceptName: function (copyData)
+    {
         this.$type = 'ConceptName';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -4899,30 +4975,32 @@ var OpenIZModel = {
             this.language = copyData.language;
         }
     },  // ConceptName 
-    // OpenIZ.Core.Model.DataTypes.ConceptReferenceTerm, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ConceptReferenceTerm, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents a reference term relationship between a concept and reference term            
      * @property {uuid} term            Gets or sets the reference term identifier            
-     * @property {OpenIZModel.ReferenceTerm} termModel [Delay loaded from term],             Gets or set the reference term            
+     * @property {SanteDBModel.ReferenceTerm} termModel [Delay loaded from term],             Gets or set the reference term            
      * @property {uuid} relationshipType            Gets or sets the relationship type identifier            
-     * @property {OpenIZModel.ConceptRelationshipType} relationshipTypeModel [Delay loaded from relationshipType],             Gets or sets the relationship type            
+     * @property {SanteDBModel.ConceptRelationshipType} relationshipTypeModel [Delay loaded from relationshipType],             Gets or sets the relationship type            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Concept} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Concept} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ConceptReferenceTerm} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ConceptReferenceTerm} copyData Copy constructor (if present)
      */
-    ConceptReferenceTerm: function (copyData) {
+    ConceptReferenceTerm: function (copyData)
+    {
         this.$type = 'ConceptReferenceTerm';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -4936,30 +5014,32 @@ var OpenIZModel = {
             this.term = copyData.term;
         }
     },  // ConceptReferenceTerm 
-    // OpenIZ.Core.Model.DataTypes.ConceptRelationship, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ConceptRelationship, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents a relationship between two concepts            
      * @property {uuid} targetConcept            Gets or sets the target concept identifier            
-     * @property {OpenIZModel.Concept} targetConceptModel [Delay loaded from targetConcept],             Gets or sets the target concept            
-     * @property {uuid} relationshipType            Relationship type            (see: {@link OpenIZModel.ConceptRelationshipTypeKeys} for values)
-     * @property {OpenIZModel.ConceptRelationshipType} relationshipTypeModel [Delay loaded from relationshipType],             Gets or sets the relationship type            
+     * @property {SanteDBModel.Concept} targetConceptModel [Delay loaded from targetConcept],             Gets or sets the target concept            
+     * @property {uuid} relationshipType            Relationship type            (see: {@link SanteDBModel.ConceptRelationshipTypeKeys} for values)
+     * @property {SanteDBModel.ConceptRelationshipType} relationshipTypeModel [Delay loaded from relationshipType],             Gets or sets the relationship type            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Concept} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Concept} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ConceptRelationship} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ConceptRelationship} copyData Copy constructor (if present)
      */
-    ConceptRelationship: function (copyData) {
+    ConceptRelationship: function (copyData)
+    {
         this.$type = 'ConceptRelationship';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -4973,12 +5053,12 @@ var OpenIZModel = {
             this.targetConcept = copyData.targetConcept;
         }
     },  // ConceptRelationship 
-    // OpenIZ.Core.Model.DataTypes.ConceptRelationshipType, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ConceptRelationshipType, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Concept relationship type            
      * @property {string} name            Gets or sets the name of the relationship            
      * @property {string} mnemonic            The invariant of the relationship type            
@@ -4987,18 +5067,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ConceptRelationshipType} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ConceptRelationshipType} copyData Copy constructor (if present)
      */
-    ConceptRelationshipType: function (copyData) {
+    ConceptRelationshipType: function (copyData)
+    {
         this.$type = 'ConceptRelationshipType';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5014,12 +5096,12 @@ var OpenIZModel = {
             this.name = copyData.name;
         }
     },  // ConceptRelationshipType 
-    // OpenIZ.Core.Model.DataTypes.ConceptSet, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ConceptSet, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Represents set of concepts            
      * @property {string} name            Gets or sets the name of the concept set            
      * @property {string} mnemonic            Gets or sets the mnemonic for the concept set (used for convenient lookup)            
@@ -5028,19 +5110,21 @@ var OpenIZModel = {
      * @property {uuid} concept            Concepts as identifiers for XML purposes only            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ConceptSet} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ConceptSet} copyData Copy constructor (if present)
      */
-    ConceptSet: function (copyData) {
+    ConceptSet: function (copyData)
+    {
         this.$type = 'ConceptSet';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5057,29 +5141,31 @@ var OpenIZModel = {
             this.name = copyData.name;
         }
     },  // ConceptSet 
-    // OpenIZ.Core.Model.DataTypes.Extension`1, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.Extension`1, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents a base entity extension            
      * @property {bytea} value            Gets or sets the value of the extension            
-     * @property {OpenIZModel.ExtensionType} extensionType            Gets or sets the extension type            
+     * @property {SanteDBModel.ExtensionType} extensionType            Gets or sets the extension type            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.VersionedEntityData} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.VersionedEntityData} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.Extension} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Extension} copyData Copy constructor (if present)
      */
-    Extension: function (copyData) {
+    Extension: function (copyData)
+    {
         this.$type = 'Extension';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5091,28 +5177,30 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // Extension 
-    // OpenIZ.Core.Model.DataTypes.EntityExtension, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.EntityExtension, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Extension
+     * @extends SanteDBModel.Extension
      * @summary             Extension bound to entity            
      * @property {bytea} value
-     * @property {OpenIZModel.ExtensionType} extensionType
+     * @property {SanteDBModel.ExtensionType} extensionType
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityExtension} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityExtension} copyData Copy constructor (if present)
      */
-    EntityExtension: function (copyData) {
+    EntityExtension: function (copyData)
+    {
         this.$type = 'EntityExtension';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5124,28 +5212,30 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // EntityExtension 
-    // OpenIZ.Core.Model.DataTypes.ActExtension, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ActExtension, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Extension
+     * @extends SanteDBModel.Extension
      * @summary             Act extension            
      * @property {bytea} value
-     * @property {OpenIZModel.ExtensionType} extensionType
+     * @property {SanteDBModel.ExtensionType} extensionType
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Act} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Act} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ActExtension} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ActExtension} copyData Copy constructor (if present)
      */
-    ActExtension: function (copyData) {
+    ActExtension: function (copyData)
+    {
         this.$type = 'ActExtension';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5157,12 +5247,12 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // ActExtension 
-    // OpenIZ.Core.Model.DataTypes.ExtensionType, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ExtensionType, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Instructions on how an extensionshould be handled            
      * @property {string} handlerClass            Gets or sets the description            
      * @property {string} name            Gets or sets the description            
@@ -5171,18 +5261,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ExtensionType} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ExtensionType} copyData Copy constructor (if present)
      */
-    ExtensionType: function (copyData) {
+    ExtensionType: function (copyData)
+    {
         this.$type = 'ExtensionType';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5198,29 +5290,31 @@ var OpenIZModel = {
             this.handlerClass = copyData.handlerClass;
         }
     },  // ExtensionType 
-    // OpenIZ.Core.Model.DataTypes.EntityIdentifier, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.EntityIdentifier, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.IdentifierBase
+     * @extends SanteDBModel.IdentifierBase
      * @summary             Entity identifiers            
      * @property {string} value
-     * @property {OpenIZModel.IdentifierType} type
-     * @property {OpenIZModel.AssigningAuthority} authority
+     * @property {SanteDBModel.IdentifierType} type
+     * @property {SanteDBModel.AssigningAuthority} authority
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityIdentifier} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityIdentifier} copyData Copy constructor (if present)
      */
-    EntityIdentifier: function (copyData) {
+    EntityIdentifier: function (copyData)
+    {
         this.$type = 'EntityIdentifier';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5233,29 +5327,31 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // EntityIdentifier 
-    // OpenIZ.Core.Model.DataTypes.ActIdentifier, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ActIdentifier, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.IdentifierBase
+     * @extends SanteDBModel.IdentifierBase
      * @summary             Act identifier            
      * @property {string} value
-     * @property {OpenIZModel.IdentifierType} type
-     * @property {OpenIZModel.AssigningAuthority} authority
+     * @property {SanteDBModel.IdentifierType} type
+     * @property {SanteDBModel.AssigningAuthority} authority
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Act} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Act} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ActIdentifier} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ActIdentifier} copyData Copy constructor (if present)
      */
-    ActIdentifier: function (copyData) {
+    ActIdentifier: function (copyData)
+    {
         this.$type = 'ActIdentifier';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5268,30 +5364,32 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // ActIdentifier 
-    // OpenIZ.Core.Model.DataTypes.IdentifierBase`1, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.IdentifierBase`1, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents an external assigned identifier            
      * @property {string} value            Gets or sets the value of the identifier            
-     * @property {OpenIZModel.IdentifierType} type            Gets or sets the identifier type            
-     * @property {OpenIZModel.AssigningAuthority} authority            Gets or sets the assigning authority             
+     * @property {SanteDBModel.IdentifierType} type            Gets or sets the identifier type            
+     * @property {SanteDBModel.AssigningAuthority} authority            Gets or sets the assigning authority             
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.VersionedEntityData} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.VersionedEntityData} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.IdentifierBase} copyData Copy constructor (if present)
+     * @param {SanteDBModel.IdentifierBase} copyData Copy constructor (if present)
      */
-    IdentifierBase: function (copyData) {
+    IdentifierBase: function (copyData)
+    {
         this.$type = 'IdentifierBase';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5304,32 +5402,34 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // IdentifierBase 
-    // OpenIZ.Core.Model.DataTypes.IdentifierType, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.IdentifierType, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Represents a basic information class which classifies the use of an identifier            
      * @property {uuid} scopeConcept            Gets or sets the id of the scope concept            
      * @property {uuid} typeConcept            Gets or sets the concept which identifies the type            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept            
-     * @property {OpenIZModel.Concept} scopeConceptModel [Delay loaded from scopeConcept],             Gets the scope of the identifier            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept            
+     * @property {SanteDBModel.Concept} scopeConceptModel [Delay loaded from scopeConcept],             Gets the scope of the identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.IdentifierType} copyData Copy constructor (if present)
+     * @param {SanteDBModel.IdentifierType} copyData Copy constructor (if present)
      */
-    IdentifierType: function (copyData) {
+    IdentifierType: function (copyData)
+    {
         this.$type = 'IdentifierType';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5345,30 +5445,32 @@ var OpenIZModel = {
             this.scopeConcept = copyData.scopeConcept;
         }
     },  // IdentifierType 
-    // OpenIZ.Core.Model.DataTypes.Note`1, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.Note`1, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Generic note class            
      * @property {string} text            Gets or sets the note text            
      * @property {uuid} author            Gets or sets the author key            
-     * @property {OpenIZModel.Entity} authorModel [Delay loaded from author],             Gets or sets the author entity            
+     * @property {SanteDBModel.Entity} authorModel [Delay loaded from author],             Gets or sets the author entity            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.VersionedEntityData} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.VersionedEntityData} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.Note} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Note} copyData Copy constructor (if present)
      */
-    Note: function (copyData) {
+    Note: function (copyData)
+    {
         this.$type = 'Note';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5381,29 +5483,31 @@ var OpenIZModel = {
             this.text = copyData.text;
         }
     },  // Note 
-    // OpenIZ.Core.Model.DataTypes.EntityNote, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.EntityNote, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Note
+     * @extends SanteDBModel.Note
      * @summary             Represents a note attached to an entity            
      * @property {string} text
      * @property {uuid} author
-     * @property {OpenIZModel.Entity} authorModel [Delay loaded from author], 
+     * @property {SanteDBModel.Entity} authorModel [Delay loaded from author], 
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityNote} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityNote} copyData Copy constructor (if present)
      */
-    EntityNote: function (copyData) {
+    EntityNote: function (copyData)
+    {
         this.$type = 'EntityNote';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5416,29 +5520,31 @@ var OpenIZModel = {
             this.text = copyData.text;
         }
     },  // EntityNote 
-    // OpenIZ.Core.Model.DataTypes.ActNote, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ActNote, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Note
+     * @extends SanteDBModel.Note
      * @summary             Represents a note attached to an entity            
      * @property {string} text
      * @property {uuid} author
-     * @property {OpenIZModel.Entity} authorModel [Delay loaded from author], 
+     * @property {SanteDBModel.Entity} authorModel [Delay loaded from author], 
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Act} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Act} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ActNote} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ActNote} copyData Copy constructor (if present)
      */
-    ActNote: function (copyData) {
+    ActNote: function (copyData)
+    {
         this.$type = 'ActNote';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5451,12 +5557,12 @@ var OpenIZModel = {
             this.text = copyData.text;
         }
     },  // ActNote 
-    // OpenIZ.Core.Model.DataTypes.PhoneticAlgorithm, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.PhoneticAlgorithm, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Represents a phonetic algorithm record in the model            
      * @property {string} name            Gets the name of the phonetic algorithm            
      * @property {string} handler            Gets the handler (or generator) for the phonetic algorithm            
@@ -5465,18 +5571,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.PhoneticAlgorithm} copyData Copy constructor (if present)
+     * @param {SanteDBModel.PhoneticAlgorithm} copyData Copy constructor (if present)
      */
-    PhoneticAlgorithm: function (copyData) {
+    PhoneticAlgorithm: function (copyData)
+    {
         this.$type = 'PhoneticAlgorithm';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5492,35 +5600,37 @@ var OpenIZModel = {
             this.name = copyData.name;
         }
     },  // PhoneticAlgorithm 
-    // OpenIZ.Core.Model.DataTypes.ReferenceTerm, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ReferenceTerm, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Represents a basic reference term            
      * @property {string} mnemonic            Gets or sets the mnemonic for the reference term            
-     * @property {OpenIZModel.CodeSystem} codeSystemModel [Delay loaded from codeSystem],             Gets or sets the code system             
-     * @property {uuid} codeSystem            Gets or sets the code system identifier            (see: {@link OpenIZModel.CodeSystemKeys} for values)
+     * @property {SanteDBModel.CodeSystem} codeSystemModel [Delay loaded from codeSystem],             Gets or sets the code system             
+     * @property {uuid} codeSystem            Gets or sets the code system identifier            (see: {@link SanteDBModel.CodeSystemKeys} for values)
      * @property {object} name            Gets display names associated with the reference term            
-     * @property {string} name.classifier  where classifier is from {@link OpenIZModel.ReferenceTermName} language
+     * @property {string} name.classifier  where classifier is from {@link SanteDBModel.ReferenceTermName} language
      * @property {string} updatedTime            Gets or sets the creation time in XML format            
      * @property {date} modifiedOn            Gets the time this item was modified            
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ReferenceTerm} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ReferenceTerm} copyData Copy constructor (if present)
      */
-    ReferenceTerm: function (copyData) {
+    ReferenceTerm: function (copyData)
+    {
         this.$type = 'ReferenceTerm';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5538,33 +5648,35 @@ var OpenIZModel = {
             this.mnemonic = copyData.mnemonic;
         }
     },  // ReferenceTerm 
-    // OpenIZ.Core.Model.DataTypes.ReferenceTermName, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ReferenceTermName, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Display name of a code system or reference term            
      * @property {string} language            Gets or sets the language code of the object            
      * @property {string} value            Gets or sets the name of the reference term            
      * @property {string} phoneticCode            Gets or sets the phonetic code of the reference term            
-     * @property {uuid} phoneticAlgorithm            Gets or sets the identifier of the phonetic code            (see: {@link OpenIZModel.PhoneticAlgorithmKeys} for values)
-     * @property {OpenIZModel.PhoneticAlgorithm} phoneticAlgorithmModel [Delay loaded from phoneticAlgorithm],             Gets or sets the phonetic algorithm            
+     * @property {uuid} phoneticAlgorithm            Gets or sets the identifier of the phonetic code            (see: {@link SanteDBModel.PhoneticAlgorithmKeys} for values)
+     * @property {SanteDBModel.PhoneticAlgorithm} phoneticAlgorithmModel [Delay loaded from phoneticAlgorithm],             Gets or sets the phonetic algorithm            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ReferenceTermName} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ReferenceTermName} copyData Copy constructor (if present)
      */
-    ReferenceTermName: function (copyData) {
+    ReferenceTermName: function (copyData)
+    {
         this.$type = 'ReferenceTermName';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5581,33 +5693,35 @@ var OpenIZModel = {
             this.language = copyData.language;
         }
     },  // ReferenceTermName 
-    // OpenIZ.Core.Model.DataTypes.Tag`1, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.Tag`1, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Represents the base class for tags            
      * @property {string} key            Gets or sets the key of the tag            
      * @property {string} value            Gets or sets the value of the tag            
      * @property {uuid} source            Gets or sets the source entity's key (where the relationship is FROM)            
-     * @property {OpenIZModel.IdentifiedData} sourceModel [Delay loaded from source],             The entity that this relationship targets            
+     * @property {SanteDBModel.IdentifiedData} sourceModel [Delay loaded from source],             The entity that this relationship targets            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.Tag} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Tag} copyData Copy constructor (if present)
      */
-    Tag: function (copyData) {
+    Tag: function (copyData)
+    {
         this.$type = 'Tag';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5623,32 +5737,34 @@ var OpenIZModel = {
             this.key = copyData.key;
         }
     },  // Tag 
-    // OpenIZ.Core.Model.DataTypes.EntityTag, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.EntityTag, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Tag
+     * @extends SanteDBModel.Tag
      * @summary             Represents a tag associated with an entity            
      * @property {string} key
      * @property {string} value
      * @property {uuid} source
-     * @property {OpenIZModel.Entity} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Entity} sourceModel [Delay loaded from source], 
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.EntityTag} copyData Copy constructor (if present)
+     * @param {SanteDBModel.EntityTag} copyData Copy constructor (if present)
      */
-    EntityTag: function (copyData) {
+    EntityTag: function (copyData)
+    {
         this.$type = 'EntityTag';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5664,32 +5780,34 @@ var OpenIZModel = {
             this.key = copyData.key;
         }
     },  // EntityTag 
-    // OpenIZ.Core.Model.DataTypes.ActTag, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.ActTag, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Tag
+     * @extends SanteDBModel.Tag
      * @summary             Represents a tag on an act            
      * @property {string} key
      * @property {string} value
      * @property {uuid} source
-     * @property {OpenIZModel.Act} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Act} sourceModel [Delay loaded from source], 
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ActTag} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ActTag} copyData Copy constructor (if present)
      */
-    ActTag: function (copyData) {
+    ActTag: function (copyData)
+    {
         this.$type = 'ActTag';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5705,12 +5823,12 @@ var OpenIZModel = {
             this.key = copyData.key;
         }
     },  // ActTag 
-    // OpenIZ.Core.Model.DataTypes.TemplateDefinition, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.DataTypes.TemplateDefinition, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.NonVersionedEntityData
+     * @extends SanteDBModel.NonVersionedEntityData
      * @summary             Represents a template definition            
      * @property {string} mnemonic            Gets or sets the mnemonic            
      * @property {string} name            Gets or set the name             
@@ -5721,18 +5839,20 @@ var OpenIZModel = {
      * @property {uuid} updatedBy            Gets or sets the created by identifier            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.TemplateDefinition} copyData Copy constructor (if present)
+     * @param {SanteDBModel.TemplateDefinition} copyData Copy constructor (if present)
      */
-    TemplateDefinition: function (copyData) {
+    TemplateDefinition: function (copyData)
+    {
         this.$type = 'TemplateDefinition';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -5750,15 +5870,15 @@ var OpenIZModel = {
             this.mnemonic = copyData.mnemonic;
         }
     },  // TemplateDefinition 
-    // OpenIZ.Core.Model.Collection.Bundle, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Collection.Bundle, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.IdentifiedData
+     * @extends SanteDBModel.IdentifiedData
      * @summary             Represents a collection of model items             
      * @property {date} modifiedOn            Gets the time the bundle was modified            
-     * @property {OpenIZModel.IdentifiedData} item            Gets or sets items in the bundle            
+     * @property {SanteDBModel.IdentifiedData} item            Gets or sets items in the bundle            
      * @property {uuid} entry            Entry into the bundle            
      * @property {number} offset            Gets or sets the count in this bundle            
      * @property {number} count            Gets or sets the count in this bundle            
@@ -5766,153 +5886,157 @@ var OpenIZModel = {
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.Bundle} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Bundle} copyData Copy constructor (if present)
      */
-    Bundle: function (copyData) {
+    Bundle: function (copyData)
+    {
         this.$type = 'Bundle';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.totalResults = copyData.totalResults;
             this.count = copyData.count;
             this.offset = copyData.offset;
             this.entry = copyData.entry;
-            this.item = copyData.item;
+            this.item = copyData.$item;
             this.modifiedOn = copyData.modifiedOn;
         }
     },  // Bundle 
-    // OpenIZ.Core.Model.Acts.Act, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.Act, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedEntityData
+     * @extends SanteDBModel.VersionedEntityData
      * @summary             Represents the base class for an act            
      * @property {bool} isNegated            Gets or sets an indicator which identifies whether the object is negated            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
      * @property {string} actTime            Gets or sets the creation time in XML format            
      * @property {string} startTime            Gets or sets the creation time in XML format            
      * @property {string} stopTime            Gets or sets the creation time in XML format            
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.ActClassKeys} for values)
-     * @property {uuid} moodConcept            Mood concept            (see: {@link OpenIZModel.ActMoodKeys} for values)
-     * @property {uuid} reasonConcept            Reason concept            (see: {@link OpenIZModel.ActReasonKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.ActClassKeys} for values)
+     * @property {uuid} moodConcept            Mood concept            (see: {@link SanteDBModel.ActMoodKeys} for values)
+     * @property {uuid} reasonConcept            Reason concept            (see: {@link SanteDBModel.ActReasonKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this act            
-     * @property {OpenIZModel.ActIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.ActIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated acts for this act            
-     * @property {OpenIZModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
-     * @property {OpenIZModel.ActRelationship} relationship.Documents             The source act documents the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
-     * @property {OpenIZModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
-     * @property {OpenIZModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
-     * @property {OpenIZModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
-     * @property {OpenIZModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.$other Unclassified
-     * @property {OpenIZModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
+     * @property {SanteDBModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
+     * @property {SanteDBModel.ActRelationship} relationship.Documents             The source act documents the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
+     * @property {SanteDBModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
+     * @property {SanteDBModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
+     * @property {SanteDBModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
+     * @property {SanteDBModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
      * @property {object} extension            Gets a list of all extensions associated with the act            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {string} note            Gets a list of all notes associated with the act            
      * @property {object} tag            Gets a list of all tags associated with the act            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Participations            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Act} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Act} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Act} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Act} copyData Copy constructor (if present)
      */
-    Act: function (copyData) {
+    Act: function (copyData)
+    {
         this.$type = 'Act';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -5950,33 +6074,35 @@ var OpenIZModel = {
             this.isNegated = copyData.isNegated;
         }
     },  // Act 
-    // OpenIZ.Core.Model.Acts.ActParticipation, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.ActParticipation, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Associates an entity which participates in an act            
      * @property {uuid} player            Gets or sets the target entity reference            
-     * @property {uuid} participationRole            Gets or sets the participation role key            (see: {@link OpenIZModel.ActParticipationKey} for values)
-     * @property {OpenIZModel.Entity} playerModel [Delay loaded from player],             Gets or sets the entity which participated in the act            
-     * @property {OpenIZModel.Concept} participationRoleModel [Delay loaded from participationRole],             Gets or sets the role that the entity played in participating in the act            
+     * @property {uuid} participationRole            Gets or sets the participation role key            (see: {@link SanteDBModel.ActParticipationKey} for values)
+     * @property {SanteDBModel.Entity} playerModel [Delay loaded from player],             Gets or sets the entity which participated in the act            
+     * @property {SanteDBModel.Concept} participationRoleModel [Delay loaded from participationRole],             Gets or sets the role that the entity played in participating in the act            
      * @property {uuid} act            The entity that this relationship targets            
-     * @property {OpenIZModel.Act} actModel [Delay loaded from act],             The entity that this relationship targets            
+     * @property {SanteDBModel.Act} actModel [Delay loaded from act],             The entity that this relationship targets            
      * @property {number} quantity            Gets or sets the quantity of player in the act            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Act} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Act} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ActParticipation} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ActParticipation} copyData Copy constructor (if present)
      */
-    ActParticipation: function (copyData) {
+    ActParticipation: function (copyData)
+    {
         this.$type = 'ActParticipation';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -5993,29 +6119,31 @@ var OpenIZModel = {
             this.player = copyData.player;
         }
     },  // ActParticipation 
-    // OpenIZ.Core.Model.Acts.ActProtocol, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.ActProtocol, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Represents information related to the clinical protocol to which an act is a member of            
      * @property {uuid} protocol            Gets or sets the protocol  to which this act belongs            
-     * @property {OpenIZModel.Protocol} protocolModel [Delay loaded from protocol],             Gets or sets the protocol data related to the protocol            
+     * @property {SanteDBModel.Protocol} protocolModel [Delay loaded from protocol],             Gets or sets the protocol data related to the protocol            
      * @property {string} state            Represents any state data related to the act / protocol link            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Act} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Act} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ActProtocol} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ActProtocol} copyData Copy constructor (if present)
      */
-    ActProtocol: function (copyData) {
+    ActProtocol: function (copyData)
+    {
         this.$type = 'ActProtocol';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -6028,30 +6156,32 @@ var OpenIZModel = {
             this.protocol = copyData.protocol;
         }
     },  // ActProtocol 
-    // OpenIZ.Core.Model.Acts.ActRelationship, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.ActRelationship, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.VersionedAssociation
+     * @extends SanteDBModel.VersionedAssociation
      * @summary             Act relationships            
      * @property {uuid} target            The target of the association            
-     * @property {OpenIZModel.Act} targetModel [Delay loaded from target],             Target act reference            
-     * @property {uuid} relationshipType            Association type key            (see: {@link OpenIZModel.ActRelationshipTypeKeys} for values)
-     * @property {OpenIZModel.Concept} relationshipTypeModel [Delay loaded from relationshipType],             Gets or sets the association type            
+     * @property {SanteDBModel.Act} targetModel [Delay loaded from target],             Target act reference            
+     * @property {uuid} relationshipType            Association type key            (see: {@link SanteDBModel.ActRelationshipTypeKeys} for values)
+     * @property {SanteDBModel.Concept} relationshipTypeModel [Delay loaded from relationshipType],             Gets or sets the association type            
      * @property {number} effectiveVersionSequence
      * @property {number} obsoleteVersionSequence
      * @property {date} modifiedOn
      * @property {uuid} source
-     * @property {OpenIZModel.Act} sourceModel [Delay loaded from source], 
+     * @property {SanteDBModel.Act} sourceModel [Delay loaded from source], 
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.ActRelationship} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ActRelationship} copyData Copy constructor (if present)
      */
-    ActRelationship: function (copyData) {
+    ActRelationship: function (copyData)
+    {
         this.$type = 'ActRelationship';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.sourceModel = copyData.sourceModel;
@@ -6065,138 +6195,140 @@ var OpenIZModel = {
             this.target = copyData.target;
         }
     },  // ActRelationship 
-    // OpenIZ.Core.Model.Acts.ControlAct, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.ControlAct, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Act
+     * @extends SanteDBModel.Act
      * @summary             Represents an act which indicates why data was created/changed            
      * @property {bool} isNegated            Gets or sets an indicator which identifies whether the object is negated            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
      * @property {string} actTime            Gets or sets the creation time in XML format            
      * @property {string} startTime            Gets or sets the creation time in XML format            
      * @property {string} stopTime            Gets or sets the creation time in XML format            
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.ActClassKeys} for values)
-     * @property {uuid} moodConcept            Mood concept            (see: {@link OpenIZModel.ActMoodKeys} for values)
-     * @property {uuid} reasonConcept            Reason concept            (see: {@link OpenIZModel.ActReasonKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.ActClassKeys} for values)
+     * @property {uuid} moodConcept            Mood concept            (see: {@link SanteDBModel.ActMoodKeys} for values)
+     * @property {uuid} reasonConcept            Reason concept            (see: {@link SanteDBModel.ActReasonKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this act            
-     * @property {OpenIZModel.ActIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.ActIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated acts for this act            
-     * @property {OpenIZModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
-     * @property {OpenIZModel.ActRelationship} relationship.Documents             The source act documents the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
-     * @property {OpenIZModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
-     * @property {OpenIZModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
-     * @property {OpenIZModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
-     * @property {OpenIZModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.$other Unclassified
-     * @property {OpenIZModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
+     * @property {SanteDBModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
+     * @property {SanteDBModel.ActRelationship} relationship.Documents             The source act documents the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
+     * @property {SanteDBModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
+     * @property {SanteDBModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
+     * @property {SanteDBModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
+     * @property {SanteDBModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
      * @property {object} extension            Gets a list of all extensions associated with the act            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {string} note            Gets a list of all notes associated with the act            
      * @property {object} tag            Gets a list of all tags associated with the act            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Participations            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Act} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Act} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.ControlAct} copyData Copy constructor (if present)
+     * @param {SanteDBModel.ControlAct} copyData Copy constructor (if present)
      */
-    ControlAct: function (copyData) {
+    ControlAct: function (copyData)
+    {
         this.$type = 'ControlAct';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -6234,141 +6366,143 @@ var OpenIZModel = {
             this.isNegated = copyData.isNegated;
         }
     },  // ControlAct 
-    // OpenIZ.Core.Model.Acts.Observation, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.Observation, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @abstract
-     * @extends OpenIZModel.Act
+     * @extends SanteDBModel.Act
      * @summary             Represents a class which is an observation            
      * @property {uuid} interpretationConcept            Gets or sets the interpretation concept            
-     * @property {OpenIZModel.Concept} interpretationConceptModel [Delay loaded from interpretationConcept],             Gets or sets the concept which indicates the interpretation of the observtion            
+     * @property {SanteDBModel.Concept} interpretationConceptModel [Delay loaded from interpretationConcept],             Gets or sets the concept which indicates the interpretation of the observtion            
      * @property {bool} isNegated            Gets or sets an indicator which identifies whether the object is negated            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
      * @property {string} actTime            Gets or sets the creation time in XML format            
      * @property {string} startTime            Gets or sets the creation time in XML format            
      * @property {string} stopTime            Gets or sets the creation time in XML format            
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.ActClassKeys} for values)
-     * @property {uuid} moodConcept            Mood concept            (see: {@link OpenIZModel.ActMoodKeys} for values)
-     * @property {uuid} reasonConcept            Reason concept            (see: {@link OpenIZModel.ActReasonKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.ActClassKeys} for values)
+     * @property {uuid} moodConcept            Mood concept            (see: {@link SanteDBModel.ActMoodKeys} for values)
+     * @property {uuid} reasonConcept            Reason concept            (see: {@link SanteDBModel.ActReasonKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this act            
-     * @property {OpenIZModel.ActIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.ActIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated acts for this act            
-     * @property {OpenIZModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
-     * @property {OpenIZModel.ActRelationship} relationship.Documents             The source act documents the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
-     * @property {OpenIZModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
-     * @property {OpenIZModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
-     * @property {OpenIZModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
-     * @property {OpenIZModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.$other Unclassified
-     * @property {OpenIZModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
+     * @property {SanteDBModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
+     * @property {SanteDBModel.ActRelationship} relationship.Documents             The source act documents the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
+     * @property {SanteDBModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
+     * @property {SanteDBModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
+     * @property {SanteDBModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
+     * @property {SanteDBModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
      * @property {object} extension            Gets a list of all extensions associated with the act            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {string} note            Gets a list of all notes associated with the act            
      * @property {object} tag            Gets a list of all tags associated with the act            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Participations            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Act} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Act} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.Observation} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Observation} copyData Copy constructor (if present)
      */
-    Observation: function (copyData) {
+    Observation: function (copyData)
+    {
         this.$type = 'Observation';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -6408,143 +6542,145 @@ var OpenIZModel = {
             this.interpretationConcept = copyData.interpretationConcept;
         }
     },  // Observation 
-    // OpenIZ.Core.Model.Acts.QuantityObservation, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.QuantityObservation, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Observation
+     * @extends SanteDBModel.Observation
      * @summary             Represents an observation that contains a quantity            
      * @property {number} value            Gets or sets the observed quantity            
      * @property {uuid} unitOfMeasure            Gets or sets the key of the uom concept            
-     * @property {OpenIZModel.Concept} unitOfMeasureModel [Delay loaded from unitOfMeasure],             Gets or sets the unit of measure            
+     * @property {SanteDBModel.Concept} unitOfMeasureModel [Delay loaded from unitOfMeasure],             Gets or sets the unit of measure            
      * @property {uuid} interpretationConcept            Gets or sets the interpretation concept            
-     * @property {OpenIZModel.Concept} interpretationConceptModel [Delay loaded from interpretationConcept],             Gets or sets the concept which indicates the interpretation of the observtion            
+     * @property {SanteDBModel.Concept} interpretationConceptModel [Delay loaded from interpretationConcept],             Gets or sets the concept which indicates the interpretation of the observtion            
      * @property {bool} isNegated            Gets or sets an indicator which identifies whether the object is negated            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
      * @property {string} actTime            Gets or sets the creation time in XML format            
      * @property {string} startTime            Gets or sets the creation time in XML format            
      * @property {string} stopTime            Gets or sets the creation time in XML format            
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.ActClassKeys} for values)
-     * @property {uuid} moodConcept            Mood concept            (see: {@link OpenIZModel.ActMoodKeys} for values)
-     * @property {uuid} reasonConcept            Reason concept            (see: {@link OpenIZModel.ActReasonKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.ActClassKeys} for values)
+     * @property {uuid} moodConcept            Mood concept            (see: {@link SanteDBModel.ActMoodKeys} for values)
+     * @property {uuid} reasonConcept            Reason concept            (see: {@link SanteDBModel.ActReasonKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this act            
-     * @property {OpenIZModel.ActIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.ActIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated acts for this act            
-     * @property {OpenIZModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
-     * @property {OpenIZModel.ActRelationship} relationship.Documents             The source act documents the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
-     * @property {OpenIZModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
-     * @property {OpenIZModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
-     * @property {OpenIZModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
-     * @property {OpenIZModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.$other Unclassified
-     * @property {OpenIZModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
+     * @property {SanteDBModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
+     * @property {SanteDBModel.ActRelationship} relationship.Documents             The source act documents the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
+     * @property {SanteDBModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
+     * @property {SanteDBModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
+     * @property {SanteDBModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
+     * @property {SanteDBModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
      * @property {object} extension            Gets a list of all extensions associated with the act            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {string} note            Gets a list of all notes associated with the act            
      * @property {object} tag            Gets a list of all tags associated with the act            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Participations            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Act} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Act} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.QuantityObservation} copyData Copy constructor (if present)
+     * @param {SanteDBModel.QuantityObservation} copyData Copy constructor (if present)
      */
-    QuantityObservation: function (copyData) {
+    QuantityObservation: function (copyData)
+    {
         this.$type = 'QuantityObservation';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -6587,141 +6723,143 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // QuantityObservation 
-    // OpenIZ.Core.Model.Acts.TextObservation, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.TextObservation, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Observation
+     * @extends SanteDBModel.Observation
      * @summary             Represents an observation with a text value            
      * @property {string} value            Gets or sets the textual value            
      * @property {uuid} interpretationConcept            Gets or sets the interpretation concept            
-     * @property {OpenIZModel.Concept} interpretationConceptModel [Delay loaded from interpretationConcept],             Gets or sets the concept which indicates the interpretation of the observtion            
+     * @property {SanteDBModel.Concept} interpretationConceptModel [Delay loaded from interpretationConcept],             Gets or sets the concept which indicates the interpretation of the observtion            
      * @property {bool} isNegated            Gets or sets an indicator which identifies whether the object is negated            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
      * @property {string} actTime            Gets or sets the creation time in XML format            
      * @property {string} startTime            Gets or sets the creation time in XML format            
      * @property {string} stopTime            Gets or sets the creation time in XML format            
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.ActClassKeys} for values)
-     * @property {uuid} moodConcept            Mood concept            (see: {@link OpenIZModel.ActMoodKeys} for values)
-     * @property {uuid} reasonConcept            Reason concept            (see: {@link OpenIZModel.ActReasonKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.ActClassKeys} for values)
+     * @property {uuid} moodConcept            Mood concept            (see: {@link SanteDBModel.ActMoodKeys} for values)
+     * @property {uuid} reasonConcept            Reason concept            (see: {@link SanteDBModel.ActReasonKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this act            
-     * @property {OpenIZModel.ActIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.ActIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated acts for this act            
-     * @property {OpenIZModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
-     * @property {OpenIZModel.ActRelationship} relationship.Documents             The source act documents the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
-     * @property {OpenIZModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
-     * @property {OpenIZModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
-     * @property {OpenIZModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
-     * @property {OpenIZModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.$other Unclassified
-     * @property {OpenIZModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
+     * @property {SanteDBModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
+     * @property {SanteDBModel.ActRelationship} relationship.Documents             The source act documents the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
+     * @property {SanteDBModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
+     * @property {SanteDBModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
+     * @property {SanteDBModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
+     * @property {SanteDBModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
      * @property {object} extension            Gets a list of all extensions associated with the act            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {string} note            Gets a list of all notes associated with the act            
      * @property {object} tag            Gets a list of all tags associated with the act            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Participations            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Act} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Act} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.TextObservation} copyData Copy constructor (if present)
+     * @param {SanteDBModel.TextObservation} copyData Copy constructor (if present)
      */
-    TextObservation: function (copyData) {
+    TextObservation: function (copyData)
+    {
         this.$type = 'TextObservation';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -6762,142 +6900,144 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // TextObservation 
-    // OpenIZ.Core.Model.Acts.CodedObservation, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.CodedObservation, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Observation
+     * @extends SanteDBModel.Observation
      * @summary             Represents an observation with a concept value            
      * @property {uuid} value            Gets or sets the key of the uom concept            
-     * @property {OpenIZModel.Concept} valueModel [Delay loaded from value],             Gets or sets the coded value of the observation            
+     * @property {SanteDBModel.Concept} valueModel [Delay loaded from value],             Gets or sets the coded value of the observation            
      * @property {uuid} interpretationConcept            Gets or sets the interpretation concept            
-     * @property {OpenIZModel.Concept} interpretationConceptModel [Delay loaded from interpretationConcept],             Gets or sets the concept which indicates the interpretation of the observtion            
+     * @property {SanteDBModel.Concept} interpretationConceptModel [Delay loaded from interpretationConcept],             Gets or sets the concept which indicates the interpretation of the observtion            
      * @property {bool} isNegated            Gets or sets an indicator which identifies whether the object is negated            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
      * @property {string} actTime            Gets or sets the creation time in XML format            
      * @property {string} startTime            Gets or sets the creation time in XML format            
      * @property {string} stopTime            Gets or sets the creation time in XML format            
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.ActClassKeys} for values)
-     * @property {uuid} moodConcept            Mood concept            (see: {@link OpenIZModel.ActMoodKeys} for values)
-     * @property {uuid} reasonConcept            Reason concept            (see: {@link OpenIZModel.ActReasonKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.ActClassKeys} for values)
+     * @property {uuid} moodConcept            Mood concept            (see: {@link SanteDBModel.ActMoodKeys} for values)
+     * @property {uuid} reasonConcept            Reason concept            (see: {@link SanteDBModel.ActReasonKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this act            
-     * @property {OpenIZModel.ActIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.ActIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated acts for this act            
-     * @property {OpenIZModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
-     * @property {OpenIZModel.ActRelationship} relationship.Documents             The source act documents the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
-     * @property {OpenIZModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
-     * @property {OpenIZModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
-     * @property {OpenIZModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
-     * @property {OpenIZModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.$other Unclassified
-     * @property {OpenIZModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
+     * @property {SanteDBModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
+     * @property {SanteDBModel.ActRelationship} relationship.Documents             The source act documents the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
+     * @property {SanteDBModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
+     * @property {SanteDBModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
+     * @property {SanteDBModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
+     * @property {SanteDBModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
      * @property {object} extension            Gets a list of all extensions associated with the act            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {string} note            Gets a list of all notes associated with the act            
      * @property {object} tag            Gets a list of all tags associated with the act            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Participations            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Act} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Act} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.CodedObservation} copyData Copy constructor (if present)
+     * @param {SanteDBModel.CodedObservation} copyData Copy constructor (if present)
      */
-    CodedObservation: function (copyData) {
+    CodedObservation: function (copyData)
+    {
         this.$type = 'CodedObservation';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -6939,140 +7079,142 @@ var OpenIZModel = {
             this.value = copyData.value;
         }
     },  // CodedObservation 
-    // OpenIZ.Core.Model.Acts.PatientEncounter, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.PatientEncounter, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Act
+     * @extends SanteDBModel.Act
      * @summary             Represents an encounter a patient has with the health system            
      * @property {uuid} dischargeDisposition            Gets or sets the key of discharge disposition            
-     * @property {OpenIZModel.Concept} dischargeDispositionModel [Delay loaded from dischargeDisposition],             Gets or sets the discharge disposition (how the patient left the encounter            
+     * @property {SanteDBModel.Concept} dischargeDispositionModel [Delay loaded from dischargeDisposition],             Gets or sets the discharge disposition (how the patient left the encounter            
      * @property {bool} isNegated            Gets or sets an indicator which identifies whether the object is negated            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
      * @property {string} actTime            Gets or sets the creation time in XML format            
      * @property {string} startTime            Gets or sets the creation time in XML format            
      * @property {string} stopTime            Gets or sets the creation time in XML format            
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.ActClassKeys} for values)
-     * @property {uuid} moodConcept            Mood concept            (see: {@link OpenIZModel.ActMoodKeys} for values)
-     * @property {uuid} reasonConcept            Reason concept            (see: {@link OpenIZModel.ActReasonKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.ActClassKeys} for values)
+     * @property {uuid} moodConcept            Mood concept            (see: {@link SanteDBModel.ActMoodKeys} for values)
+     * @property {uuid} reasonConcept            Reason concept            (see: {@link SanteDBModel.ActReasonKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this act            
-     * @property {OpenIZModel.ActIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.ActIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated acts for this act            
-     * @property {OpenIZModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
-     * @property {OpenIZModel.ActRelationship} relationship.Documents             The source act documents the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
-     * @property {OpenIZModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
-     * @property {OpenIZModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
-     * @property {OpenIZModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
-     * @property {OpenIZModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.$other Unclassified
-     * @property {OpenIZModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
+     * @property {SanteDBModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
+     * @property {SanteDBModel.ActRelationship} relationship.Documents             The source act documents the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
+     * @property {SanteDBModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
+     * @property {SanteDBModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
+     * @property {SanteDBModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
+     * @property {SanteDBModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
      * @property {object} extension            Gets a list of all extensions associated with the act            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {string} note            Gets a list of all notes associated with the act            
      * @property {object} tag            Gets a list of all tags associated with the act            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Participations            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Act} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Act} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.PatientEncounter} copyData Copy constructor (if present)
+     * @param {SanteDBModel.PatientEncounter} copyData Copy constructor (if present)
      */
-    PatientEncounter: function (copyData) {
+    PatientEncounter: function (copyData)
+    {
         this.$type = 'PatientEncounter';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -7112,31 +7254,33 @@ var OpenIZModel = {
             this.dischargeDisposition = copyData.dischargeDisposition;
         }
     },  // PatientEncounter 
-    // OpenIZ.Core.Model.Acts.Protocol, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.Protocol, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.BaseEntityData
+     * @extends SanteDBModel.BaseEntityData
      * @summary             Represents the model of a protocol            
      * @property {string} name            Gets or sets the name of the protocol            
      * @property {string} handlerClass            Gets or sets the handler class AQN            
      * @property {bytea} definition            Contains instructions which the handler class can understand            
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
      * @property {string} etag            Gets a tag which changes whenever the object is updated            
-     * @param {OpenIZModel.Protocol} copyData Copy constructor (if present)
+     * @param {SanteDBModel.Protocol} copyData Copy constructor (if present)
      */
-    Protocol: function (copyData) {
+    Protocol: function (copyData)
+    {
         this.$type = 'Protocol';
-        if (copyData) {
+        if (copyData)
+        {
             this.etag = copyData.etag;
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
@@ -7151,146 +7295,148 @@ var OpenIZModel = {
             this.name = copyData.name;
         }
     },  // Protocol 
-    // OpenIZ.Core.Model.Acts.SubstanceAdministration, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Acts.SubstanceAdministration, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @class
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
-     * @extends OpenIZModel.Act
+     * @extends SanteDBModel.Act
      * @summary             Represents an act whereby a substance is administered to the patient            
      * @property {uuid} route            Gets or sets the key for route            
      * @property {uuid} doseUnit            Gets or sets the key for dosing unit            
-     * @property {OpenIZModel.Concept} routeModel [Delay loaded from route],             Gets or sets a concept which indicates the route of administration (eg: Oral, Injection, etc.)            
-     * @property {OpenIZModel.Concept} doseUnitModel [Delay loaded from doseUnit],             Gets or sets a concept which indicates the unit of measure for the dose (eg: 5 mL, 10 mL, 1 drop, etc.)            
+     * @property {SanteDBModel.Concept} routeModel [Delay loaded from route],             Gets or sets a concept which indicates the route of administration (eg: Oral, Injection, etc.)            
+     * @property {SanteDBModel.Concept} doseUnitModel [Delay loaded from doseUnit],             Gets or sets a concept which indicates the unit of measure for the dose (eg: 5 mL, 10 mL, 1 drop, etc.)            
      * @property {number} doseQuantity            Gets or sets the amount of substance administered            
      * @property {number} doseSequence            The sequence of the dose (i.e. OPV 0 = 0 , OPV 1 = 1, etc.)            
      * @property {uuid} site            Gets or sets the site            
-     * @property {OpenIZModel.Concept} siteModel [Delay loaded from site],             Gets or sets a concept which indicates the site of administration            
+     * @property {SanteDBModel.Concept} siteModel [Delay loaded from site],             Gets or sets a concept which indicates the site of administration            
      * @property {bool} isNegated            Gets or sets an indicator which identifies whether the object is negated            
-     * @property {OpenIZModel.TemplateDefinition} template            Gets or sets the template identifier             
+     * @property {SanteDBModel.TemplateDefinition} template            Gets or sets the template identifier             
      * @property {string} actTime            Gets or sets the creation time in XML format            
      * @property {string} startTime            Gets or sets the creation time in XML format            
      * @property {string} stopTime            Gets or sets the creation time in XML format            
-     * @property {uuid} classConcept            Class concept            (see: {@link OpenIZModel.ActClassKeys} for values)
-     * @property {uuid} moodConcept            Mood concept            (see: {@link OpenIZModel.ActMoodKeys} for values)
-     * @property {uuid} reasonConcept            Reason concept            (see: {@link OpenIZModel.ActReasonKeys} for values)
-     * @property {uuid} statusConcept            Status concept id            (see: {@link OpenIZModel.StatusKeys} for values)
+     * @property {uuid} classConcept            Class concept            (see: {@link SanteDBModel.ActClassKeys} for values)
+     * @property {uuid} moodConcept            Mood concept            (see: {@link SanteDBModel.ActMoodKeys} for values)
+     * @property {uuid} reasonConcept            Reason concept            (see: {@link SanteDBModel.ActReasonKeys} for values)
+     * @property {uuid} statusConcept            Status concept id            (see: {@link SanteDBModel.StatusKeys} for values)
      * @property {uuid} typeConcept            Type concept identifier            
-     * @property {OpenIZModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
-     * @property {OpenIZModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
-     * @property {OpenIZModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
-     * @property {OpenIZModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
+     * @property {SanteDBModel.Concept} classConceptModel [Delay loaded from classConcept],             Class concept datal load property            
+     * @property {SanteDBModel.Concept} moodConceptModel [Delay loaded from moodConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} reasonConceptModel [Delay loaded from reasonConcept],             Mood concept data load property            
+     * @property {SanteDBModel.Concept} statusConceptModel [Delay loaded from statusConcept],             Status concept id            
+     * @property {SanteDBModel.Concept} typeConceptModel [Delay loaded from typeConcept],             Type concept identifier            
      * @property {object} identifier            Gets the identifiers associated with this act            
-     * @property {OpenIZModel.ActIdentifier} identifier.classifier  where classifier is from {@link OpenIZModel.IdentifierBase} 
+     * @property {SanteDBModel.ActIdentifier} identifier.classifier  where classifier is from {@link SanteDBModel.IdentifierBase} 
      * @property {object} relationship            Gets a list of all associated acts for this act            
-     * @property {OpenIZModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
-     * @property {OpenIZModel.ActRelationship} relationship.Documents             The source act documents the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
-     * @property {OpenIZModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
-     * @property {OpenIZModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
-     * @property {OpenIZModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
-     * @property {OpenIZModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
-     * @property {OpenIZModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
-     * @property {OpenIZModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
-     * @property {OpenIZModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
-     * @property {OpenIZModel.ActRelationship} relationship.$other Unclassified
-     * @property {OpenIZModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
+     * @property {SanteDBModel.ActRelationship} relationship.Appends             Indicates that the source act appends information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Arrival             Links the transortation act from another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Departure             Links a transporation act from another act indicating departure of the subject            
+     * @property {SanteDBModel.ActRelationship} relationship.Documents             The source act documents the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.EpisodeLink             Links two instances of the same act over time (example: chronic conditions)            
+     * @property {SanteDBModel.ActRelationship} relationship.Evaluates             Used to link a goal to an observation            
+     * @property {SanteDBModel.ActRelationship} relationship.Fulfills             Indicates that the source act fulfills the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasAuthorization             Indicates that the target act authorizes the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasComponent             Indicates that the target act is a component of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasControlVariable             Relationship from an act to one or more control variables (for example: device settings, or environment)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasManifestation             The assertion that a new observation may be a manifestation of another            
+     * @property {SanteDBModel.ActRelationship} relationship.HasPrecondition             Indicates that the target act is a pre-condition of the source act            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReason             Indicates a reasoning as to why the source act is occurring            
+     * @property {SanteDBModel.ActRelationship} relationship.HasReferenceValues             Indicates that the source act contains reference values from the target            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSubject             Indicates the subject of a particular act (example: clinical act is a subject of a control act)            
+     * @property {SanteDBModel.ActRelationship} relationship.HasSupport             Indicates an existing act is suggesting evidence for a new observation.            
+     * @property {SanteDBModel.ActRelationship} relationship.IsCauseOf             Indicates that the source act is the cause of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsDerivedFrom             Indicates the source act is derived from information contained in the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.IsExcerptOf             Indicates that the source act is an excerpt of the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.RefersTo             Indicates that the source act refers to the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.Replaces             The source act replaces the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.StartsAfterStartOf             Indicates that the source act starts after the start of another act            
+     * @property {SanteDBModel.ActRelationship} relationship.Transforms             Indicates that the source act transforms the target act            
+     * @property {SanteDBModel.ActRelationship} relationship.$other Unclassified
+     * @property {SanteDBModel.SecurityPolicyInstance} policy            Gets or sets the policy instances            
      * @property {object} extension            Gets a list of all extensions associated with the act            
-     * @property {bytea} extension.classifier  where classifier is from {@link OpenIZModel.Extension} 
+     * @property {bytea} extension.classifier  where classifier is from {@link SanteDBModel.Extension} 
      * @property {string} note            Gets a list of all notes associated with the act            
      * @property {object} tag            Gets a list of all tags associated with the act            
-     * @property {string} tag.classifier  where classifier is from {@link OpenIZModel.Tag} key
+     * @property {string} tag.classifier  where classifier is from {@link SanteDBModel.Tag} key
      * @property {object} participation            Participations            
-     * @property {OpenIZModel.ActParticipation} participation.Admitter 
-     * @property {OpenIZModel.ActParticipation} participation.Attender 
-     * @property {OpenIZModel.ActParticipation} participation.Authenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Authororiginator 
-     * @property {OpenIZModel.ActParticipation} participation.Baby 
-     * @property {OpenIZModel.ActParticipation} participation.Beneficiary 
-     * @property {OpenIZModel.ActParticipation} participation.CallbackContact 
-     * @property {OpenIZModel.ActParticipation} participation.CausativeAgent 
-     * @property {OpenIZModel.ActParticipation} participation.Consultant 
-     * @property {OpenIZModel.ActParticipation} participation.Consumable 
-     * @property {OpenIZModel.ActParticipation} participation.CoverageTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Custodian 
-     * @property {OpenIZModel.ActParticipation} participation.DataEnterer 
-     * @property {OpenIZModel.ActParticipation} participation.Destination 
-     * @property {OpenIZModel.ActParticipation} participation.Device 
-     * @property {OpenIZModel.ActParticipation} participation.DirectTarget 
-     * @property {OpenIZModel.ActParticipation} participation.Discharger 
-     * @property {OpenIZModel.ActParticipation} participation.Distributor 
-     * @property {OpenIZModel.ActParticipation} participation.Donor 
-     * @property {OpenIZModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
-     * @property {OpenIZModel.ActParticipation} participation.Escort 
-     * @property {OpenIZModel.ActParticipation} participation.Exposure 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureAgent 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureSource 
-     * @property {OpenIZModel.ActParticipation} participation.ExposureTarget 
-     * @property {OpenIZModel.ActParticipation} participation.GuarantorParty 
-     * @property {OpenIZModel.ActParticipation} participation.Holder 
-     * @property {OpenIZModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
-     * @property {OpenIZModel.ActParticipation} participation.Informant 
-     * @property {OpenIZModel.ActParticipation} participation.InformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.LegalAuthenticator 
-     * @property {OpenIZModel.ActParticipation} participation.Location             The location where the service was performed            
-     * @property {OpenIZModel.ActParticipation} participation.NonreuseableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.Origin 
-     * @property {OpenIZModel.ActParticipation} participation.Participation 
-     * @property {OpenIZModel.ActParticipation} participation.Performer 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryInformationRecipient 
-     * @property {OpenIZModel.ActParticipation} participation.PrimaryPerformer 
-     * @property {OpenIZModel.ActParticipation} participation.Product 
-     * @property {OpenIZModel.ActParticipation} participation.Receiver 
-     * @property {OpenIZModel.ActParticipation} participation.RecordTarget 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredBy 
-     * @property {OpenIZModel.ActParticipation} participation.ReferredTo 
-     * @property {OpenIZModel.ActParticipation} participation.Referrer 
-     * @property {OpenIZModel.ActParticipation} participation.Remote 
-     * @property {OpenIZModel.ActParticipation} participation.ResponsibleParty 
-     * @property {OpenIZModel.ActParticipation} participation.ReusableDevice 
-     * @property {OpenIZModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
-     * @property {OpenIZModel.ActParticipation} participation.Specimen 
-     * @property {OpenIZModel.ActParticipation} participation.Subject 
-     * @property {OpenIZModel.ActParticipation} participation.Tracker 
-     * @property {OpenIZModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
-     * @property {OpenIZModel.ActParticipation} participation.UgentNotificationContact 
-     * @property {OpenIZModel.ActParticipation} participation.Verifier 
-     * @property {OpenIZModel.ActParticipation} participation.Via 
-     * @property {OpenIZModel.ActParticipation} participation.Witness 
-     * @property {OpenIZModel.ActParticipation} participation.$other Unclassified
+     * @property {SanteDBModel.ActParticipation} participation.Admitter 
+     * @property {SanteDBModel.ActParticipation} participation.Attender 
+     * @property {SanteDBModel.ActParticipation} participation.Authenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Authororiginator 
+     * @property {SanteDBModel.ActParticipation} participation.Baby 
+     * @property {SanteDBModel.ActParticipation} participation.Beneficiary 
+     * @property {SanteDBModel.ActParticipation} participation.CallbackContact 
+     * @property {SanteDBModel.ActParticipation} participation.CausativeAgent 
+     * @property {SanteDBModel.ActParticipation} participation.Consultant 
+     * @property {SanteDBModel.ActParticipation} participation.Consumable 
+     * @property {SanteDBModel.ActParticipation} participation.CoverageTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Custodian 
+     * @property {SanteDBModel.ActParticipation} participation.DataEnterer 
+     * @property {SanteDBModel.ActParticipation} participation.Destination 
+     * @property {SanteDBModel.ActParticipation} participation.Device 
+     * @property {SanteDBModel.ActParticipation} participation.DirectTarget 
+     * @property {SanteDBModel.ActParticipation} participation.Discharger 
+     * @property {SanteDBModel.ActParticipation} participation.Distributor 
+     * @property {SanteDBModel.ActParticipation} participation.Donor 
+     * @property {SanteDBModel.ActParticipation} participation.EntryLocation             The location where the act was entered            
+     * @property {SanteDBModel.ActParticipation} participation.Escort 
+     * @property {SanteDBModel.ActParticipation} participation.Exposure 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureAgent 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureSource 
+     * @property {SanteDBModel.ActParticipation} participation.ExposureTarget 
+     * @property {SanteDBModel.ActParticipation} participation.GuarantorParty 
+     * @property {SanteDBModel.ActParticipation} participation.Holder 
+     * @property {SanteDBModel.ActParticipation} participation.IndirectTarget             The entity not directly present in the act but which will be the focust of th act            
+     * @property {SanteDBModel.ActParticipation} participation.Informant 
+     * @property {SanteDBModel.ActParticipation} participation.InformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.LegalAuthenticator 
+     * @property {SanteDBModel.ActParticipation} participation.Location             The location where the service was performed            
+     * @property {SanteDBModel.ActParticipation} participation.NonreuseableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.Origin 
+     * @property {SanteDBModel.ActParticipation} participation.Participation 
+     * @property {SanteDBModel.ActParticipation} participation.Performer 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryInformationRecipient 
+     * @property {SanteDBModel.ActParticipation} participation.PrimaryPerformer 
+     * @property {SanteDBModel.ActParticipation} participation.Product 
+     * @property {SanteDBModel.ActParticipation} participation.Receiver 
+     * @property {SanteDBModel.ActParticipation} participation.RecordTarget 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredBy 
+     * @property {SanteDBModel.ActParticipation} participation.ReferredTo 
+     * @property {SanteDBModel.ActParticipation} participation.Referrer 
+     * @property {SanteDBModel.ActParticipation} participation.Remote 
+     * @property {SanteDBModel.ActParticipation} participation.ResponsibleParty 
+     * @property {SanteDBModel.ActParticipation} participation.ReusableDevice 
+     * @property {SanteDBModel.ActParticipation} participation.SecondaryPerformer             The secondary performing person (support clinician)            
+     * @property {SanteDBModel.ActParticipation} participation.Specimen 
+     * @property {SanteDBModel.ActParticipation} participation.Subject 
+     * @property {SanteDBModel.ActParticipation} participation.Tracker 
+     * @property {SanteDBModel.ActParticipation} participation.Transcriber             The person who transcribed data from the original act            
+     * @property {SanteDBModel.ActParticipation} participation.UgentNotificationContact 
+     * @property {SanteDBModel.ActParticipation} participation.Verifier 
+     * @property {SanteDBModel.ActParticipation} participation.Via 
+     * @property {SanteDBModel.ActParticipation} participation.Witness 
+     * @property {SanteDBModel.ActParticipation} participation.$other Unclassified
      * @property {string} etag
      * @property {uuid} previousVersion
-     * @property {OpenIZModel.Act} previousVersionModel [Delay loaded from previousVersion], 
+     * @property {SanteDBModel.Act} previousVersionModel [Delay loaded from previousVersion], 
      * @property {uuid} version
      * @property {number} sequence
      * @property {string} creationTime            Gets or sets the creation time in XML format            
      * @property {string} obsoletionTime            Gets or sets the creation time in XML format            
-     * @property {OpenIZModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
+     * @property {SanteDBModel.SecurityUser} createdByModel [Delay loaded from createdBy],             Gets or sets the user that created this base data            
      * @property {date} modifiedOn            Get the modified on time            
-     * @property {OpenIZModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
+     * @property {SanteDBModel.SecurityUser} obsoletedByModel [Delay loaded from obsoletedBy],             Gets or sets the user that obsoleted this base data            
      * @property {uuid} createdBy            Gets or sets the created by identifier            
      * @property {uuid} obsoletedBy            Gets or sets the obsoleted by identifier            
      * @property {uuid} id            The internal primary key value of the entity            
      * @property {string} $type            Gets the type            
-     * @param {OpenIZModel.SubstanceAdministration} copyData Copy constructor (if present)
+     * @param {SanteDBModel.SubstanceAdministration} copyData Copy constructor (if present)
      */
-    SubstanceAdministration: function (copyData) {
+    SubstanceAdministration: function (copyData)
+    {
         this.$type = 'SubstanceAdministration';
-        if (copyData) {
+        if (copyData)
+        {
             this.id = copyData.id;
             this.obsoletedBy = copyData.obsoletedBy;
             this.createdBy = copyData.createdBy;
@@ -7336,10 +7482,10 @@ var OpenIZModel = {
             this.route = copyData.route;
         }
     },  // SubstanceAdministration 
-    // OpenIZ.Core.Model.Constants.UserClassKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.UserClassKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Represents user classification keys            
@@ -7358,10 +7504,10 @@ var OpenIZModel = {
          */
         SystemUser: '9f71bb34-9691-440f-8249-9c831ea16d58',
     },  // UserClassKeys 
-    // OpenIZ.Core.Model.Constants.EntityClassKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.EntityClassKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Entity class concept keys            
@@ -7448,10 +7594,10 @@ var OpenIZModel = {
          */
         State: '8cf4b0b0-84e5-4122-85fe-6afa8240c218',
     },  // EntityClassKeys 
-    // OpenIZ.Core.Model.Constants.DeterminerKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.DeterminerKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Determiner codes            
@@ -7470,10 +7616,10 @@ var OpenIZModel = {
          */
         Specific: 'f29f08de-78a7-4a5e-aeaf-7b545ba19a09',
     },  // DeterminerKeys 
-    // OpenIZ.Core.Model.Constants.StatusKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.StatusKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Concept identifiers            
@@ -7494,16 +7640,17 @@ var OpenIZModel = {
         /** 
          *             Status - Nullified            
          */
-        Nullfied: 'cd4aa3c4-02d5-4cc9-9088-ef8f31e321c5',
+        Nullified: 'cd4aa3c4-02d5-4cc9-9088-ef8f31e321c5',
         /** 
          *             Status - Obsolete            
          */
         Obsolete: 'bdef5f90-5497-4f26-956c-8f818cce2bd2',
+        Cancelled: '3efd3b6e-02d5-4cc9-9088-ef8f31e321c5'
     },  // StatusKeys 
-    // OpenIZ.Core.Model.Constants.EntityRelationshipTypeKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.EntityRelationshipTypeKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Base entity relationship type keys            
@@ -8117,11 +8264,13 @@ var OpenIZModel = {
          * 
          */
         Wife: 'a3ff423e-81d5-4571-8edf-03c295189a23',
+        Replaces : 'd1578637-e1cb-415e-b319-4011da033813'
+
     },  // EntityRelationshipTypeKeys 
-    // OpenIZ.Core.Model.Constants.TelecomAddressUseKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.TelecomAddressUseKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Telecommunications address use keys            
@@ -8156,10 +8305,10 @@ var OpenIZModel = {
          */
         WorkPlace: 'eaa6f08e-bb8e-4457-9dc0-3a1555fadf5c',
     },  // TelecomAddressUseKeys 
-    // OpenIZ.Core.Model.Constants.NameUseKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.NameUseKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Name use keys            
@@ -8230,10 +8379,10 @@ var OpenIZModel = {
          */
         Syllabic: 'b4ca3bf0-a7fc-44f3-87d5-e126beda93ff',
     },  // NameUseKeys 
-    // OpenIZ.Core.Model.Constants.AddressUseKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.AddressUseKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Address use keys            
@@ -8300,10 +8449,10 @@ var OpenIZModel = {
          */
         WorkPlace: 'eaa6f08e-bb8e-4457-9dc0-3a1555fadf5c',
     },  // AddressUseKeys 
-    // OpenIZ.Core.Model.Constants.ActParticipationKey, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.ActParticipationKey, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Represents the participation concepts which an entity can participate in an act            
@@ -8534,10 +8683,10 @@ var OpenIZModel = {
          */
         Witness: '0b82357f-5ae0-4543-ab8e-a33e9b315bab',
     },  // ActParticipationKey 
-    // OpenIZ.Core.Model.Constants.AddressComponentKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.AddressComponentKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Represents address component types            
@@ -8656,10 +8805,10 @@ var OpenIZModel = {
          */
         UnitIdentifier: '908c09df-81fe-45ac-9233-0881a278a401',
     },  // AddressComponentKeys 
-    // OpenIZ.Core.Model.Constants.NameComponentKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.NameComponentKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Name component type keys            
@@ -8690,10 +8839,10 @@ var OpenIZModel = {
          */
         Title: '4386d92a-d81b-4033-b968-01e57e20d5e0',
     },  // NameComponentKeys 
-    // OpenIZ.Core.Model.Constants.PhoneticAlgorithmKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.PhoneticAlgorithmKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Phonetic algorithm keys            
@@ -8712,10 +8861,10 @@ var OpenIZModel = {
          */
         Soundex: '3352a79a-d2e0-4e0c-9b48-6fd2a202c681',
     },  // PhoneticAlgorithmKeys 
-    // OpenIZ.Core.Model.Constants.ConceptRelationshipTypeKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.ConceptRelationshipTypeKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Reference type identifiers            
@@ -8738,10 +8887,10 @@ var OpenIZModel = {
          */
         SameAs: '2c4dafc2-566a-41ae-9ebc-3097d7d22f4a',
     },  // ConceptRelationshipTypeKeys 
-    // OpenIZ.Core.Model.Constants.ConceptClassKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.ConceptClassKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Concept classification identifiers            
@@ -8800,10 +8949,10 @@ var OpenIZModel = {
          */
         UnitOfMeasure: '1ef69347-ef03-4ff7-b3c5-6334448845e6',
     },  // ConceptClassKeys 
-    // OpenIZ.Core.Model.Constants.CodeSystemKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.CodeSystemKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Code system identifiers            
@@ -8846,10 +8995,10 @@ var OpenIZModel = {
          */
         UCUM: '4853a702-fff3-4efb-8dd7-54aacca53664',
     },  // CodeSystemKeys 
-    // OpenIZ.Core.Model.Constants.ActClassKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.ActClassKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Represents a series of class keys for use on acts            
@@ -8912,10 +9061,10 @@ var OpenIZModel = {
          */
         Transport: '61677f76-dc05-466d-91de-47efc8e7a3e6',
     },  // ActClassKeys 
-    // OpenIZ.Core.Model.Constants.ActMoodKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.ActMoodKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Act Mood keys            
@@ -8958,10 +9107,10 @@ var OpenIZModel = {
          */
         Request: 'e658ca72-3b6a-4099-ab6e-7cf6861a5b61',
     },  // ActMoodKeys 
-    // OpenIZ.Core.Model.Constants.ActReasonKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.ActReasonKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Represents act reasons (reasons for an act)            
@@ -9007,11 +9156,15 @@ var OpenIZModel = {
          *             There was a cold-storage failure which resulted in the material being unusable.            
          */
         ColdStorageFailure: '06922eac-0cae-49af-a33c-fc7096349e4a',
+        /** 
+        *             Adjustment is the result of a physical count
+        */
+        PhysicalCount: '5edb55a1-723c-46e4-9fee-2c94db20b7ab'
     },  // ActReasonKeys 
-    // OpenIZ.Core.Model.Constants.ActRelationshipTypeKeys, OpenIZ.Core.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Model.Constants.ActRelationshipTypeKeys, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
     /**
      * @enum {uuid}
-     * @memberof OpenIZModel
+     * @memberof SanteDBModel
      * @public
      * @readonly
      * @summary             Act relationship types            
@@ -9117,15 +9270,16 @@ var OpenIZModel = {
          * @class
          * @summary Represents a simple exception class
          * @constructor
-         * @memberof OpenIZModel
+         * @memberof SanteDBModel
          * @property {String} message Informational message about the exception
          * @property {Object} details Any detail / diagnostic information
-         * @property {OpenIZModel#Exception} caused_by The cause of the exception
+         * @property {SanteDBModel#Exception} caused_by The cause of the exception
          * @param {String} message Informational message about the exception
          * @param {Object} detail Any detail / diagnostic information
-         * @param {OpenIZModel#Exception} cause The cause of the exception
+         * @param {SanteDBModel#Exception} cause The cause of the exception
          */
-    Exception: function (type, message, detail, cause) {
+    Exception: function (type, message, detail, cause)
+    {
         _self = this;
 
         this.type = type;
@@ -9133,5 +9287,91 @@ var OpenIZModel = {
         this.details = detail;
         this.caused_by = cause;
 
-    }
-} // OpenIZModel
+    },  // Exception
+    // SanteDB.Core.Model.Constants.NullReasonKeys, SanteDB.Core.Model, Version=0.8.1.22482, Culture=neutral, PublicKeyToken=null
+    /**
+     * @enum {uuid}
+     * @memberof SanteDBModel
+     * @public
+     * @readonly
+     * @summary             Null reason keys            
+     */
+    NullReasonKeys: {
+        /** 
+         * 
+         */
+        Unavailable: '31e01921-82dc-4622-b3db-21429ea9e406',
+        /** 
+         * 
+         */
+        NotApplicable: 'fea2cfb1-f231-413d-b113-372779092e56',
+        /** 
+         * 
+         */
+        Derived: '8ef137b3-e717-492b-8d8f-3817c99aed88',
+        /** 
+         * 
+         */
+        Other: '6052712a-340e-4480-ad6b-409ba320db4f',
+        /** 
+         * 
+         */
+        AskedUnknown: '21b0ffc8-ca4e-408d-a104-41fc924d3a39',
+        /** 
+         * 
+         */
+        Invalid: 'd3f92eb1-fece-4dea-bed2-515af2b0fb38',
+        /** 
+         * 
+         */
+        Trace: '085069d8-0ca8-4771-986b-5eb3466580ff',
+        /** 
+         * 
+         */
+        NegativeInfinity: 'fed3fe1b-b2c7-480b-b0af-5fd2e0200ce5',
+        /** 
+         * 
+         */
+        SufficientQuantity: 'c139841a-7d5a-40ba-9ac7-7628a7cdf443',
+        /** 
+         * 
+         */
+        UnEncoded: '7da45c51-eb8e-4c75-a40b-7db66cb3f3cb',
+        /** 
+         * 
+         */
+        NotAsked: '09919a72-808c-44c4-8b44-86fd3725f100',
+        /** 
+         * 
+         */
+        Unknown: '70fe34ce-caff-4f46-b6e6-9cd6d8f289d6',
+        /** 
+         * 
+         */
+        PositiveInfinity: 'e6d6fee2-fa53-4027-8eb8-9dd0f35d053d',
+        /** 
+         * 
+         */
+        NoInformation: '61d8f65c-747e-4a99-982f-a42ac5437473',
+        /** 
+         * 
+         */
+        Masked: '9b16bf12-073e-4ea4-b6c5-e1b93e8fd490',
+    },  // NullReasonKeys 
+    // SanteDB.Core.Model.Constants.DatePrecisionFormats, SanteDB.Core.Model, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
+    /**
+     * @enum {String}
+     * @memberof SanteDBModel
+     * @public
+     * @readonly
+     * @summary Date formats for using date precision
+     */
+    DatePrecisionFormats: {
+        DateFormatYear: 'YYYY',
+        DateFormatMonth: 'YYYY-MM',
+        DateFormatDay: 'YYYY-MM-DD',
+        DateFormatHour: 'YYYY-MM-DD HH',
+        DateFormatMinute: 'YYYY-MM-DD HH:mm',
+        DateFormatSecond: 'YYYY-MM-DD HH:mm:ss'
+    }  // Date Precision Formats
+} // SanteDBModel

@@ -92,13 +92,27 @@
     <EmbeddedResource Include="RefData\weight-ranges-male.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TestRules\SanteDB.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TestRules\SanteDB-model.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="TestRules\act.observation.weight.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestRules\santedb.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestRules\SanteDB-bre.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestRules\SanteDB-dw.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestRules\SanteDB-model.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

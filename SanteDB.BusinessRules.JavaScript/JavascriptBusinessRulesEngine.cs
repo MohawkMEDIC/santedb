@@ -467,7 +467,7 @@ namespace SanteDB.BusinessRules.JavaScript
                     var sdata = data as IDictionary<String, Object>;
                     if (sdata == null || !sdata.ContainsKey("$type")) return data;
 
-                    var callList = this.GetCallList(binder.BindToType("SanteDB.Core.Model, Version=1.0.0.0", sdata["$type"].ToString()), action);
+                    var callList = this.GetCallList(binder.BindToType("SanteDB.Core.Model, Version=1.1.0.0", sdata["$type"].ToString()), action);
                     var retVal = data;
 
                     if (callList.Count > 0)
