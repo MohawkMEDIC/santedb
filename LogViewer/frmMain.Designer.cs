@@ -446,7 +446,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
-            this.Text = "OpenIZ Log Viewer";
+            this.Text = "SanteDB Log Viewer";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

@@ -33,8 +33,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.lblProcessorCount = new System.Windows.Forms.Label();
-            this.lblOpenIZVersion = new System.Windows.Forms.Label();
-            this.lblOpenIZInfoVersion = new System.Windows.Forms.Label();
+            this.lblSanteDBVersion = new System.Windows.Forms.Label();
+            this.lblSanteDBInfoVersion = new System.Windows.Forms.Label();
             this.lblSku = new System.Windows.Forms.Label();
             this.lblOperatingSystem = new System.Windows.Forms.Label();
             this.lbl64Bit = new System.Windows.Forms.Label();
@@ -96,7 +96,7 @@
             this.tp1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tp1.Size = new System.Drawing.Size(562, 402);
             this.tp1.TabIndex = 0;
-            this.tp1.Text = "OpenIZ Version";
+            this.tp1.Text = "SanteDB Version";
             this.tp1.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -106,8 +106,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.65909F));
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.lblProcessorCount, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblOpenIZVersion, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblOpenIZInfoVersion, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblSanteDBVersion, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblSanteDBInfoVersion, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblSku, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblOperatingSystem, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.lbl64Bit, 1, 4);
@@ -162,29 +162,29 @@
             this.lblProcessorCount.Text = "1";
             this.lblProcessorCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblOpenIZVersion
+            // lblSanteDBVersion
             // 
-            this.lblOpenIZVersion.AutoSize = true;
-            this.lblOpenIZVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOpenIZVersion.Location = new System.Drawing.Point(227, 0);
-            this.lblOpenIZVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOpenIZVersion.Name = "lblOpenIZVersion";
-            this.lblOpenIZVersion.Size = new System.Drawing.Size(323, 49);
-            this.lblOpenIZVersion.TabIndex = 19;
-            this.lblOpenIZVersion.Text = "v0.0.0.0";
-            this.lblOpenIZVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSanteDBVersion.AutoSize = true;
+            this.lblSanteDBVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSanteDBVersion.Location = new System.Drawing.Point(227, 0);
+            this.lblSanteDBVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSanteDBVersion.Name = "lblSanteDBVersion";
+            this.lblSanteDBVersion.Size = new System.Drawing.Size(323, 49);
+            this.lblSanteDBVersion.TabIndex = 19;
+            this.lblSanteDBVersion.Text = "v0.0.0.0";
+            this.lblSanteDBVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblOpenIZInfoVersion
+            // lblSanteDBInfoVersion
             // 
-            this.lblOpenIZInfoVersion.AutoSize = true;
-            this.lblOpenIZInfoVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOpenIZInfoVersion.Location = new System.Drawing.Point(227, 49);
-            this.lblOpenIZInfoVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblOpenIZInfoVersion.Name = "lblOpenIZInfoVersion";
-            this.lblOpenIZInfoVersion.Size = new System.Drawing.Size(323, 49);
-            this.lblOpenIZInfoVersion.TabIndex = 18;
-            this.lblOpenIZInfoVersion.Text = "No Version Name";
-            this.lblOpenIZInfoVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSanteDBInfoVersion.AutoSize = true;
+            this.lblSanteDBInfoVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSanteDBInfoVersion.Location = new System.Drawing.Point(227, 49);
+            this.lblSanteDBInfoVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSanteDBInfoVersion.Name = "lblSanteDBInfoVersion";
+            this.lblSanteDBInfoVersion.Size = new System.Drawing.Size(323, 49);
+            this.lblSanteDBInfoVersion.TabIndex = 18;
+            this.lblSanteDBInfoVersion.Text = "No Version Name";
+            this.lblSanteDBInfoVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblSku
             // 
@@ -334,7 +334,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(215, 49);
             this.label1.TabIndex = 0;
-            this.label1.Text = "OpenIZ Core Version";
+            this.label1.Text = "SanteDB Core Version";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tp2
@@ -514,8 +514,8 @@
         private System.Windows.Forms.TabPage tp3;
         private System.Windows.Forms.TabPage tp4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lblOpenIZVersion;
-        private System.Windows.Forms.Label lblOpenIZInfoVersion;
+        private System.Windows.Forms.Label lblSanteDBVersion;
+        private System.Windows.Forms.Label lblSanteDBInfoVersion;
         private System.Windows.Forms.Label lblSku;
         private System.Windows.Forms.Label lblOperatingSystem;
         private System.Windows.Forms.Label lbl64Bit;

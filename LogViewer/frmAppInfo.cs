@@ -17,7 +17,7 @@
  * User: fyfej
  * Date: 2017-9-1
  */
-using OpenIZ.Core.Model.AMI.Diagnostics;
+using SanteDB.Core.Model.AMI.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -67,8 +67,8 @@ namespace LogViewer
             lblUsedMemory.DataBindings.Add(nameof(Label.Text), this.m_report.EnvironmentInfo, nameof(DiagnosticEnvironmentInfo.UsedMemory));
             lblProcessorCount.DataBindings.Add(nameof(Label.Text), this.m_report.EnvironmentInfo, nameof(DiagnosticEnvironmentInfo.ProcessorCount));
 
-            lblOpenIZInfoVersion.DataBindings.Add(nameof(Label.Text), this.m_report, nameof(DiagnosticApplicationInfo.InformationalVersion));
-            lblOpenIZVersion.DataBindings.Add(nameof(Label.Text), this.m_report, nameof(DiagnosticApplicationInfo.Version));
+            lblSanteDBInfoVersion.DataBindings.Add(nameof(Label.Text), this.m_report, nameof(DiagnosticApplicationInfo.InformationalVersion));
+            lblSanteDBVersion.DataBindings.Add(nameof(Label.Text), this.m_report, nameof(DiagnosticApplicationInfo.Version));
             lblSku.DataBindings.Add(nameof(Label.Text), this.m_report, nameof(DiagnosticApplicationInfo.Product));
 
             foreach(var asm in this.m_report.Assemblies)

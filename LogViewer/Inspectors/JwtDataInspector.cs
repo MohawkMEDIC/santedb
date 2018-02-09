@@ -112,7 +112,7 @@ namespace LogViewer.Inspectors
                 case "iss": return "Issued By";
                 case "authmethod": return "Authentication Method";
                 case "unique_name": return "Principal Name";
-                case "http://openiz.org/claims/grant": return "Granted Policies";
+                case "http://santedb.org/claims/grant": return "Granted Policies";
                 case "sub": return "Subject Identifier";
                 case "aud": return "Token Audience";
                 case "email": return "E-Mail Address";

@@ -114,8 +114,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="..\OpenIZ.licenseheader">
-      <Link>OpenIZ.licenseheader</Link>
+    <None Include="..\SanteDB.licenseheader">
+      <Link>SanteDB.licenseheader</Link>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -131,21 +131,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenIZ.Core.Model.AMI\OpenIZ.Core.Model.AMI.csproj">
+    <ProjectReference Include="..\SanteDB.Core.Model.AMI\SanteDB.Core.Model.AMI.csproj">
       <Project>{65EF51C6-5CB8-43B8-AE65-4A68F0B44AD2}</Project>
-      <Name>OpenIZ.Core.Model.AMI</Name>
+      <Name>SanteDB.Core.Model.AMI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenIZ.Core.Model\OpenIZ.Core.Model.csproj">
+    <ProjectReference Include="..\SanteDB.Core.Model\SanteDB.Core.Model.csproj">
       <Project>{f1a82a4f-4a57-47d7-ae76-444c8a4ff54a}</Project>
-      <Name>OpenIZ.Core.Model</Name>
+      <Name>SanteDB.Core.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenIZ.Messaging.AMI\OpenIZ.Messaging.AMI.csproj">
+    <ProjectReference Include="..\SanteDB.Messaging.AMI\SanteDB.Messaging.AMI.csproj">
       <Project>{d882323c-2bc9-4a1d-b70f-d833cf2e91a1}</Project>
-      <Name>OpenIZ.Messaging.AMI</Name>
+      <Name>SanteDB.Messaging.AMI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenIZ.Persistence.Diagnostics.Jira\OpenIZ.Persistence.Diagnostics.Jira.csproj">
+    <ProjectReference Include="..\SanteDB.Persistence.Diagnostics.Jira\SanteDB.Persistence.Diagnostics.Jira.csproj">
       <Project>{18a9f102-023e-4e17-8a70-a91365e1510d}</Project>
-      <Name>OpenIZ.Persistence.Diagnostics.Jira</Name>
+      <Name>SanteDB.Persistence.Diagnostics.Jira</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
