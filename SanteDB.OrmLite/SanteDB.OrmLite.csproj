@@ -58,6 +58,7 @@
     <Compile Include="IAdoLoadedData.cs" />
     <Compile Include="IQueryBuilderHack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\FirebirdSQLProvider.cs" />
     <Compile Include="Providers\IDbProvider.cs" />
     <Compile Include="Providers\PostgreSQLProvider.cs" />
     <Compile Include="Providers\SqlEngineFeatures.cs" />

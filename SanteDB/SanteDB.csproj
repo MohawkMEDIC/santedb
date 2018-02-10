@@ -88,9 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleParameters.cs" />
-    <None Include="Applets\org.SanteDB.templates.pak">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Data\000-IndustryTypes.dataset">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -121,9 +118,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="App.Config.Sample">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Applets\org.SanteDB.core.pak">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\000-AssigningAuthorities.dataset">

@@ -272,6 +272,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data\SQL\FBSQL\santedb-ddl.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\SQL\FBSQL\santedb-codes.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\SQL\FBSQL\santedb-fn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Data\SQL\PSQL\SanteDB-vws.sql" />
     <Content Include="Data\SQL\Updates\20180126-PSQL.sql" />
     <Content Include="Data\SQL\Updates\20180131-PSQL.sql" />

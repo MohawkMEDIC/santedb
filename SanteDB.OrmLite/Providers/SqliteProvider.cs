@@ -70,7 +70,7 @@ namespace SanteDB.OrmLite.Providers
         {
             get
             {
-                return SqlEngineFeatures.AutoGenerateTimestamps;
+                return SqlEngineFeatures.AutoGenerateTimestamps | SqlEngineFeatures.LimitOffset;
             }
         }
 

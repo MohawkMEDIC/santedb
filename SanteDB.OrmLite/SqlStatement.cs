@@ -296,16 +296,25 @@ namespace SanteDB.OrmLite
         /// </summary>
         public SqlStatement Offset(int offset)
         {
-            return this.Append($" OFFSET {offset} ");
+            if (this.m_provider.Features.HasFlag(SqlEngineFeatures.LimitOffset))
+                return this.Append($" OFFSET {offset} ");
+            else if (this.m_provider.Features.HasFlag(SqlEngineFeatures.FetchOffset))
+                return this.Append($" OFFSET {offset} ROW ");
+            else
+                throw new InvalidOperationException("SQL Engine does not support OFFSET n ROW or OFFSET n");
         }
 
         /// <summary>
         /// Limit of the 
         /// </summary>
-        /// <param name="value"></param>
         public SqlStatement Limit(int limit)
         {
-            return this.Append($" LIMIT {limit} ");
+            if (this.m_provider.Features.HasFlag(SqlEngineFeatures.LimitOffset))
+                return this.Append($" LIMIT {limit} ");
+            else if (this.m_provider.Features.HasFlag(SqlEngineFeatures.FetchOffset))
+                return this.Append($" FETCH FIRST {limit} ROWS ONLY");
+            else
+                throw new InvalidOperationException("SQL Engine does not support FETCH FIRST n ROWS ONLY or LIMIT n functionality");
         }
 
         /// <summary>

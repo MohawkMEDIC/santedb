@@ -27,9 +27,11 @@ namespace SanteDB.OrmLite.Providers
     [Flags]
     public enum SqlEngineFeatures
     {
-        None = 0,
-        ReturnedInserts = 1,
-        AutoGenerateGuids = 2,
-        AutoGenerateTimestamps = 4
+        None = 0x0,
+        ReturnedInserts = 0x1,
+        AutoGenerateGuids = 0x2,
+        AutoGenerateTimestamps = 0x4,
+        LimitOffset = 0x8,
+        FetchOffset = 0x10
     }
 }
