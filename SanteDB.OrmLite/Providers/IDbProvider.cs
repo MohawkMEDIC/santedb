@@ -125,5 +125,10 @@ namespace SanteDB.OrmLite.Providers
         /// Map datatype
         /// </summary>
         string MapDatatype(SchemaPropertyType type);
+
+        /// <summary>
+        /// Map a type to parameter type
+        /// </summary>
+        DbType MapParameterType(Type type);
     }
 }

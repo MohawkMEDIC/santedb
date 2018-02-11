@@ -267,8 +267,27 @@ namespace SanteDB.OrmLite
             var columnSelector = selector;
             if (selector == null || selector.Length == 0)
             {
-                selectStatement = new SqlStatement(this.m_provider, $"SELECT * ").Append(selectStatement);
-                // columnSelector = scopedTables.SelectMany(o => o.Columns).ToArray();
+                // The SQL Engine being used does not permit duplicate column names that may come from 
+                // SELECT * in a sub-query, so we should explicitly call out the columns to be safe
+                if (this.m_provider.Features.HasFlag(SqlEngineFeatures.StrictSubQueryColumnNames))
+                {
+                    var existingCols = new List<String>();
+
+                    // Column list of distinct columns
+                    var columnList = String.Join(",", scopedTables.SelectMany(o => o.Columns).Where(o =>
+                      {
+                          if (!existingCols.Contains(o.Name))
+                          {
+                              existingCols.Add(o.Name);
+                              return true;
+                          }
+                          return false;
+                      }).Select(o => $"{tablePrefix}{o.Table.TableName}.{o.Name}"));
+                    selectStatement = new SqlStatement(this.m_provider, $"SELECT {columnList} ").Append(selectStatement);
+
+                }
+                else
+                    selectStatement = new SqlStatement(this.m_provider, $"SELECT * ").Append(selectStatement);
             }
             else
             {

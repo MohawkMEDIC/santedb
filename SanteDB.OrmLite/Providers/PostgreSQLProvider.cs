@@ -32,6 +32,7 @@ using SanteDB.Core.Model.Map;
 using SanteDB.Core.Data.Warehouse;
 using System.Net;
 using System.Text.RegularExpressions;
+using SanteDB.Core.Model;
 
 namespace SanteDB.OrmLite.Providers
 {
@@ -75,7 +76,11 @@ namespace SanteDB.OrmLite.Providers
         {
             get
             {
-                return SqlEngineFeatures.AutoGenerateGuids | SqlEngineFeatures.AutoGenerateTimestamps | SqlEngineFeatures.ReturnedInserts | SqlEngineFeatures.LimitOffset | SqlEngineFeatures.FetchOffset;
+                return SqlEngineFeatures.AutoGenerateGuids | 
+                    SqlEngineFeatures.AutoGenerateTimestamps | 
+                    SqlEngineFeatures.ReturnedInsertsAsReader | 
+                    SqlEngineFeatures.LimitOffset | 
+                    SqlEngineFeatures.FetchOffset ;
             }
         }
 
@@ -227,18 +232,8 @@ namespace SanteDB.OrmLite.Providers
                     var value = itm;
 
                     // Parameter type
-                    if (value is String) parm.DbType = System.Data.DbType.String;
-                    else if (value is DateTime) parm.DbType = System.Data.DbType.DateTime;
-                    else if (value is DateTimeOffset) parm.DbType = DbType.DateTimeOffset;
-                    else if (value is Int32) parm.DbType = System.Data.DbType.Int32;
-                    else if (value is Boolean) parm.DbType = System.Data.DbType.Boolean;
-                    else if (value is byte[])
-                        parm.DbType = System.Data.DbType.Binary;
-                    else if (value is Guid || value is Guid?)
-                        parm.DbType = System.Data.DbType.Guid;
-                    else if (value is float || value is double) parm.DbType = System.Data.DbType.Double;
-                    else if (value is Decimal) parm.DbType = System.Data.DbType.Decimal;
-                    else if (value == null) parm.DbType = DbType.Object;
+                    parm.DbType = this.MapParameterType(value?.GetType());
+
                     // Set value
                     if (itm == null)
                         parm.Value = DBNull.Value;
@@ -276,6 +271,26 @@ namespace SanteDB.OrmLite.Providers
             }
 
             return cmd;
+        }
+
+        /// <summary>
+        /// Map a parameter type from the provided type
+        /// </summary>
+        public DbType MapParameterType(Type type)
+        {
+            if (type == null) return DbType.Object;
+            else if (type.StripNullable() == typeof(String)) return System.Data.DbType.String;
+            else if (type.StripNullable() == typeof(DateTime)) return System.Data.DbType.DateTime;
+            else if (type.StripNullable() == typeof(DateTimeOffset)) return DbType.DateTimeOffset;
+            else if (type.StripNullable() == typeof(Int32)) return System.Data.DbType.Int32;
+            else if (type.StripNullable() == typeof(Boolean)) return System.Data.DbType.Boolean;
+            else if (type.StripNullable() == typeof(byte[]))
+                return System.Data.DbType.Binary;
+            else if (type.StripNullable() == typeof(float) || type.StripNullable() == typeof(double)) return System.Data.DbType.Double;
+            else if (type.StripNullable() == typeof(Decimal)) return System.Data.DbType.Decimal;
+            else if (type.StripNullable() == typeof(Guid)) return DbType.Guid;
+            else
+                throw new ArgumentOutOfRangeException(nameof(type), "Can't map parameter type");
         }
 
         /// <summary>

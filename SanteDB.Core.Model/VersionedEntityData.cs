@@ -35,7 +35,7 @@ namespace SanteDB.Core.Model
     /// <summary>
     /// Represents versioned based data, that is base data which has versions
     /// </summary>
-    
+
     [XmlType(Namespace = "http://santedb.org/model"), JsonObject("VersionedEntityData")]
     public abstract class VersionedEntityData<THistoryModelType> : BaseEntityData, IVersionedEntity where THistoryModelType : VersionedEntityData<THistoryModelType>, new()
     {
@@ -43,7 +43,7 @@ namespace SanteDB.Core.Model
         // Previous version id
         private Guid? m_previousVersionId;
         // Previous version
-        
+
         private THistoryModelType m_previousVersion;
 
         /// <summary>
@@ -60,11 +60,7 @@ namespace SanteDB.Core.Model
         {
             get
             {
-                return this.PreviousVersion;
-            }
-            set
-            {
-                this.PreviousVersion = (THistoryModelType)value;
+                return this.GetPreviousVersion();
             }
         }
 
@@ -111,24 +107,12 @@ namespace SanteDB.Core.Model
         /// Gets or sets the previous version
         /// </summary>
         //[SerializationReference(nameof(PreviousVersionKey))]
-        [XmlIgnore, JsonIgnore]
-        public virtual THistoryModelType PreviousVersion
+        public virtual THistoryModelType GetPreviousVersion()
         {
-            get
-            {
-                if(this.m_previousVersion == null && this.IsDelayLoadEnabled && 
-                    this.m_previousVersionId.HasValue)
-                    this.m_previousVersion = EntitySource.Current.Get<THistoryModelType>(this.Key, this.m_previousVersionId.Value);
-                return this.m_previousVersion;
-            }
-            set
-            {
-                this.m_previousVersion = value;
-                if (value == default(THistoryModelType))
-                    this.m_previousVersionId = null;
-                else
-                    this.m_previousVersionId = value.VersionKey;
-            }
+            if (this.m_previousVersion == null &&
+                this.m_previousVersionId.HasValue)
+                this.m_previousVersion = EntitySource.Current.Get<THistoryModelType>(this.Key, this.m_previousVersionId.Value);
+            return this.m_previousVersion;
         }
 
         /// <summary>

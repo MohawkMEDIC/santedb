@@ -142,5 +142,28 @@ namespace SanteDB.Core.Model.Map
         {
             return EPOCH.AddSeconds(date).ToLocalTime();
         }
+
+        /// <summary>
+        /// Convert Int16 to decimal
+        /// </summary>
+        public static Decimal Int16ToDecimal(Int16 val)
+        {
+            return (Decimal)val;
+        }
+        /// <summary>
+        /// Convert Int32 to decimal
+        /// </summary>
+        public static Decimal Int32ToDecimal(Int32 val)
+        {
+            return (Decimal)val;
+        }
+
+        /// <summary>
+        /// Convert Int64 to decimal
+        /// </summary>
+        public static Decimal Int64ToDecimal(Int64 val)
+        {
+            return (Decimal)val;
+        }
     }
 }

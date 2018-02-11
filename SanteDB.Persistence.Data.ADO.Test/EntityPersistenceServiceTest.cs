@@ -13,6 +13,8 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using SanteDB.Core.Model;
+using SanteDB.Core.Exceptions;
 
 namespace SanteDB.Persistence.Data.ADO.Test
 {
@@ -29,6 +31,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
         public static void ClassSetup(TestContext context)
         {
             DataTestUtil.Start(context);
+            AuthenticationContext.Current = new AuthenticationContext(AuthenticationContext.SystemPrincipal);
 
             s_authorization = AuthenticationContext.SystemPrincipal;
 
@@ -50,7 +53,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
                     Key = Guid.NewGuid(), // Some random concept for the "Type",
                     Mnemonic = "TEST_CHAIN_INSERT",
                     CreatedByKey = Guid.Empty,
-                    IsSystemConcept = false,
+                    IsReadonly = false,
                     StatusConceptKey = StatusKeys.Active
                 }
             };
@@ -180,7 +183,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
             // Assert
             Assert.AreEqual(StatusKeys.Obsolete, afterObsolete.StatusConcept.Key);
             Assert.IsNotNull(afterObsolete.PreviousVersionKey);
-            Assert.IsNotNull(afterObsolete.PreviousVersion);
+            Assert.IsNotNull(afterObsolete.GetPreviousVersion());
 
         }
 
@@ -201,7 +204,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
 
             var afterTest = base.DoTestInsert(toBeQueried, s_authorization);
             var id = afterTest.Key;
-            Assert.AreEqual(StatusKeys.Active, afterTest.StatusConcept.Key);
+            Assert.AreEqual(StatusKeys.Active, afterTest.StatusConceptKey);
 
             // Query 
             var query = base.DoTestQuery(o => o.CreationTime > DateTimeOffset.MinValue && o.ClassConcept.Key == EntityClassKeys.Place && o.Names.Any(n => n.NameUse.Key == NameUseKeys.Assigned && n.Component.Any(c => c.Value == "Some Clinic")), id, s_authorization);
@@ -242,14 +245,57 @@ namespace SanteDB.Persistence.Data.ADO.Test
             };
 
             // Associate: PARENT > CHILD
-            e1.Relationships.Add(new EntityRelationship(EntityRelationshipTypeKeys.OwnedEntity, e2));
+            e1.Relationships.Add(new EntityRelationship(EntityRelationshipTypeKeys.TerritoryOfAuthority, e2));
 
             // Persist
             var afterInsert = base.DoTestInsert(e1);
             Assert.AreEqual(EntityClassKeys.Organization, afterInsert.ClassConceptKey);
             Assert.AreEqual(1, afterInsert.Relationships.Count);
-            Assert.AreEqual(EntityRelationshipTypeKeys.OwnedEntity, afterInsert.Relationships[0].RelationshipTypeKey);
-            Assert.AreEqual(EntityClassKeys.Place, afterInsert.Relationships[0].TargetEntity.ClassConceptKey);
+            Assert.AreEqual(EntityRelationshipTypeKeys.TerritoryOfAuthority, afterInsert.Relationships[0].RelationshipTypeKey);
+            Assert.AreEqual(EntityClassKeys.Place, afterInsert.Relationships[0].LoadProperty<Entity>("TargetEntity").ClassConceptKey);
+
+        }
+
+        [TestMethod]
+        public void TestInvalidRelationshipThrowsValidationException()
+        {
+            Entity e1 = new Entity()
+            {
+                DeterminerConceptKey = DeterminerKeys.Specific,
+                ClassConceptKey = EntityClassKeys.Organization,
+                StatusConceptKey = StatusKeys.Active,
+                Names = new List<EntityName>()
+                {
+                    new EntityName(NameUseKeys.OfficialRecord, "PARENT")
+                }
+            }, e2 = new Entity()
+            {
+                DeterminerConceptKey = DeterminerKeys.Specific,
+                ClassConceptKey = EntityClassKeys.Place,
+                StatusConceptKey = StatusKeys.Active,
+                Names = new List<EntityName>()
+                {
+                    new EntityName(NameUseKeys.OfficialRecord, "CHILD")
+                }
+            };
+
+            // Associate: ORGANIZATION ==[Wife]==> PLACE
+            e1.Relationships.Add(new EntityRelationship(EntityRelationshipTypeKeys.Wife, e2));
+
+            // Persist
+            try
+            {
+                var afterInsert = base.DoTestInsert(e1);
+                Assert.Fail("Insert should throw detected issue exception");
+            }
+            catch(DetectedIssueException)
+            {
+
+            }
+            catch(Exception)
+            {
+                Assert.Fail("Insert should throw DetectedIssueException");
+            }
 
         }
 

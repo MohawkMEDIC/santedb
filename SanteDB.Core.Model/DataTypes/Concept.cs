@@ -66,7 +66,7 @@ namespace SanteDB.Core.Model.DataTypes
         /// Gets or sets an indicator which dictates whether the concept is a system concept
         /// </summary>
         [XmlElement("isReadonly"), JsonProperty("isReadonly")]
-        public bool IsSystemConcept { get; set; }
+        public bool IsReadonly { get; set; }
         /// <summary>
         /// Gets or sets the unchanging mnemonic for the concept
         /// </summary>
@@ -226,7 +226,7 @@ namespace SanteDB.Core.Model.DataTypes
                 this.ClassKey == other.ClassKey &&
                 this.ConceptNames?.SemanticEquals(other.ConceptNames) == true &&
                 this.ConceptSets?.SemanticEquals(other.ConceptSets) == true &&
-                this.IsSystemConcept == other.IsSystemConcept &&
+                this.IsReadonly == other.IsReadonly &&
                 this.Relationship?.SemanticEquals(other.Relationship) == true;
         }
 

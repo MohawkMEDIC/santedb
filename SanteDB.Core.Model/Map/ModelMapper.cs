@@ -469,7 +469,7 @@ namespace SanteDB.Core.Model.Map
 
                 object domainValue = null;
                 // Set value
-                if (domainProperty == null)
+                if (domainProperty == null || !domainProperty.CanWrite)
                     continue;
                 //Debug.WriteLine ("Unmapped property ({0}).{1}", typeof(TModel).Name, propInfo.Name);
                 else if (domainProperty.PropertyType == typeof(byte[]) && propInfo.PropertyType.StripNullable() == typeof(Guid))

@@ -440,13 +440,42 @@ namespace SanteDB.OrmLite
         /// <summary>
         /// Construct a SELECT FROM statement
         /// </summary>
-        public SqlStatement<T> SelectFrom(String tableAlias = null)
+        public SqlStatement<T> SelectFrom()
         {
             var tableMap = TableMapping.Get(typeof(T));
-            return this.Append(new SqlStatement<T>(this.m_provider, $"SELECT * FROM {tableMap.TableName} AS {tableAlias ?? tableMap.TableName} ")
+            return this.Append(new SqlStatement<T>(this.m_provider, $"SELECT * FROM {tableMap.TableName} AS {tableMap.TableName} ")
             {
-                m_alias = tableAlias ?? tableMap.TableName
+                m_alias = tableMap.TableName
             });
+        }
+
+        /// <summary>
+        /// Construct a SELECT FROM statement with the specified selectors
+        /// </summary>
+        /// <param name="selector">The types from which to select columns</param>
+        /// <returns>The constructed sql statement</returns>
+        public SqlStatement<T> SelectFrom(params Type[] scopedTables)
+        {
+            var existingCols = new List<String>();
+            var tableMap = TableMapping.Get(typeof(T));
+            // Column list of distinct columns
+            var columnList = String.Join(",", scopedTables.Select(o=>TableMapping.Get(o)).SelectMany(o => o.Columns).Where(o =>
+            {
+                if (!existingCols.Contains(o.Name))
+                {
+                    existingCols.Add(o.Name);
+                    return true;
+                }
+                return false;
+            }).Select(o => $"{o.Table.TableName}.{o.Name}"));
+
+            // Append the result to query
+            return this.Append(new SqlStatement<T>(this.m_provider, $"SELECT {columnList} FROM {tableMap.TableName} AS {tableMap.TableName} ")
+            {
+                m_alias = tableMap.TableName
+            });
+
+
         }
 
         /// <summary>

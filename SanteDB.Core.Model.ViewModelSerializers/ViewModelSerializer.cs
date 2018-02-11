@@ -15789,10 +15789,10 @@ namespace SanteDB.Core.Model.Json.Formatter {
                 throw new System.ArgumentException(string.Format("Invalid type {0} provided, expected {1}", o.GetType(), typeof(SanteDB.Core.Model.DataTypes.Concept)));
             }
             if (context.ShouldSerialize("isReadonly")) {
-                if ((_strong.IsSystemConcept == null)) {
+                if ((_strong.IsReadonly == null)) {
                 }
                 else {
-                    context.JsonContext.WritePropertyUtil(w, "isReadonly", _strong.IsSystemConcept, context);
+                    context.JsonContext.WritePropertyUtil(w, "isReadonly", _strong.IsReadonly, context);
                 }
             }
             if (context.ShouldSerialize("mnemonic")) {
@@ -16190,7 +16190,7 @@ namespace SanteDB.Core.Model.Json.Formatter {
                                                                                                                 r.Read();
                                                                                                                 object _instance = context.JsonContext.ReadElementUtil(r, typeof(bool), new SanteDB.Core.Applets.ViewModel.Json.JsonSerializationContext("isReadonly", context.JsonContext, _retVal, context));
                                                                                                                 if ((_instance != null)) {
-                                                                                                                    _retVal.IsSystemConcept = ((bool)(_instance));
+                                                                                                                    _retVal.IsReadonly = ((bool)(_instance));
                                                                                                                 }
                                                                                                             }
                                                                                                             else {

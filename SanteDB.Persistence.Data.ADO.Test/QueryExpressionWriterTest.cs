@@ -27,8 +27,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
         [TestMethod]
         public void TestConstructsEmptySelectStatement()
         {
-            SqlStatement sql = new SqlStatement<DbAct>(new PostgreSQLProvider()).SelectFrom("foo").Build();
-            Assert.IsTrue(sql.SQL.Contains("AS foo"));
+            SqlStatement sql = new SqlStatement<DbAct>(new PostgreSQLProvider()).SelectFrom().Build();
             Assert.IsTrue(sql.SQL.Contains("SELECT * FROM act_tbl"));
             Assert.AreEqual(0, sql.Arguments.Count());
         }
@@ -39,10 +38,10 @@ namespace SanteDB.Persistence.Data.ADO.Test
         [TestMethod]
         public void TestConstructsParameters()
         {
-            SqlStatement sql = new SqlStatement<DbAct>(new PostgreSQLProvider()).SelectFrom("foo").Where("act_id = ?", Guid.NewGuid()).Build();
-            Assert.IsTrue(sql.SQL.Contains("AS foo"));
+            SqlStatement sql = new SqlStatement<DbAct>(new PostgreSQLProvider()).SelectFrom().Where("act_id = ?", Guid.NewGuid()).Build();
             Assert.IsTrue(sql.SQL.Contains("SELECT * FROM act_tbl"));
             Assert.AreEqual(1, sql.Arguments.Count());
+            Assert.IsTrue(sql.SQL.Contains("act_id = "));
         }
 
 
@@ -52,8 +51,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
         [TestMethod]
         public void TestConstructLocalParameters()
         {
-            SqlStatement sql = new SqlStatement<DbActVersion>(new PostgreSQLProvider()).SelectFrom("foo").Where("act_id = ?", Guid.NewGuid()).And("act_utc < ?", DateTime.Now).Build();
-            Assert.IsTrue(sql.SQL.Contains("AS foo"));
+            SqlStatement sql = new SqlStatement<DbActVersion>(new PostgreSQLProvider()).SelectFrom().Where("act_id = ?", Guid.NewGuid()).And("act_utc < ?", DateTime.Now).Build();
             Assert.IsTrue(sql.SQL.Contains("AND"));
             Assert.IsTrue(sql.SQL.Contains("act_id"));
             Assert.IsTrue(sql.SQL.Contains("act_utc"));
@@ -72,9 +70,8 @@ namespace SanteDB.Persistence.Data.ADO.Test
             Guid mg = Guid.NewGuid();
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            SqlStatement sql = new SqlStatement<DbActVersion>(new PostgreSQLProvider()).SelectFrom("foo").Where(o => o.IsNegated == true).Build();
+            SqlStatement sql = new SqlStatement<DbActVersion>(new PostgreSQLProvider()).SelectFrom().Where(o => o.IsNegated == true).Build();
             sw.Stop();
-            Assert.IsTrue(sql.SQL.Contains("AS foo"));
             Assert.IsTrue(sql.SQL.Contains("neg_ind =  ?"));
             Assert.AreEqual(1, sql.Arguments.Count());
 
@@ -89,10 +86,9 @@ namespace SanteDB.Persistence.Data.ADO.Test
             Guid mg = Guid.NewGuid();
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            SqlStatement sql = new SqlStatement<DbActVersion>(new PostgreSQLProvider()).SelectFrom("foo").Where(o => o.Key == mg || o.Key == Guid.NewGuid() && o.CreationTime <= DateTime.Now).Build();
+            SqlStatement sql = new SqlStatement<DbActVersion>(new PostgreSQLProvider()).SelectFrom().Where(o => o.Key == mg || o.Key == Guid.NewGuid() && o.CreationTime <= DateTime.Now).Build();
             sw.Stop();
 
-            Assert.IsTrue(sql.SQL.Contains("AS foo"));
             Assert.IsTrue(sql.SQL.Contains("AND"));
             Assert.IsTrue(sql.SQL.Contains("act_id"));
             Assert.IsTrue(sql.SQL.Contains("crt_utc"));

@@ -94,7 +94,7 @@ namespace SanteDB.Core.Model
             else if (currentValue == null)
             {
                 var xsr = propertyToLoad.GetCustomAttribute<SerializationReferenceAttribute>();
-                if (xsr == null) return me;
+                if (xsr == null) return null;
                 var keyValue = me.GetType().GetRuntimeProperty(xsr.RedirectProperty).GetValue(me) as Guid?;
                 if (keyValue.GetValueOrDefault() == default(Guid))
                     return currentValue;

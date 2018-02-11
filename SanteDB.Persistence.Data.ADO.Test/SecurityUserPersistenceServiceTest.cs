@@ -26,6 +26,8 @@ namespace SanteDB.Persistence.Data.ADO.Test
         public static void ClassSetup(TestContext context)
         {
             DataTestUtil.Start(context);
+            AuthenticationContext.Current = new AuthenticationContext(AuthenticationContext.SystemPrincipal);
+
         }
 
         /// <summary>

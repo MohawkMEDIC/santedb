@@ -49,6 +49,6 @@ namespace SanteDB.Core.Model.Interfaces
         /// <summary>
         /// Gets the previous version
         /// </summary>
-        IVersionedEntity PreviousVersion { get; set; }
+        IVersionedEntity PreviousVersion { get; }
     }
 }

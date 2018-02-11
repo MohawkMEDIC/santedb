@@ -55,7 +55,7 @@ namespace SanteDB.Persistence.Data.ADO.Services.Persistence
             if (dbConceptVersion != null && context.LoadState == Core.Model.LoadState.FullLoad)
             {
                 var dbConcept = (dataInstance as CompositeResult)?.Values.OfType<DbConcept>().FirstOrDefault() ?? context.FirstOrDefault<DbConcept>(o => o.Key == dbConceptVersion.Key);
-                retVal.IsSystemConcept = dbConcept.IsReadonly;
+                retVal.IsReadonly = dbConcept.IsReadonly;
             }
             //retVal.ConceptSetsXml = de.Concept.ConceptSetMembers.Select(o => o.ConceptSetId).ToList();
 

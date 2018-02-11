@@ -30,6 +30,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
         {
             DataTestUtil.Start(context);
 
+            AuthenticationContext.Current = new AuthenticationContext(AuthenticationContext.SystemPrincipal);
             IIdentityProviderService identityProvider = ApplicationContext.Current.GetService<IIdentityProviderService>();
             var identity = identityProvider.CreateIdentity(nameof(SecurityRolePersistenceServiceTest), "password", AuthenticationContext.SystemPrincipal);
 

@@ -1553,7 +1553,7 @@ CREATE TABLE ent_rel_vrfy_cdtbl (
 	rel_typ_cd_id UUID NOT NULL, -- THE TYPE OF RELATIONSHIP
 	src_cls_cd_id UUID NOT NULL, -- THE CLASS CODE OF THE SOURCE ENTITY
 	trg_cls_cd_id UUID NOT NULL, -- THE CLASS CODE OF THE TARGET ENTITY
-	err_desc VARCHAR(64) NOT NULL, -- THE ERROR CONDITION
+	err_desc VARCHAR(128) NOT NULL, -- THE ERROR CONDITION
 	CONSTRAINT pk_ent_rel_vrfy_cdtbl PRIMARY KEY (ent_rel_vrfy_id),
 	CONSTRAINT fk_ent_rel_vrfy_rel_typ_cd FOREIGN KEY (rel_typ_cd_id) REFERENCES cd_tbl(cd_id),
 	CONSTRAINT fk_ent_rel_vrfy_src_cls_cd FOREIGN KEY (src_cls_cd_id) REFERENCES cd_tbl(cd_id),

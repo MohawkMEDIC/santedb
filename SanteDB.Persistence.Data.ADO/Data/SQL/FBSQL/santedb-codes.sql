@@ -4222,3 +4222,20 @@ INSERT INTO ent_rel_vrfy_cdtbl (rel_typ_cd_id, src_cls_cd_id, trg_cls_cd_id, err
 
 INSERT INTO ent_rel_vrfy_cdtbl (rel_typ_cd_id, src_cls_cd_id, trg_cls_cd_id, err_desc) 
 SELECT char_to_uuid('d1578637-e1cb-415e-b319-4011da033813'), cd_id, cd_id, 'err_ReplaceOnlySameType' FROM cd_set_mem_vw WHERE set_mnemonic = 'EntityClass';
+
+-- RULE 17: ORGS ARE TERRITORIAL AUTHORITIES OF PLACES
+INSERT INTO ent_rel_vrfy_cdtbl (rel_typ_cd_id, src_cls_cd_id, trg_cls_cd_id, err_desc) VALUES (char_to_uuid('C6B92576-1D62-4896-8799-6F931F8AB607'), char_to_uuid('7C08BD55-4D42-49CD-92F8-6388D6C4183F'), char_to_uuid('21AB7873-8EF3-4D78-9C19-4582B3C40631'), 'err_stateDedicatedSDL');
+
+UPDATE ENT_REL_VRFY_CDTBL 
+	SET err_desc = (
+		SELECT SRC.MNEMONIC || ' ==[' || TYP.MNEMONIC || ']==> ' || TRG.MNEMONIC 
+		FROM 
+			ENT_REL_VRFY_CDTBL VFY
+			INNER JOIN CD_VRSN_TBL TYP ON (REL_TYP_CD_ID = TYP.CD_ID)
+			INNER JOIN CD_VRSN_TBL SRC ON (SRC_CLS_CD_ID = SRC.CD_ID)
+			INNER JOIN CD_VRSN_TBL TRG ON (TRG_CLS_CD_ID = TRG.CD_ID)
+		WHERE 
+			VFY.ENT_REL_VRFY_ID = ENT_REL_VRFY_CDTBL.ENT_REL_VRFY_ID
+		FETCH FIRST 1 ROWS ONLY
+	);
+

@@ -28,10 +28,12 @@ namespace SanteDB.OrmLite.Providers
     public enum SqlEngineFeatures
     {
         None = 0x0,
-        ReturnedInserts = 0x1,
+        ReturnedInsertsAsReader = 0x1,
         AutoGenerateGuids = 0x2,
         AutoGenerateTimestamps = 0x4,
         LimitOffset = 0x8,
-        FetchOffset = 0x10
+        FetchOffset = 0x10,
+        ReturnedInsertsAsParms = 0x20,
+        StrictSubQueryColumnNames = 0x40
     }
 }

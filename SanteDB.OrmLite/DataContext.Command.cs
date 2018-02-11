@@ -816,20 +816,76 @@ namespace SanteDB.OrmLite
                 lock (this.m_lockObject)
                 {
                     var dbc = this.m_provider.CreateCommand(this, stmt);
-                    try { 
-                        if (returnKeys.Count() > 0 && this.m_provider.Features.HasFlag(SqlEngineFeatures.ReturnedInserts))
+                    try
+                    {
+                        // There are returned keys and we support simple mode returned inserts
+                        if (returnKeys.Any() && this.m_provider.Features.HasFlag(SqlEngineFeatures.ReturnedInsertsAsReader))
                         {
                             using (var rdr = dbc.ExecuteReader())
                                 if (rdr.Read())
                                     foreach (var itm in returnKeys)
                                     {
-                                        object ov = null;
-                                        if (MapUtil.TryConvert(rdr[itm.Name], itm.SourceProperty.PropertyType, out ov))
+                                        object ov = this.m_provider.ConvertValue(rdr[itm.Name], itm.SourceProperty.PropertyType);
+                                        if (ov != null)
                                             itm.SourceProperty.SetValue(value, ov);
                                     }
                         }
-                        else
+                        // There are returned keys and the provider requires an output parameter to hold the keys
+                        else if(returnKeys.Any() && this.m_provider.Features.HasFlag(SqlEngineFeatures.ReturnedInsertsAsParms))
+                        {
+                            // Define output parameters
+                            foreach(var rt in returnKeys)
+                            {
+                                var parm = dbc.CreateParameter();
+                                parm.ParameterName = rt.Name;
+                                parm.DbType = this.m_provider.MapParameterType(rt.SourceProperty.PropertyType);
+                                parm.Direction = ParameterDirection.Output;
+                                dbc.Parameters.Add(parm);
+                            }
+
                             dbc.ExecuteNonQuery();
+
+                            // Get the parameter values
+                            foreach(IDataParameter parm in dbc.Parameters)
+                            {
+                                if (parm.Direction != ParameterDirection.Output) continue;
+
+                                var itm = returnKeys.First(o => o.Name == parm.ParameterName);
+                                object ov = this.m_provider.ConvertValue(parm.Value, itm.SourceProperty.PropertyType);
+                                if (ov != null)
+                                    itm.SourceProperty.SetValue(value, ov);
+                            }
+                        }
+                        else // Provider does not support returned keys
+                        {
+                            dbc.ExecuteNonQuery();
+
+                            // But... the query wants the keys so we have to query them back if the RETURNING clause fields aren't populated in the source object
+                            if (returnKeys.Count() > 0 &&
+                                returnKeys.Any(o=>o.SourceProperty.GetValue(value) == (o.SourceProperty.PropertyType.IsValueType ? Activator.CreateInstance(o.SourceProperty.PropertyType) : null)))
+                            {
+                                if (!this.IsPreparedCommand(dbc))
+                                    dbc.Dispose();
+
+                                var pkcols = tableMap.Columns.Where(o => o.IsPrimaryKey);
+                                var where = new SqlStatement<TModel>(this.m_provider);
+                                foreach (var pk in pkcols)
+                                    where.And($"{pk.Name} = ?", pk.SourceProperty.GetValue(value));
+                                stmt = new SqlStatement<TModel>(this.m_provider).SelectFrom().Where(where);
+
+                                // Create command and exec
+                                dbc = this.m_provider.CreateCommand(this, stmt);
+                                using (var rdr = dbc.ExecuteReader())
+                                    if (rdr.Read())
+                                        foreach (var itm in returnKeys)
+                                        {
+                                            object ov = this.m_provider.ConvertValue(rdr[itm.Name], itm.SourceProperty.PropertyType);
+                                            if (ov != null)
+                                                itm.SourceProperty.SetValue(value, ov);
+                                        }
+
+                            }
+                        }
                     }
                     finally
                     {

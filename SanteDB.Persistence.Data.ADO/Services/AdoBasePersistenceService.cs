@@ -220,7 +220,7 @@ namespace SanteDB.Persistence.Data.ADO.Services
                             return data;
 
                         }
-                        catch(DbException e)
+                        catch (DbException e)
                         {
 
 #if DEBUG
@@ -326,7 +326,7 @@ namespace SanteDB.Persistence.Data.ADO.Services
                         {
 
 #if DEBUG
-                        this.m_tracer.TraceEvent(TraceEventType.Error, 0, "Error : {0} -- {1}", e, this.ObjectToString(data));
+                            this.m_tracer.TraceEvent(TraceEventType.Error, 0, "Error : {0} -- {1}", e, this.ObjectToString(data));
 #else
                             this.m_tracer.TraceEvent(TraceEventType.Error, 0, "Error : {0}", e.Message);
 #endif
@@ -339,7 +339,7 @@ namespace SanteDB.Persistence.Data.ADO.Services
                         {
 
 #if DEBUG
-                        this.m_tracer.TraceEvent(TraceEventType.Error, 0, "Error : {0} -- {1}", e, this.ObjectToString(data));
+                            this.m_tracer.TraceEvent(TraceEventType.Error, 0, "Error : {0} -- {1}", e, this.ObjectToString(data));
 #else
                         this.m_tracer.TraceEvent(TraceEventType.Error, 0, "Error : {0}", e.Message);
 #endif
@@ -423,6 +423,15 @@ namespace SanteDB.Persistence.Data.ADO.Services
                     default:
                         throw new DataPersistenceException(e.Message, e);
                 }
+            }
+            else
+            {
+                throw new DetectedIssueException(new List<DetectedIssue>() {
+                                        new DetectedIssue() {
+                                            Priority = DetectedIssuePriorityType.Error,
+                                            Text = e.Message
+                                        }
+                                    });
             }
         }
 
