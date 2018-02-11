@@ -31,7 +31,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
         public static void ClassSetup(TestContext context)
         {
             s_authorization = AuthenticationContext.SystemPrincipal;
-
+            DataTestUtil.Start(context);
         }
 
         /// <summary>

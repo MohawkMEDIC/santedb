@@ -7,12 +7,24 @@ using SanteDB.Core.Security;
 using MARC.HI.EHRS.SVC.Core.Services.Security;
 using SanteDB.Core.Model.Security;
 using System.Security.Principal;
+using System.IO;
 
 namespace SanteDB.Persistence.Data.ADO.Test
 {
     [TestClass]
     public class AdoPolicyProviderTest : DataTest
     {
+
+        /// <summary>
+        /// Class startup
+        /// </summary>
+        /// <param name="context"></param>
+        [ClassInitialize]
+        public static void ClassSetup(TestContext context)
+        {
+
+            DataTestUtil.Start(context);
+        }
 
         /// <summary>
         /// Test that the service gets all policies

@@ -28,7 +28,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
         [ClassInitialize]
         public static void ClassSetup(TestContext context)
         {
-           
+            DataTestUtil.Start(context);
 
             IIdentityProviderService identityProvider = ApplicationContext.Current.GetService<IIdentityProviderService>();
             var identity = identityProvider.CreateIdentity(nameof(SecurityRolePersistenceServiceTest), "password", AuthenticationContext.SystemPrincipal);
@@ -80,7 +80,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
             roleUnderTest.Policies.Add(new SecurityPolicyInstance(s_chickenCostumePolicy, PolicyGrantType.Grant));
             var roleAfterInsert = base.DoTestInsert(roleUnderTest, s_authorization);
             Assert.AreEqual(1, roleAfterInsert.Policies.Count);
-            
+
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace SanteDB.Persistence.Data.ADO.Test
             dataPersistence.Update(roleAfterInsert, s_authorization, TransactionMode.Commit);
             var roleAfterTest = dataPersistence.Get(roleAfterInsert.Id(), s_authorization, false);
             Assert.AreEqual(PolicyGrantType.Elevate, roleAfterTest.Policies[0].GrantType);
-            
+
         }
 
         /// <summary>

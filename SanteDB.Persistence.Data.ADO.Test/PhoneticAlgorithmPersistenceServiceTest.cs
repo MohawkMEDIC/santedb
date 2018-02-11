@@ -12,7 +12,12 @@ namespace SanteDB.Persistence.Data.ADO.Test
     [TestClass]
     public class PhoneticAlgorithmPersistenceServiceTest : PersistenceTest<PhoneticAlgorithm>
     {
-        
+
+        [ClassInitialize]
+        public static void ClassSetup(TestContext context)
+        {
+            DataTestUtil.Start(context);
+        }
 
         /// <summary>
         /// Tests the persistence layer successfully inserts a phonetic algorithm

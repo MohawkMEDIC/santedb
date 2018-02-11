@@ -28,7 +28,10 @@ namespace SanteDB.Persistence.Data.ADO.Test
         public static void ClassSetup(TestContext context)
         {
 
+
+            DataTestUtil.Start(context);
             IPasswordHashingService hashingService = ApplicationContext.Current.GetService<IPasswordHashingService>();
+            AuthenticationContext.Current = new AuthenticationContext(AuthenticationContext.SystemPrincipal);
             var dataService = ApplicationContext.Current.GetService<IIdentityProviderService>();
             if (dataService.GetIdentity("admin@identitytest.com") == null)
                 dataService.CreateIdentity("admin@identitytest.com", "password", AuthenticationContext.SystemPrincipal);

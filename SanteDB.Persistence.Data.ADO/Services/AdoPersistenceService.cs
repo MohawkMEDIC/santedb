@@ -347,7 +347,7 @@ namespace SanteDB.Persistence.Data.ADO.Services
 
                     if (oizVer < dbVer)
                         throw new InvalidOperationException(String.Format("Invalid Schema Version. SanteDB version {0} is older than the database schema version {1}", oizVer, dbVer));
-                    this.m_tracer.TraceInformation("SanteDB Schema Version {0}", dbVer);
+                    this.m_tracer.TraceInformation("SanteDB Schema Version {0} on {1}", dbVer, s_configuration.Provider.Name);
                 }
             }
             catch (Exception e)

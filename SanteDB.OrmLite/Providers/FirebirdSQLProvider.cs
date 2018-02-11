@@ -33,6 +33,8 @@ using SanteDB.Core.Model.Map;
 using SanteDB.Core.Diagnostics;
 using System.Data.Common;
 using System.Text.RegularExpressions;
+using System.IO;
+using SanteDB.Core.Model;
 
 namespace SanteDB.OrmLite.Providers
 {
@@ -100,16 +102,22 @@ namespace SanteDB.OrmLite.Providers
            return source.IsReadonly ? this.GetReadonlyConnection() : this.GetWriteConnection();
        }
 
-       /// <summary>
-       /// Convert a value to the specified type
-       /// </summary>
-       /// <param name="toType">The type to convert to</param>
-       /// <param name="value">The value to be converted</param>
-       public object ConvertValue(object value, Type toType)
-       {
-           object retVal = null;
-           if (value != DBNull.Value)
-               MapUtil.TryConvert(value, toType, out retVal);
+        /// <summary>
+        /// Convert a value to the specified type
+        /// </summary>
+        /// <param name="toType">The type to convert to</param>
+        /// <param name="value">The value to be converted</param>
+        public object ConvertValue(object value, Type toType)
+        {
+            object retVal = null;
+            if (value != DBNull.Value)
+            {
+                // Hack: Firebird handles UUIDs as a char array of 16 rather than a byte array
+                if (toType.StripNullable() == typeof(Guid))
+                    retVal = Guid.Parse(String.Join("", Encoding.Default.GetBytes(value.ToString()).Select(o => (o).ToString("x2")).ToArray()));
+                else if (!MapUtil.TryConvert(value, toType, out retVal))
+                    throw new ArgumentOutOfRangeException(nameof(value), $"Cannot convert {value?.GetType().Name} to {toType.Name}");
+            }
            return retVal;
        }
 
@@ -158,7 +166,6 @@ namespace SanteDB.OrmLite.Providers
                cmd = context.Connection.CreateCommand();
                cmd.Transaction = context.Transaction;
                cmd.CommandType = type;
-               cmd.CommandText = sql;
 
                if (this.TraceSql)
                    this.m_tracer.TraceVerbose("[{0}] {1}", type, sql);
@@ -169,19 +176,22 @@ namespace SanteDB.OrmLite.Providers
                    var parm = cmd.CreateParameter();
                    var value = itm;
 
-                   // Parameter type
-                   if (value is String) parm.DbType = System.Data.DbType.String;
-                   else if (value is DateTime) parm.DbType = System.Data.DbType.DateTime;
-                   else if (value is DateTimeOffset) parm.DbType = DbType.DateTimeOffset;
-                   else if (value is Int32) parm.DbType = System.Data.DbType.Int32;
-                   else if (value is Boolean) parm.DbType = System.Data.DbType.Boolean;
-                   else if (value is byte[])
-                       parm.DbType = System.Data.DbType.Binary;
-                   else if (value is Guid || value is Guid?)
-                       parm.DbType = System.Data.DbType.Guid;
-                   else if (value is float || value is double) parm.DbType = System.Data.DbType.Double;
-                   else if (value is Decimal) parm.DbType = System.Data.DbType.Decimal;
-                   else if (value == null) parm.DbType = DbType.Object;
+                    // Parameter type
+                    if (value is String) parm.DbType = System.Data.DbType.String;
+                    else if (value is DateTime) parm.DbType = System.Data.DbType.DateTime;
+                    else if (value is DateTimeOffset) parm.DbType = DbType.DateTimeOffset;
+                    else if (value is Int32) parm.DbType = System.Data.DbType.Int32;
+                    else if (value is Boolean) parm.DbType = System.Data.DbType.Boolean;
+                    else if (value is byte[])
+                        parm.DbType = System.Data.DbType.Binary;
+                    else if (value is Guid || value is Guid?)
+                    {
+                        sql = sql.Replace($"@parm{pno}", $"char_to_uuid(@parm{pno})");
+                        parm.DbType = System.Data.DbType.String;
+                    }
+                    else if (value is float || value is double) parm.DbType = System.Data.DbType.Double;
+                    else if (value is Decimal) parm.DbType = System.Data.DbType.Decimal;
+                    else if (value == null) parm.DbType = DbType.Object;
                    // Set value
                    if (itm == null)
                        parm.Value = DBNull.Value;
@@ -199,8 +209,10 @@ namespace SanteDB.OrmLite.Providers
                    cmd.Parameters.Add(parm);
                }
 
-               // Prepare command
-               if (context.PrepareStatements && !cmd.CommandText.StartsWith("EXPLAIN"))
+                cmd.CommandText = sql;
+
+                // Prepare command
+                if (context.PrepareStatements && !cmd.CommandText.StartsWith("EXPLAIN"))
                {
                    if (!cmd.Parameters.OfType<IDataParameter>().Any(o => o.DbType == DbType.Object) &&
                        context.Transaction == null)
@@ -274,7 +286,7 @@ namespace SanteDB.OrmLite.Providers
        /// <returns>The constructed statement</returns>
        public SqlStatement Exists(SqlStatement sqlStatement)
        {
-           return new SqlStatement(this, "SELECT CASE WHEN EXISTS (").Append(sqlStatement.Build()).Append(") THEN true ELSE false END");
+           return new SqlStatement(this, "SELECT CASE WHEN EXISTS (").Append(sqlStatement.Build()).Append(") THEN true ELSE false END FROM RDB$DATABASE");
        }
 
        /// <summary>
@@ -283,13 +295,26 @@ namespace SanteDB.OrmLite.Providers
        /// <returns>The FirebirdSQL provider </returns>
        private DbProviderFactory GetProviderFactory()
        {
-           if (this.m_provider == null) // HACK for Mono
-               this.m_provider = typeof(DbProviderFactories).GetMethod("GetFactory", new Type[] { typeof(String) }).Invoke(null, new object[] { "Fbsql" }) as DbProviderFactory;
+            if (this.m_provider == null) // HACK for Mono
+                this.m_provider = DbProviderFactories.GetFactory("Fbsql");
 
            if (this.m_provider == null)
                throw new InvalidOperationException("Missing FirebirdSQL provider");
            return this.m_provider;
        }
+
+        /// <summary>
+        /// Correc connection string client library
+        /// </summary>
+        private String CorrectConnectionStringLib()
+        {
+            var cstring = new DbConnectionStringBuilder();
+            // HACK: FBSQL doesn't understand || parameters
+            cstring.ConnectionString = this.ConnectionString.Replace("|DataDirectory|", AppDomain.CurrentDomain.GetData("DataDirectory").ToString());
+            if (!cstring.ContainsKey("ClientLibrary"))
+                cstring.Add("ClientLibrary", Path.Combine(Path.GetDirectoryName(typeof(FirebirdSQLProvider).Assembly.Location), "fbclient.dll"));
+            return cstring.ConnectionString;
+        }
 
        /// <summary>
        /// Get a readonly connection
@@ -297,14 +322,14 @@ namespace SanteDB.OrmLite.Providers
        public DataContext GetReadonlyConnection()
        {
            var conn = this.GetProviderFactory().CreateConnection();
-           conn.ConnectionString = this.ConnectionString;
+           conn.ConnectionString = this.CorrectConnectionStringLib();
            return new DataContext(this, conn, true);
        }
 
        public DataContext GetWriteConnection()
        {
            var conn = this.GetProviderFactory().CreateConnection();
-           conn.ConnectionString = this.ConnectionString;
+           conn.ConnectionString = this.CorrectConnectionStringLib();
            return new DataContext(this, conn, false);
        }
 
