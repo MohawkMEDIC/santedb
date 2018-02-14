@@ -42,6 +42,12 @@ using SanteDB.Core.Model.Collection;
 using Newtonsoft.Json.Converters;
 using SanteDB.Core.Model.EntityLoader;
 using SanteDB.Core.Wcf.Compression;
+using SanteDB.Core.Model.Query;
+using MARC.HI.EHRS.SVC.Core;
+using SanteDB.Core.Applets.Services;
+using SanteDB.Core.Applets.ViewModel.Json;
+using SanteDB.Core.Model.Json.Formatter;
+using SanteDB.Core.Applets.ViewModel.Description;
 
 namespace SanteDB.Core.Wcf.Serialization
 {
@@ -61,10 +67,14 @@ namespace SanteDB.Core.Wcf.Serialization
         private static Type[] s_knownTypes = typeof(TContract).GetCustomAttributes<ServiceKnownTypeAttribute>().Select(t => t.Type).ToArray();
         // Serializers
         private static Dictionary<Type, XmlSerializer> s_serializers = new Dictionary<Type, XmlSerializer>();
+        // Default view model
+        private static ViewModelDescription m_defaultViewModel = null;
 
         // Static ctor
         static WcfMessageDispatchFormatter()
         {
+            m_defaultViewModel = ViewModelDescription.Load(typeof(RawBodyWriter).Assembly.GetManifestResourceStream("SanteDB.Core.Resources.ViewModel.xml"));
+
             foreach (var s in s_knownTypes)
                 s_serializers.Add(s, new XmlSerializer(s,  s.GetCustomAttributes<XmlIncludeAttribute>().Select(o => o.Type).ToArray()));
         }
@@ -175,15 +185,41 @@ namespace SanteDB.Core.Wcf.Serialization
                         // Now read the JSON data
                         MemoryStream ms = new MemoryStream(rawBody);
                         StreamReader sr = new StreamReader(ms);
-                        JsonSerializer jsz = new JsonSerializer()
+
+                        // Is this in view model format or regular format?
+                        if (contentType?.StartsWith("application/json+oiz-viewmodel") == true)
                         {
-                            Binder = new ModelSerializationBinder(),
-                            TypeNameAssemblyFormat = 0,
-                            TypeNameHandling = TypeNameHandling.All
-                        };
-                        jsz.Converters.Add(new StringEnumConverter());
-                        var dserType = parm.Type;
-                        parameters[pNumber] = jsz.Deserialize(sr, dserType);
+                            var nvc = NameValueCollection.ParseQueryString(httpRequest.QueryString);
+                            var viewModel = httpRequest.Headers["X-SanteDB-ViewModel"] ?? nvc["_viewModel"]?.FirstOrDefault();
+
+                            // Create the view model serializer
+                            var viewModelSerializer = new JsonViewModelSerializer();
+                            viewModelSerializer.LoadSerializerAssembly(typeof(ActExtensionViewModelSerializer).Assembly);
+
+                            if (!String.IsNullOrEmpty(viewModel))
+                            {
+                                var viewModelDescription = ApplicationContext.Current.GetService<IAppletManagerService>()?.Applets.GetViewModelDescription(viewModel);
+                                viewModelSerializer.ViewModel = viewModelDescription;
+                            }
+                            else
+                            {
+                                viewModelSerializer.ViewModel = m_defaultViewModel;
+                            }
+
+                            parameters[pNumber] = viewModelSerializer.DeSerialize(sr, parm.Type);
+                        }
+                        else
+                        {
+                            JsonSerializer jsz = new JsonSerializer()
+                            {
+                                Binder = new ModelSerializationBinder(),
+                                TypeNameAssemblyFormat = 0,
+                                TypeNameHandling = TypeNameHandling.All
+                            };
+                            jsz.Converters.Add(new StringEnumConverter());
+                            var dserType = parm.Type;
+                            parameters[pNumber] = jsz.Deserialize(sr, dserType);
+                        }
                     }
                     else if(contentType == "application/octet-stream")
                     {
@@ -229,31 +265,69 @@ namespace SanteDB.Core.Wcf.Serialization
                     if (accepts?.StartsWith("application/json") == true ||
                         contentType?.StartsWith("application/json") == true)
                     {
-                        // Prepare the serializer
-                        JsonSerializer jsz = new JsonSerializer();
-                        jsz.Converters.Add(new StringEnumConverter());
 
-                        // Write json data
-                        byte[] body = null;
-                        using (MemoryStream ms = new MemoryStream())
-                        using (StreamWriter sw = new StreamWriter(ms, Encoding.UTF8))
-                        using (JsonWriter jsw = new JsonTextWriter(sw))
+                        if (accepts?.StartsWith("application/json+oiz-viewmodel") == true ||
+                            contentType?.StartsWith("application/json+oiz-viewmodel") == true)
                         {
-                            jsz.DateFormatHandling = DateFormatHandling.IsoDateFormat;
-                            jsz.NullValueHandling = NullValueHandling.Ignore;
-                            jsz.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                            jsz.TypeNameHandling = TypeNameHandling.Auto;
-                            jsz.Converters.Add(new StringEnumConverter());
-                            jsz.Serialize(jsw, result);
-                            sw.Flush();
-                            body = ms.ToArray();
+                            var nvc = NameValueCollection.ParseQueryString(httpRequest.QueryString);
+                            var viewModel = httpRequest.Headers["X-SanteDB-ViewModel"] ?? nvc["_viewModel"]?.FirstOrDefault();
+
+                            // Create the view model serializer
+                            var viewModelSerializer = new JsonViewModelSerializer();
+                            viewModelSerializer.LoadSerializerAssembly(typeof(ActExtensionViewModelSerializer).Assembly);
+
+                            if (!String.IsNullOrEmpty(viewModel))
+                            {
+                                var viewModelDescription = ApplicationContext.Current.GetService<IAppletManagerService>()?.Applets.GetViewModelDescription(viewModel);
+                                viewModelSerializer.ViewModel = viewModelDescription;
+                            }
+                            else
+                            {
+                                viewModelSerializer.ViewModel = m_defaultViewModel;
+                            }
+
+                            byte[] body = null;
+                            using (var ms = new MemoryStream())
+                            using (StreamWriter sw = new StreamWriter(ms, Encoding.UTF8))
+                            using (JsonWriter jsw = new JsonTextWriter(sw))
+                            {
+                                viewModelSerializer.Serialize(jsw, result as IdentifiedData);
+                                sw.Flush();
+                                body = ms.ToArray();
+                            }
+
+                            // Prepare reply for the WCF pipeline
+                            format = WebContentFormat.Raw;
+                            contentType = "application/json+oiz-viewmodel";
+                            reply = Message.CreateMessage(messageVersion, this.m_operationDescription?.Messages[1]?.Action, new RawBodyWriter(body));
                         }
+                        else
+                        {
+                            // Prepare the serializer
+                            JsonSerializer jsz = new JsonSerializer();
+                            jsz.Converters.Add(new StringEnumConverter());
 
-                        // Prepare reply for the WCF pipeline
-                        format = WebContentFormat.Raw;
-                        contentType = "application/json";
-                        reply = Message.CreateMessage(messageVersion, this.m_operationDescription?.Messages[1]?.Action, new RawBodyWriter(body));
+                            // Write json data
+                            byte[] body = null;
+                            using (MemoryStream ms = new MemoryStream())
+                            using (StreamWriter sw = new StreamWriter(ms, Encoding.UTF8))
+                            using (JsonWriter jsw = new JsonTextWriter(sw))
+                            {
+                                jsz.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+                                jsz.NullValueHandling = NullValueHandling.Ignore;
+                                jsz.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                                jsz.TypeNameHandling = TypeNameHandling.Auto;
+                                jsz.Converters.Add(new StringEnumConverter());
+                                jsz.Serialize(jsw, result);
+                                sw.Flush();
+                                body = ms.ToArray();
+                            }
 
+                            // Prepare reply for the WCF pipeline
+                            format = WebContentFormat.Raw;
+                            contentType = "application/json";
+                            reply = Message.CreateMessage(messageVersion, this.m_operationDescription?.Messages[1]?.Action, new RawBodyWriter(body));
+                        }
                     }
                     // The request was in XML and/or the accept is JSON
                     else
