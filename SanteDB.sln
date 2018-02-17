@@ -150,6 +150,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NOTICES", "NOTICES", "{59FF
 		NOTICE.md = NOTICE.md
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SanteDbQueryTool", "SanteDbQueryTool\", "{BBACB540-CB59-4945-8B3A-11DAA6AE0E87}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_33588"
+		Debug.AspNetCompiler.PhysicalPath = "SanteDbQueryTool\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_33588\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_33588"
+		Release.AspNetCompiler.PhysicalPath = "SanteDbQueryTool\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_33588\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "33588"
+		SlnRelativePath = "SanteDbQueryTool\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanteDB.Tools.DataQueryService", "SanteDB.Tools.DataQueryService\SanteDB.Tools.DataQueryService.csproj", "{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -421,6 +444,18 @@ Global
 		{11407ADB-E336-4C0C-AF8E-EA6B601BA69E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11407ADB-E336-4C0C-AF8E-EA6B601BA69E}.SignedRelease|Any CPU.ActiveCfg = Release|Any CPU
 		{11407ADB-E336-4C0C-AF8E-EA6B601BA69E}.SignedRelease|Any CPU.Build.0 = Release|Any CPU
+		{BBACB540-CB59-4945-8B3A-11DAA6AE0E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBACB540-CB59-4945-8B3A-11DAA6AE0E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBACB540-CB59-4945-8B3A-11DAA6AE0E87}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBACB540-CB59-4945-8B3A-11DAA6AE0E87}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{BBACB540-CB59-4945-8B3A-11DAA6AE0E87}.SignedRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBACB540-CB59-4945-8B3A-11DAA6AE0E87}.SignedRelease|Any CPU.Build.0 = Debug|Any CPU
+		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.SignedRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.SignedRelease|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -485,5 +520,7 @@ Global
 		{BFC58F38-9023-4700-B35C-AA933A608E43} = {AACAD3BD-DCCA-4B0E-A887-E708AFC85D0D}
 		{20C72E5E-CDB0-4EF8-AA88-2DB30662F732} = {743B3DB9-DFAD-4E1F-8C4A-7A485C7EC709}
 		{11407ADB-E336-4C0C-AF8E-EA6B601BA69E} = {60153C83-F4A3-423A-B67F-27695D9FB4BB}
+		{BBACB540-CB59-4945-8B3A-11DAA6AE0E87} = {743B3DB9-DFAD-4E1F-8C4A-7A485C7EC709}
+		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3} = {743B3DB9-DFAD-4E1F-8C4A-7A485C7EC709}
 	EndGlobalSection
 EndGlobal

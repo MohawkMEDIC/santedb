@@ -1,0 +1,296 @@
+﻿<html ng-app="layout" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Simple SanteDB Query Tool</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/select2.min.css" />
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/jquery.datefix.min.js" type="text/javascript"></script>
+    <script src="js/angular.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/select2.min.js" type="text/javascript"></script>
+    <script src="js/query-tool.js" type="text/javascript"></script>
+    <script src="js/select2-extended-ajax.min.js" type="text/javascript"></script>
+    <script src="js/santedb.js" type="text/javascript"></script>
+    <script src="js/santedb-model.js" type="text/javascript"></script>
+    <script src="js/santedb-ng.js" type="text/javascript"></script>
+    <script src="controllers/index.js" type="text/javascript"></script>
+    <script src="controllers/authenticate.js" type="text/javascript"></script>
+</head>
+<body ng-controller="IndexController" style="padding-top:65px">
+    <nav>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">SanteDB Developer Console</a>
+                </div>
+                <form class="navbar-form navbar-right">
+                    <select name="realm" class="form-control" ng-model="$root.realm">
+                        <option ng-repeat="r in $root.configuration.realm" value="{{r.url}}">{{r.name}} ({{r.url}})</option>
+                    </select>
+                    <button type="button" class="btn btn-info" ng-if="$root.realm &amp;&amp; $root.session" ng-click="$root.session.abandon()">Logout</button>
+                    <button type="button" class="btn btn-info" ng-if="$root.realm &amp;&amp; !$root.session" ng-click="login()">Login</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="clearfix"></div>
+    <div class="container">
+        <h1>Request Editor:</h1>
+        <form ng-submit="search(submitForm)" novalidate="novalidate" name="submitForm" class="form-horizontal">
+
+            <fieldset ng-disabled="search.searching" class="form-horizontal">
+                <legend>Query Settings:</legend>
+                <div class="form-group">
+                    <label for="resourceTypeInput" class="col-sm-2 control-label">Resource Type:</label>
+                    <div class="col-sm-10">
+                        <select  ng-class="{ 'has-error' : submitForm.resourceTypeInput.$invalid &amp;&amp; submitForm.resourceTypeInput.$touched }" required="required" name="resourceTypeInput" ng-model="search.resourceType" class="form-control">
+                            <option ng-repeat="rt in $root.configuration.resources" ng-if="rt.verb[0] == 'GET' &amp;&amp; hasParameter(rt.resource)" value="{{rt.resource}}">{{rt.resource}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Offset:</label>
+                    <div class="col-sm-2">
+                        <input min="0" ng-model="search.query._offset" class="form-control" type="number" />
+                    </div>
+                    <label class="col-sm-2 control-label">Count:</label>
+                    <div class="col-sm-2">
+                        <input min="0" ng-model="search.query._count" class="form-control" type="number" />
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="checkbox">
+                            <label>
+                                <input checked="checked" type="checkbox" ng-model="search.query._lean" ng-true-value="true" ng-false-value="false"> Lean
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Content Type:</label>
+                    <div class="col-sm-2">
+                        <select ng-model="search.contentType" class="form-control">
+                            <option value="application/json+oiz-viewmodel">ViewModel</option>
+                            <option value="application/json">JSON FastSync</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-2 control-label">View Model:</label>
+                    <div class="col-sm-2">
+                        <select ng-disabled="search.contentType != 'application/json+oiz-viewmodel'" ng-model="search.query._viewModel" class="form-control">
+                            <option value="">Default</option>
+                            <option value="min">Minimal</option>
+                            <option value="full">Full</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Query UUID:</label>
+                    <div class="col-sm-4" ng-class="{ 'has-error' : submitForm.queryId.$invalid &amp;&amp; submitForm.queryId.$touched }">
+                        <input name="queryId"  ng-pattern="'^[A-Fa-f0-9]{8}\-[A-Fa-f0-9]{4}\-[A-Fa-f0-9]{4}\-[A-Fa-f0-9]{4}\-[A-Fa-f0-9]{12}$'" type="text" ng-model="search.query._queryId" class="form-control"/>
+                        <p class="text-danger" ng-if="submitForm.queryId.$invalid &amp;&amp; submitForm.queryId.$touched">UUID must be in form xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="https://www.uuidgenerator.net/" target="_blank">UUID Generator</a>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset ng-disabled="search.searching" class="form-horizontal" ng-show="search.resourceType">
+                <legend>{{search.resourceType}} Filter:</legend>
+                <table class="table table-striped">
+                    <tr>
+                        <th style="width:20%">Parameter</th>
+                        <th style="width:10%">Op</th>
+                        <th style="width:60%">Value</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                    <tr ng-repeat="itm in search.queryBuild track by $index">
+                        <td ng-class="{ 'has-error' : submitForm['key' + $index].$invalid &amp;&amp; (submitForm['key' + $index].$touched || submitForm.$submitted)}">
+                            <select required="required"
+                                    class="form-control"
+                                    ng-model="itm.key"
+                                    ng-change="rebuildQuery()"
+                                    name="key{{index}}">
+                                <option ng-repeat="(k,i) in $root.configuration.parameters" ng-if="i.scope.indexOf(search.resourceType) > -1" value="{{k}}">{{i.name}}</option>
+                            </select>
+                        </td>
+                        <td ng-class="{ 'has-error' : submitForm['op' + $index].$invalid &amp;&amp; ( submitForm['op' + $index].$touched  || submitForm.$submitted)}">
+                            <select 
+                                    required="required" 
+                                    class="form-control" 
+                                    ng-model="itm.op" 
+                                    ng-change="rebuildQuery()"
+                                    name="op{{$index}}"
+                                >
+                                <option selected="selected" value="=">==</option>
+                                <option value="=!">!=</option>
+                                <option ng-if="$root.configuration.types[$root.configuration.parameters[itm.key].type].ops.lt" value="=<"><</option>
+                                <option ng-if="$root.configuration.types[$root.configuration.parameters[itm.key].type].ops.le" value="=<="><=</option>
+                                <option ng-if="$root.configuration.types[$root.configuration.parameters[itm.key].type].ops.gt" value="=>">&gt;</option>
+                                <option ng-if="$root.configuration.types[$root.configuration.parameters[itm.key].type].ops.ge" value="=>=">&gt;=</option>
+                                <option ng-if="$root.configuration.types[$root.configuration.parameters[itm.key].type].ops.ap" value="=~">~</option>
+                            </select>
+                        </td>
+                        <td ng-class="{ 'has-error' : submitForm['val' +$index].$invalid &amp;&amp; (submitForm['val' +$index].$touched || submitForm.$submitted) }">
+                            <select ng-if="$root.configuration.parameters[itm.key].type == 'bool'"
+
+                                    required="required"
+                                    class="form-control"
+                                    name="val{{$index}}"
+                                    ng-model="itm.val">
+                                <option value="false">False</option>
+                                <option value="true">True</option>
+                            </select>
+                            <input 
+                                    name="val{{$index}}"
+                                   required="required"
+                                   ng-if="$root.configuration.parameters[itm.key].type != 'bool' &amp;&amp; !$root.configuration.types[$root.configuration.parameters[itm.key].type].search" 
+                                   class="form-control has-error" 
+                                   ng-model="itm.val" 
+                                   type="{{$root.configuration.parameters[itm.key].type}}" 
+                                   />
+                            <div ng-if="$root.configuration.parameters[itm.key].type != 'bool' &amp;&amp; $root.configuration.types[$root.configuration.parameters[itm.key].type].search">
+                                <select 
+                                    name="val{{$index}}"
+                                        required="required"
+                                        ng-model="itm.val" class="form-control"
+                                        style="width:100%"
+                                        sdb-search="{{$root.configuration.types[$root.configuration.parameters[itm.key].type].search}}"
+                                        data-filter="{{$root.configuration.parameters[itm.key].searchFilter}}"
+                                        data-url="{{$root.realm}}"
+                                        data-searchfield="{{$root.configuration.types[$root.configuration.parameters[itm.key].type].searchField}}"></select>
+
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" ng-if="$index > 0" class="btn btn-danger" ng-click="removeTerm($index)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="addTerm()">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">HDSI Query String:</label>
+                    <div class="col-sm-10">
+                        <textarea readonly="readonly" class="form-control">{{$root.realm}}/{{search.resourceType}}?{{buildQueryString()}}</textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-group pull-right clearfix">
+                            <button type="button" ng-click="reset()" ng-disabled="search.searching" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Clear</button>
+                            <button type="submit" ng-disabled="search.searching || !search.resourceType" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="search.searching">
+                    <div class="col-md-12" style="text-align:center">
+                        <img src="./img/ajax-loader.gif" style="margin-left:auto; margin-right:auto; padding:4px; display:block" />
+                        Executing Query
+                    </div>
+                </div>
+            </div>
+            <fieldset ng-if="results">
+                <legend>Query Results ({{results.offset}} .. {{results.count}} of {{results.totalResults}} in {{results.ttr}} ms)</legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr ng-if="['Entity','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">
+                            <th>SN#</th>
+                            <th>Key</th>
+                            <th>Type</th>
+                            <th>Class</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-if="['Act','SubstanceAdministration','QuantityObservation','CodedObservation','TextObservation','PatientEncounter','Procedure'].indexOf(search.resourceType) > -1">
+                            <th>SN#</th>
+                            <th>Key</th>
+                            <th>Type</th>
+                            <th>Class / Sub-Class</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-if="search.resourceType == 'Concept'">
+                            <th>SN#</th>
+                            <th>Key</th>
+                            <th>Mnemonic</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="res in results.item track by $index">
+                            <td>{{$index + 1}}</td>
+                            <td>{{res.id}}</td>
+                            <td ng-if="search.resourceType != 'Concept'">{{res.$type}}</td>
+                            <td ng-if="search.resourceType != 'Concept'">{{res.classConceptModel | sdbConcept}}{{res.typeConceptModel | sdbConcept}}</td>
+                            <td ng-if="['Entity','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">{{res.name | sdbEntityName}}</td>
+                            <td ng-if="['Entity','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">{{res.address | sdbEntityAddress }}</td>
+                            <td ng-if="['Act','SubstanceAdministration','QuantityObservation','CodedObservation','TextObservation','PatientEncounter','Procedure'].indexOf(search.resourceType) > -1">
+                                <div ng-if="res.actTime">
+                                    {{res.actTime}}
+                                </div>
+                            </td>
+                            <td ng-if="search.resourceType == 'Concept'">{{res.mnemonic}}</td>
+                            <td ng-if="search.resourceType == 'Concept'">{{res | sdbConcept}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal fade" id="dlgAuthenticate" ng-controller="AuthenticationController" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form ng-submit="authenticate(loginForm)" class="form" name="loginForm" novalidate="novalidate">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title">Login to Server</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <fieldset class="form-horizontal form-group" xmlns="http://www.w3.org/1999/xhtml">
+                                <div class="form-group" ng-class="{ 'has-error' : loginForm.username.$invalid &amp;&amp; loginForm.username.$touched }">
+                                    <label for="usernameInput" class="control-label">User:</label>
+                                    <input ng-model="username" type="text" ng-required="!token || token.length == 0" placeholder="Username" class="form-control" name="username" id="usernameInput" autocomplete="off" autofocus="autofocus" autocorrect="off" autocapitalize="none" />
+                                    <p ng-show="loginForm.username.$invalid &amp;&amp; loginForm.username.$touched" class="help-block text-danger">Username required</p>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid &amp;&amp; loginForm.password.$touched }">
+                                    <label for="passwordInput" class="control-label">Password:</label>
+                                    <input ng-model="password" type="password" ng-required="!token || token.length == 0" placeholder="Password" class="form-control" name="password" />
+                                    <p ng-show="loginForm.password.$invalid &amp;&amp; loginForm.password.$touched" class="help-block text-danger">Password is required</p>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid &amp;&amp; loginForm.password.$touched }">
+                                    <label for="tokenInput" class="control-label">OAUTH2 JWT Token (If you already have one):</label>
+                                    <textarea ng-model="token" placeholder="JWT Token" class="form-control" name="token"></textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal" ng-click="QueryTool.$authentication = {}">
+                            <span>
+                                <span class="glyphicon glyphicon-remove"></span> Cancel
+                            </span>
+                        </button>
+                        <button type="submit" id="loginButton" class="btn btn-primary btn-lg">
+                            Ok
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
