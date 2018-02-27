@@ -97,6 +97,15 @@ namespace SanteDB.Core.Query
         }
 
         /// <summary>
+        /// Clear
+        /// </summary>
+        public void Clear()
+        {
+            this.m_queryCache.Clear();
+        }
+
+
+        /// <summary>
         /// Add results to id set
         /// </summary>
         public bool AddResults<TIdentifier>(string queryId, Identifier<TIdentifier>[] results)
@@ -108,7 +117,7 @@ namespace SanteDB.Core.Query
                 lock (retVal.Results)
                     retVal.Results.AddRange(results.Where(o => !retVal.Results.Contains(o.Id)).Select(o => o.Id).OfType<Object>());
 
-                retVal.TotalResults = retVal.Results.Count();
+                //retVal.TotalResults = retVal.Results.Count();
                 return true;
             }
             else
@@ -122,7 +131,8 @@ namespace SanteDB.Core.Query
         {
             MemoryQueryInfo retVal = null;
             if (this.m_queryCache.TryGetValue(queryId, out retVal))
-                return retVal.Results.ToArray().Distinct().Skip(startRecord).Take(nRecords).Select(o => new Identifier<Guid>((Guid)o)).OfType<Identifier<TIdentifier>>().ToArray();
+                lock(retVal.Results)
+                    return retVal.Results.ToArray().Distinct().Skip(startRecord).Take(nRecords).Select(o => new Identifier<Guid>((Guid)o)).OfType<Identifier<TIdentifier>>().ToArray();
             return null;
         }
 
@@ -169,6 +179,7 @@ namespace SanteDB.Core.Query
                     this.m_tracer.TraceVerbose("Updating query {0} ({1} results)", queryId, results.Count());
                     retVal.Results = results.Select(o => o.Id).OfType<Object>().ToList();
                     retVal.QueryTag = tag;
+                    retVal.TotalResults = count;
                 }
                 else
                 {
@@ -178,7 +189,7 @@ namespace SanteDB.Core.Query
                     {
                         QueryTag = tag,
                         Results = results.Select(o => o.Id).OfType<Object>().ToList(),
-                        TotalResults = results.ToArray().Count()
+                        TotalResults = count
                     });
                 }
             }
@@ -196,7 +207,7 @@ namespace SanteDB.Core.Query
             ApplicationContext.Current.Started += (o, e) =>
             {
                 var timerService = ApplicationContext.Current.GetService<ITimerService>();
-                if (!timerService.IsJobRegistered(typeof(MemoryQueryPersistenceService)))
+                if (timerService?.IsJobRegistered(typeof(MemoryQueryPersistenceService)) == false)
                     timerService.AddJob(this, new TimeSpan(4, 0, 0));
             };
 

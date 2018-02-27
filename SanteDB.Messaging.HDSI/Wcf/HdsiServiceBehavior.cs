@@ -812,7 +812,7 @@ namespace SanteDB.Messaging.HDSI.Wcf
                 // Service options
                 var retVal = new ServiceOptions()
                 {
-                    InterfaceVersion = typeof(IdentifiedData).Assembly.GetName().Version.ToString(),
+                    InterfaceVersion = "1.0.0.0",
                     Services = new List<ServiceResourceOptions>()
                     {
                         new ServiceResourceOptions()
@@ -862,6 +862,13 @@ namespace SanteDB.Messaging.HDSI.Wcf
         {
             if (!ApplicationContext.Current.IsRunning)
                 throw new DomainStateException();
+        }
+
+        /// <summary>
+        /// Options resource
+        /// </summary>
+        public void OptionsResource(string resourceType)
+        {
         }
     }
 }

@@ -433,7 +433,9 @@ namespace SanteDB.Core.Applets.ViewModel.Json
                 }
             }
             else
+            {
                 w.WriteValue(instance);
+            }
 
         }
 

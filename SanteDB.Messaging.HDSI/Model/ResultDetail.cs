@@ -17,7 +17,9 @@
  * User: fyfej
  * Date: 2017-9-1
  */
+using SanteDB.Core.Model;
 using System.Xml.Serialization;
+using System;
 
 namespace SanteDB.Messaging.HDSI.Model
 {
@@ -40,7 +42,7 @@ namespace SanteDB.Messaging.HDSI.Model
     /// A single result detail
     /// </summary
     [XmlType(nameof(ResultDetail), Namespace = "http://santedb.org/hdsi")]
-    public class ResultDetail
+    public class ResultDetail : IdentifiedData
     {
         /// <summary>
         /// Default ctor
@@ -53,19 +55,30 @@ namespace SanteDB.Messaging.HDSI.Model
         /// </summary>
         public ResultDetail(DetailType type, string text)
         {
-            this.Type = type;
+            this.DetailType = type;
             this.Text = text;
         }
         /// <summary>
         /// Gets or sets the type of the error
         /// </summary>
         [XmlAttribute("type")]
-        public DetailType Type { get; set; }
+        public DetailType DetailType { get; set; }
 
         /// <summary>
         /// Gets or sets the text of the error
         /// </summary>
         [XmlText]
         public string Text { get; set; }
+
+        /// <summary>
+        /// Get the modified on
+        /// </summary>
+        public override DateTimeOffset ModifiedOn
+        {
+            get
+            {
+                return DateTimeOffset.Now;
+            }
+        }
     }
 }

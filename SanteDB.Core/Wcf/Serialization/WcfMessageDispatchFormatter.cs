@@ -265,9 +265,7 @@ namespace SanteDB.Core.Wcf.Serialization
                     if (accepts?.StartsWith("application/json") == true ||
                         contentType?.StartsWith("application/json") == true)
                     {
-
-                        if (accepts?.StartsWith("application/json+oiz-viewmodel") == true ||
-                            contentType?.StartsWith("application/json+oiz-viewmodel") == true)
+                        if (accepts?.StartsWith("application/json+sdb-viewmodel") == true)
                         {
                             var nvc = NameValueCollection.ParseQueryString(httpRequest.QueryString);
                             var viewModel = httpRequest.Headers["X-SanteDB-ViewModel"] ?? nvc["_viewModel"]?.FirstOrDefault();

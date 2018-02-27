@@ -268,7 +268,6 @@ namespace SanteDB.OrmLite
         /// </summary>
         private object MapObject(Type tModel, IDataReader rdr)
         {
-
             var tableMapping = TableMapping.Get(tModel);
             dynamic result = Activator.CreateInstance(tModel);
             // Read each column and pull from reader

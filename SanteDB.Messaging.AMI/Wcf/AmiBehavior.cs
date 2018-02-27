@@ -221,7 +221,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 
 			var serviceOptions = new ServiceOptions
 			{
-				InterfaceVersion = typeof(AmiCollection<>).Assembly.GetName().Version.ToString(),
+				InterfaceVersion = "1.0.0.0",
 				Services = new List<ServiceResourceOptions>
 				{
 					new ServiceResourceOptions

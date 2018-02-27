@@ -169,7 +169,13 @@ namespace SanteDB.Caching.Memory
             CacheEntry candidate = null;
             if (this.m_entryTable.TryGetValue(idData.Key.Value, out candidate) && candidate != null)
             {
-                if ((candidate.Data as IIdentifiedEntity).LoadState <= idData.LoadState)
+                if (candidate.Data.GetType() != data.GetType())
+                {
+                    lock (this.m_lock)
+                        this.m_entryTable.Remove(idData.Key.Value);
+                    this.m_entryTable.Add(idData.Key.Value, new CacheEntry(DateTime.Now, data as IdentifiedData));
+                }
+                else if ((candidate.Data as IIdentifiedEntity).LoadState <= idData.LoadState)
                     candidate.Update(data as IdentifiedData);
             }
             else
@@ -276,7 +282,6 @@ namespace SanteDB.Caching.Memory
         public void Clear()
         {
             this.ThrowIfDisposed();
-
             this.m_entryTable.Clear();
         }
 
