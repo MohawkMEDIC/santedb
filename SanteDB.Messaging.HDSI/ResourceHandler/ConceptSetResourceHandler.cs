@@ -28,6 +28,7 @@ using SanteDB.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -49,10 +50,21 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 			ApplicationContext.Current.Started += (o, e) => this.repositoryService = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 		}
 
-		/// <summary>
-		/// Gets the resource name
-		/// </summary>
-		public string ResourceName => "ConceptSet";
+        /// <summary>
+        /// Get the capabilities of this handler
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Create | ResourceCapability.CreateOrUpdate | ResourceCapability.Delete | ResourceCapability.Get | ResourceCapability.Search | ResourceCapability.Update;
+            }
+        }
+
+        /// <summary>
+        /// Gets the resource name
+        /// </summary>
+        public string ResourceName => "ConceptSet";
 
 		/// <summary>
 		/// Gets the type of serialization

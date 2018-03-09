@@ -31,6 +31,7 @@ using SanteDB.Core.Security.Attribute;
 using SanteDB.Core.Security;
 using MARC.HI.EHRS.SVC.Core;
 using SanteDB.Core.Model.Collection;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -72,6 +73,24 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
             get
             {
                 return typeof(TResource);
+            }
+        }
+
+        /// <summary>
+        /// Gets the capabilities of this resource handler
+        /// </summary>
+        public virtual ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Create |
+                    ResourceCapability.CreateOrUpdate |
+                    ResourceCapability.Delete |
+                    ResourceCapability.Get |
+                    ResourceCapability.GetVersion |
+                    ResourceCapability.History |
+                    ResourceCapability.Search |
+                    ResourceCapability.Update;
             }
         }
 

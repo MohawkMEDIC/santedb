@@ -25,6 +25,7 @@ using SanteDB.Core.Model.Query;
 using SanteDB.Core.Services;
 using System;
 using System.Collections.Generic;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -43,10 +44,22 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 			ApplicationContext.Current.Started += (o, e) => this.repository = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 		}
 
-		/// <summary>
-		/// Gets the resource name.
-		/// </summary>
-		public string ResourceName
+
+        /// <summary>
+        /// Get capabilities
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Get | ResourceCapability.Search;
+            }
+        }
+
+        /// <summary>
+        /// Gets the resource name.
+        /// </summary>
+        public string ResourceName
 		{
 			get
 			{

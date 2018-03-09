@@ -799,7 +799,7 @@ namespace SanteDB.Messaging.HDSI.Wcf
         [SwaggerWcfTag("Immunization Management Service Interface (HDSI)")]
         [SwaggerWcfResponse(503, "The HDSI service is unavailable (for example: Server is still starting up, or didn't start up correctly)")]
         [SwaggerWcfResponse(200, "The operation was successful")]
-        public IdentifiedData Options()
+        public ServiceOptions Options()
         {
             this.ThrowIfNotReady();
             try
@@ -817,13 +817,12 @@ namespace SanteDB.Messaging.HDSI.Wcf
                     {
                         new ServiceResourceOptions()
                         {
-                            ResourceName = null,
-                            Verbs = new List<string>() { "OPTIONS" }
+                            ResourceName = null
                         },
                         new ServiceResourceOptions()
                         {
                             ResourceName = "time",
-                            Verbs = new List<string>() { "GET" }
+                            Capabilities = ResourceCapability.Get
                         }
                     }
                 };
@@ -834,13 +833,10 @@ namespace SanteDB.Messaging.HDSI.Wcf
                     var svc = new ServiceResourceOptions()
                     {
                         ResourceName = itm.ResourceName,
-                        Verbs = new List<string>()
-                        {
-                            "GET", "PUT", "POST", "HEAD", "DELETE"
-                        }
+                        Capabilities = itm.Capabilities
                     };
                     if (ApplicationContext.Current.GetService<IPatchService>() != null)
-                        svc.Verbs.Add("PATCH");
+                        svc.Capabilities |= ResourceCapability.Patch;
                     retVal.Services.Add(svc);
                 }
 
@@ -867,8 +863,14 @@ namespace SanteDB.Messaging.HDSI.Wcf
         /// <summary>
         /// Options resource
         /// </summary>
-        public void OptionsResource(string resourceType)
+        public ServiceResourceOptions Options(string resourceType)
         {
+
+            var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+            if (handler == null)
+                throw new FileNotFoundException(resourceType);
+            else
+                return new ServiceResourceOptions(resourceType, handler.Capabilities);
         }
     }
 }

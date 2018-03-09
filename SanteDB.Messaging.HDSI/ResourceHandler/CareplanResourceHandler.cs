@@ -33,6 +33,7 @@ using SanteDB.Messaging.HDSI.Util;
 using SanteDB.Core.Model.Acts;
 using System.Linq.Expressions;
 using SanteDB.Core.Security;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -41,6 +42,17 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
     /// </summary>
     public class CareplanResourceHandler : IResourceHandler
     {
+        /// <summary>
+        /// Get capabilities statement
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Get | ResourceCapability.Search;
+            }
+        }
+
         /// <summary>
         /// Gets the resource name
         /// </summary>

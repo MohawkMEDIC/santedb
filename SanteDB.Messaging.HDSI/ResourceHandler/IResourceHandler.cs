@@ -17,6 +17,7 @@
  * User: fyfej
  * Date: 2017-9-1
  */
+using SanteDB.Core.Interop;
 using SanteDB.Core.Model;
 using SanteDB.Core.Model.Query;
 using System;
@@ -39,13 +40,18 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// </summary>
 		Type Type { get; }
 
-		/// <summary>
-		/// Creates a resource.
-		/// </summary>
-		/// <param name="data">The resource data to be created.</param>
-		/// <param name="updateIfExists">Updates the resource if the resource exists.</param>
-		/// <returns>Returns the created resource.</returns>
-		IdentifiedData Create(IdentifiedData data, bool updateIfExists);
+        /// <summary>
+        /// Gets the capabilities of this service
+        /// </summary>
+        ResourceCapability Capabilities { get;  }
+
+        /// <summary>
+        /// Creates a resource.
+        /// </summary>
+        /// <param name="data">The resource data to be created.</param>
+        /// <param name="updateIfExists">Updates the resource if the resource exists.</param>
+        /// <returns>Returns the created resource.</returns>
+        IdentifiedData Create(IdentifiedData data, bool updateIfExists);
 
 		/// <summary>
 		/// Gets a specific resource instance.

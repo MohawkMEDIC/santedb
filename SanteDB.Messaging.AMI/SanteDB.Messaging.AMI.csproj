@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AmiConstants.cs" />
     <Compile Include="AmiMessageHandler.cs" />
     <Compile Include="Configuration\AmiConfiguration.cs" />
     <Compile Include="Configuration\AmiConfigurationSectionHandler.cs" />
@@ -84,11 +85,13 @@
     <Compile Include="Wcf\AmiBehavior.SecurityPolicy.cs" />
     <Compile Include="Wcf\AmiBehavior.SecurityDevice.cs" />
     <Compile Include="Wcf\AmiBehavior.SecurityRole.cs" />
+    <Compile Include="Wcf\AmiServiceBehavior.cs" />
     <Compile Include="Wcf\Behavior\AmiRestEndpointBehavior.cs" />
     <Compile Include="Wcf\Behavior\AmiSerializerOperationBehavior.cs" />
     <Compile Include="Wcf\IAmiContract.cs" />
     <Compile Include="Wcf\AmiMessageInspector.cs" />
     <Compile Include="Wcf\AmiContentTypeHandler.cs" />
+    <Compile Include="Wcf\IAmiServiceContract.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SanteDB.Alerting\SanteDB.Alerting.csproj">
@@ -121,6 +124,9 @@
       <Link>SanteDB.licenseheader</Link>
     </None>
     <Compile Include="Wcf\AmiBehavior.SecurityUser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ResourceHandler\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

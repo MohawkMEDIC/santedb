@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -37,10 +38,21 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 	/// </summary>
 	public class ConceptResourceHandler : IResourceHandler
 	{
-		/// <summary>
-		/// Gets the resource name
-		/// </summary>
-		public string ResourceName => nameof(Concept);
+        /// <summary>
+        /// Get resource capabilities
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Get | ResourceCapability.GetVersion | ResourceCapability.Search | ResourceCapability.History;
+            }
+        }
+
+        /// <summary>
+        /// Gets the resource name
+        /// </summary>
+        public string ResourceName => nameof(Concept);
 
 		/// <summary>
 		/// Gets the model type of the handler

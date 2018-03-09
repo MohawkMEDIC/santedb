@@ -30,6 +30,7 @@ using MARC.HI.EHRS.SVC.Core.Services;
 using SanteDB.Core.Security;
 using SanteDB.Core.Security.Attribute;
 using SanteDB.Core.Services;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -38,6 +39,18 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
     /// </summary>
     public class ExtensionTypeResourceHandler : IResourceHandler
     {
+
+        /// <summary>
+        /// Get capabilities of this handler
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Get | ResourceCapability.Search;
+            }
+        }
+
         /// <summary>
         /// Resource name
         /// </summary>

@@ -27,6 +27,7 @@ using SanteDB.Core.Model.Query;
 using SanteDB.Core.Model.DataTypes;
 using MARC.HI.EHRS.SVC.Core;
 using SanteDB.Core.Services;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -35,6 +36,17 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
     /// </summary>
     public class TemplateDefinitionResourceHandler : IResourceHandler
     {
+        /// <summary>
+        /// Get capabilities 
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Search;
+            }
+        }
+
         /// <summary>
         /// Get the resource name
         /// </summary>

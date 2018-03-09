@@ -28,6 +28,7 @@ using SanteDB.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -46,10 +47,21 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 			ApplicationContext.Current.Started += (o, e) => this.repository = ApplicationContext.Current.GetService<IIdentifierTypeRepositoryService>();
 		}
 
-		/// <summary>
-		/// Gets the resource name.
-		/// </summary>
-		public string ResourceName
+        /// <summary>
+        /// Get capabilities for this resource handler
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Create | ResourceCapability.CreateOrUpdate | ResourceCapability.Delete | ResourceCapability.Get | ResourceCapability.Search | ResourceCapability.Update;
+            }
+        }
+
+        /// <summary>
+        /// Gets the resource name.
+        /// </summary>
+        public string ResourceName
 		{
 			get
 			{

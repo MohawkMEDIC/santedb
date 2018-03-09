@@ -26,6 +26,7 @@ using SanteDB.Core.Security.Attribute;
 using SanteDB.Core.Services;
 using System;
 using System.Collections.Generic;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -43,10 +44,21 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
                 
 		}
 
-		/// <summary>
-		/// The name of the resource
-		/// </summary>
-		public string ResourceName
+        /// <summary>
+        /// Get the capabilities of this handler
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Get | ResourceCapability.Search;
+            }
+        }
+
+        /// <summary>
+        /// The name of the resource
+        /// </summary>
+        public string ResourceName
 		{
 			get
 			{

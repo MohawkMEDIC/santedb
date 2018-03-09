@@ -18,11 +18,41 @@
  * Date: 2017-9-1
  */
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace SanteDB.Core.Interop
 {
+
+    /// <summary>
+    /// Service resource operations
+    /// </summary>
+    [XmlType(nameof(ResourceCapability), Namespace = "http://santedb.org/model"), Flags]
+    public enum ResourceCapability 
+    {
+        [XmlEnum("none")]
+        None = 0x00, 
+        [XmlEnum("create")]
+        Create = 0x001,
+        [XmlEnum("create-update")]
+        CreateOrUpdate = 0x002,
+        [XmlEnum("update")]
+        Update = 0x004,
+        [XmlEnum("delete")]
+        Delete = 0x008,
+        [XmlEnum("patch")]
+        Patch = 0x010,
+        [XmlEnum("get")]
+        Get = 0x020,
+        [XmlEnum("get-version")]
+        GetVersion = 0x040,
+        [XmlEnum("history")]
+        History = 0x080,
+        [XmlEnum("search")]
+        Search = 0x100
+    }
+
     /// <summary>
     /// Service resource options
     /// </summary>
@@ -43,11 +73,11 @@ namespace SanteDB.Core.Interop
 		/// with a specific resource name, and verbs.
 		/// </summary>
 		/// <param name="resourceName">The name of the resource of the service resource options.</param>
-		/// <param name="verbs">The list of HTTP verbs of the resource option.</param>
-	    public ServiceResourceOptions(string resourceName, List<string> verbs)
+		/// <param name="operations">The list of HTTP verbs of the resource option.</param>
+	    public ServiceResourceOptions(string resourceName, ResourceCapability operations)
 	    {
 		    this.ResourceName = resourceName;
-		    this.Verbs = verbs;
+            this.Capabilities = operations;
 	    }
 
         /// <summary>
@@ -57,9 +87,9 @@ namespace SanteDB.Core.Interop
         public string ResourceName { get; set; }
 
         /// <summary>
-        /// Gets the verbs supported on the specified resource
+        /// Gets or sets the operations supported by this resource
         /// </summary>
-        [XmlElement("verb"), JsonProperty("verb")]
-        public List<string> Verbs { get; set; }
+        [XmlAttribute("cap"), JsonProperty("cap")]
+        public ResourceCapability Capabilities { get; set; }
     }
 }

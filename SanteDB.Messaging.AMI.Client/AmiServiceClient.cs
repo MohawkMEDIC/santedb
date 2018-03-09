@@ -119,14 +119,7 @@ namespace SanteDB.Messaging.AMI.Client
 			return this.Client.Post<AssigningAuthorityInfo, AssigningAuthorityInfo>("assigningAuthority", this.Client.Accept, assigningAuthorityInfo);
 		}
 
-		/// <summary>
-		/// Create audit
-		/// </summary>
-		public void CreateAudit(AuditInfo audit)
-		{
-			this.Client.Post<AuditInfo, object>("audit", this.Client.Accept, audit);
-		}
-
+		
 		/// <summary>
 		/// Creates the code system.
 		/// </summary>

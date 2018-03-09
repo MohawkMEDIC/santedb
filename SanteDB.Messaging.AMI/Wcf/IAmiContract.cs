@@ -164,6 +164,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <param name="audit">The audit to save.</param>
 		[WebInvoke(UriTemplate = "/audit", BodyStyle = WebMessageBodyStyle.Bare, Method = "POST")]
 		void CreateAudit(AuditInfo audit);
+        
 
 		#endregion Auditing
 

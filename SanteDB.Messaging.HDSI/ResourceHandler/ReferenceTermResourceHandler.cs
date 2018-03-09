@@ -31,6 +31,7 @@ using SanteDB.Core.Model.Collection;
 using SanteDB.Core.Security;
 using SanteDB.Core.Security.Attribute;
 using System.Security.Permissions;
+using SanteDB.Core.Interop;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -52,10 +53,21 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 			ApplicationContext.Current.Started += (o, e) => { this.repository = ApplicationContext.Current.GetService<IConceptRepositoryService>(); };
 		}
 
-		/// <summary>
-		/// Gets the name of the resource which the resource handler supports.
-		/// </summary>
-		public string ResourceName => nameof(ReferenceTerm);
+        /// <summary>
+        /// Get capabilities of this interface
+        /// </summary>
+        public ResourceCapability Capabilities
+        {
+            get
+            {
+                return ResourceCapability.Search | ResourceCapability.Get;
+            }
+        }
+
+        /// <summary>
+        /// Gets the name of the resource which the resource handler supports.
+        /// </summary>
+        public string ResourceName => nameof(ReferenceTerm);
 
 		/// <summary>
 		/// Gets the type which the resource handler supports.
