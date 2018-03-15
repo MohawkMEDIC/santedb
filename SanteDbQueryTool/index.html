@@ -203,7 +203,7 @@
                 <legend>Query Results ({{results.offset}} .. {{results.count}} of {{results.totalResults}} in {{results.ttr}} ms)</legend>
                 <table class="table table-striped">
                     <thead>
-                        <tr ng-if="['Entity','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">
+                        <tr ng-if="['Entity','Organization','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">
                             <th>SN#</th>
                             <th>Key</th>
                             <th>Type</th>
@@ -234,8 +234,8 @@
                             <td>{{res.id}}</td>
                             <td ng-if="search.resourceType != 'Concept'">{{res.$type}}</td>
                             <td ng-if="search.resourceType != 'Concept'">{{res.classConceptModel | sdbConcept}}{{res.typeConceptModel | sdbConcept}}</td>
-                            <td ng-if="['Entity','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">{{res.name | sdbEntityName}}</td>
-                            <td ng-if="['Entity','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">{{res.address | sdbEntityAddress }}</td>
+                            <td ng-if="['Entity','Organization','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">{{res.name | sdbEntityName}}</td>
+                            <td ng-if="['Entity','Organization','Patient','Person','Provider','UserEntity','Place','Material','ManufacturedMaterial'].indexOf(search.resourceType) > -1">{{res.address | sdbEntityAddress }}</td>
                             <td ng-if="['Act','SubstanceAdministration','QuantityObservation','CodedObservation','TextObservation','PatientEncounter','Procedure'].indexOf(search.resourceType) > -1">
                                 <div ng-if="res.actTime">
                                     {{res.actTime}}
