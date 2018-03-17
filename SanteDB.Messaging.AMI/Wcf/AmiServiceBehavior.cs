@@ -18,6 +18,8 @@ using SanteDB.Core.Model.Interfaces;
 using System.ServiceModel.Web;
 using System.Net;
 using System.ServiceModel.Channels;
+using SanteDB.Messaging.Common;
+using SanteDB.Core.Model;
 
 namespace SanteDB.Messaging.AMI.Wcf
 {
@@ -39,35 +41,35 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="resourceType">The type of resource being created</param>
         /// <param name="data">The resource data being created</param>
         /// <returns>The created the data</returns>
-        public object Create(string resourceType, object data)
+        public IdentifiedData Create(string resourceType, IdentifiedData data)
         {
             this.ThrowIfNotReady();
 
             try
             {
 
-                //object handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
-                //if (handler != null)
-                //{
-                //    var retVal = handler.Create(data, false);
+                IResourceHandler handler = ResourceHandlerUtil.Current.GetResourceHandler<IAmiServiceContract>(resourceType);
+                if (handler != null)
+                {
+                    var retVal = handler.Create(data, false);
 
-                //    var versioned = retVal as IVersionedEntity;
-                //    WebOperationContext.Current.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.Created;
-                //    WebOperationContext.Current.OutgoingResponse.ETag = retVal.Tag;
-                //    if (versioned != null)
-                //        WebOperationContext.Current.OutgoingResponse.Headers.Add(HttpResponseHeader.ContentLocation, String.Format("{0}/{1}/{2}/history/{3}",
-                //           WebOperationContext.Current.IncomingRequest.UriTemplateMatch.BaseUri,
-                //           resourceType,
-                //           retVal.Key,
-                //           versioned.Key));
-                //    else
-                //        WebOperationContext.Current.OutgoingResponse.Headers.Add(HttpResponseHeader.ContentLocation, String.Format("{0}/{1}/{2}",
-                //            WebOperationContext.Current.IncomingRequest.UriTemplateMatch.BaseUri,
-                //            resourceType,
-                //            retVal.Key));
-                //}
-                //else
-                //    throw new FileNotFoundException(resourceType);
+                    var versioned = retVal as IVersionedEntity;
+                    WebOperationContext.Current.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.Created;
+                    WebOperationContext.Current.OutgoingResponse.ETag = (retVal as IdentifiedData).Tag;
+                    if (versioned != null)
+                        WebOperationContext.Current.OutgoingResponse.Headers.Add(HttpResponseHeader.ContentLocation, String.Format("{0}/{1}/{2}/history/{3}",
+                           WebOperationContext.Current.IncomingRequest.UriTemplateMatch.BaseUri,
+                           resourceType,
+                           (retVal as IdentifiedData).Key,
+                           versioned.Key));
+                    else
+                        WebOperationContext.Current.OutgoingResponse.Headers.Add(HttpResponseHeader.ContentLocation, String.Format("{0}/{1}/{2}",
+                            WebOperationContext.Current.IncomingRequest.UriTemplateMatch.BaseUri,
+                            resourceType,
+                            (retVal as IdentifiedData).Key));
+                }
+                else
+                    throw new FileNotFoundException(resourceType);
                 return null;
             }
             catch (Exception e)
@@ -79,17 +81,17 @@ namespace SanteDB.Messaging.AMI.Wcf
             }
         }
 
-        public object CreateUpdate(string resourceType, string key, object data)
+        public IdentifiedData CreateUpdate(string resourceType, string key, IdentifiedData data)
         {
             throw new NotImplementedException();
         }
 
-        public object Delete(string resourceType, string key)
+        public IdentifiedData Delete(string resourceType, string key)
         {
             throw new NotImplementedException();
         }
 
-        public object Get(string resourceType, string key)
+        public IdentifiedData Get(string resourceType, string key)
         {
             throw new NotImplementedException();
         }
@@ -99,12 +101,12 @@ namespace SanteDB.Messaging.AMI.Wcf
             throw new NotImplementedException();
         }
 
-        public object GetVersion(string resourceType, string key, string versionKey)
+        public IdentifiedData GetVersion(string resourceType, string key, string versionKey)
         {
             throw new NotImplementedException();
         }
 
-        public object History(string resourceType, string key)
+        public IdentifiedData History(string resourceType, string key)
         {
             throw new NotImplementedException();
         }
@@ -124,12 +126,12 @@ namespace SanteDB.Messaging.AMI.Wcf
             throw new NotImplementedException();
         }
 
-        public object Search(string resourceType)
+        public IdentifiedData Search(string resourceType)
         {
             throw new NotImplementedException();
         }
 
-        public object Update(string resourceType, string key, object data)
+        public IdentifiedData Update(string resourceType, string key, IdentifiedData data)
         {
             throw new NotImplementedException();
         }

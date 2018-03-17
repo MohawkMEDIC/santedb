@@ -1,11 +1,9 @@
 ﻿using SanteDB.Core.Alert.Alerting;
 using SanteDB.Core.Applets.Model;
 using SanteDB.Core.Interop;
-using SanteDB.Core.Model.AMI.Alerting;
+using SanteDB.Core.Model;
 using SanteDB.Core.Model.AMI.Applet;
 using SanteDB.Core.Model.AMI.Auth;
-using SanteDB.Core.Model.AMI.BusinessRules;
-using SanteDB.Core.Model.AMI.DataTypes;
 using SanteDB.Core.Model.AMI.Diagnostics;
 using SanteDB.Core.Model.AMI.Logging;
 using SanteDB.Core.Model.AMI.Security;
@@ -31,7 +29,6 @@ namespace SanteDB.Messaging.AMI.Wcf
     [ServiceKnownType(typeof(Entity))]
     [ServiceKnownType(typeof(ExtensionType))]
     [ServiceKnownType(typeof(AlertMessage))]
-    [ServiceKnownType(typeof(AlertMessageInfo))]
     [ServiceKnownType(typeof(SecurityApplication))]
     [ServiceKnownType(typeof(SecurityApplicationInfo))]
     [ServiceKnownType(typeof(TfaRequestInfo))]
@@ -61,7 +58,6 @@ namespace SanteDB.Messaging.AMI.Wcf
     [ServiceKnownType(typeof(SubmissionRequest))]
     [ServiceKnownType(typeof(ServiceOptions))]
     [ServiceKnownType(typeof(X509Certificate2Info))]
-    [ServiceKnownType(typeof(AssigningAuthorityInfo))]
     [ServiceKnownType(typeof(CodeSystem))]
     [ServiceKnownType(typeof(LogFileInfo))]
     [ServiceKnownType(typeof(AmiCollection<SubmissionInfo>))]
@@ -73,10 +69,7 @@ namespace SanteDB.Messaging.AMI.Wcf
     [ServiceKnownType(typeof(AmiCollection<SecurityPolicyInfo>))]
     [ServiceKnownType(typeof(AmiCollection<TfaMechanismInfo>))]
     [ServiceKnownType(typeof(AmiCollection<TfaRequestInfo>))]
-    [ServiceKnownType(typeof(AmiCollection<BusinessRuleInfo>))]
-    [ServiceKnownType(typeof(AmiCollection<AssigningAuthorityInfo>))]
     [ServiceKnownType(typeof(AmiCollection<SecurityDevice>))]
-    [ServiceKnownType(typeof(AmiCollection<AlertMessageInfo>))]
     [ServiceKnownType(typeof(AmiCollection<SecurityUserInfo>))]
     [ServiceKnownType(typeof(AmiCollection<LogFileInfo>))]
     [ServiceKnownType(typeof(AmiCollection<CodeSystem>))]
@@ -96,7 +89,7 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="data">The resource data to be created</param>
         /// <returns>The stored resource</returns>
         [WebInvoke(Method = "POST", UriTemplate = "/{resourceType}", BodyStyle = WebMessageBodyStyle.Bare)]
-        object Create(String resourceType, object data);
+        IdentifiedData Create(String resourceType, IdentifiedData data);
 
         /// <summary>
         /// Creates the specified resource if it does not exist, otherwise updates it
@@ -106,7 +99,7 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="data">The resource itself</param>
         /// <returns>The updated or created resource</returns>
         [WebInvoke(Method = "POST", UriTemplate = "/{resourceType}/{key}", BodyStyle = WebMessageBodyStyle.Bare)]
-        object CreateUpdate(String resourceType, String key, object data);
+        IdentifiedData CreateUpdate(String resourceType, String key, IdentifiedData data);
 
         /// <summary>
         /// Updates the specified resource
@@ -116,7 +109,7 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="data">The resource data to be updated</param>
         /// <returns>The updated resource</returns>
         [WebInvoke(Method = "PUT", UriTemplate = "/{resourceType}/{key}", BodyStyle = WebMessageBodyStyle.Bare)]
-        object Update(String resourceType, String key, object data);
+        IdentifiedData Update(String resourceType, String key, IdentifiedData data);
 
         /// <summary>
         /// Deletes the specified resource
@@ -125,7 +118,7 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="key">The key of the resource being deleted</param>
         /// <returns>The last version of the deleted resource</returns>
         [WebInvoke(Method = "DELETE", UriTemplate = "/{resourceType}/{key}", BodyStyle = WebMessageBodyStyle.Bare)]
-        object Delete(String resourceType, String key);
+        IdentifiedData Delete(String resourceType, String key);
 
         /// <summary>
         /// Gets the specified resource from the service
@@ -134,7 +127,7 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="key">The key of the resource</param>
         /// <returns>The retrieved resource</returns>
         [WebInvoke(Method = "GET", UriTemplate = "/{resourceType}/{key}", BodyStyle = WebMessageBodyStyle.Bare)]
-        object Get(String resourceType, String key);
+        IdentifiedData Get(String resourceType, String key);
 
         /// <summary>
         /// Gets the specified versioned copy of the data
@@ -144,7 +137,7 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="versionKey">The version key to retrieve</param>
         /// <returns>The object as it existed at that version</returns>
         [WebInvoke(Method = "GET", UriTemplate = "/{resourceType}/{key}/history/{versionKey}", BodyStyle = WebMessageBodyStyle.Bare)]
-        object GetVersion(String resourceType, String key, String versionKey);
+        IdentifiedData GetVersion(String resourceType, String key, String versionKey);
 
         /// <summary>
         /// Gets a complete history of changes made to the object (if supported)
@@ -153,7 +146,7 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="key">The key of the object to retrieve the history for</param>
         /// <returns>The history</returns>
         [WebInvoke(Method = "GET", UriTemplate = "/{resourceType}/{key}/history", BodyStyle = WebMessageBodyStyle.Bare)]
-        object History(String resourceType, String key);
+        IdentifiedData History(String resourceType, String key);
 
         /// <summary>
         /// Searches the specified resource type for matches
@@ -161,7 +154,7 @@ namespace SanteDB.Messaging.AMI.Wcf
         /// <param name="resourceType">The resource type to be searched</param>
         /// <returns>The results of the search</returns>
         [WebInvoke(Method = "GET", UriTemplate = "/{resourceType}", BodyStyle = WebMessageBodyStyle.Bare)]
-        object Search(String resourceType);
+        IdentifiedData Search(String resourceType);
 
         /// <summary>
         /// Patches the specified resource with the provided patch

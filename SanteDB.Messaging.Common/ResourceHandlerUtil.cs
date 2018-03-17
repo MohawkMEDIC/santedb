@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace SanteDB.Messaging.HDSI.ResourceHandler
+namespace SanteDB.Messaging.Common
 {
 	/// <summary>
 	/// Resource handler utility
@@ -70,7 +70,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 					{
 						ConstructorInfo ci = t.GetConstructor(Type.EmptyTypes);
 						IResourceHandler rh = ci.Invoke(null) as IResourceHandler;
-						m_handlers.Add(rh.ResourceName, rh);
+						m_handlers.Add($"{rh.Scope.Name}/{rh.ResourceName}", rh);
 					}
 				}
 				catch (ReflectionTypeLoadException)
@@ -83,10 +83,10 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Get resource handler
 		/// </summary>
-		public IResourceHandler GetResourceHandler(String resourceName)
+		public IResourceHandler GetResourceHandler<TScope>(String resourceName)
 		{
 			IResourceHandler retVal = null;
-			this.m_handlers.TryGetValue(resourceName, out retVal);
+			this.m_handlers.TryGetValue($"{typeof(TScope).Name}/{resourceName}", out retVal);
 			return retVal;
 		}
 	}

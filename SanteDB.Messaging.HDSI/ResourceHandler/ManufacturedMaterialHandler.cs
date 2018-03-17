@@ -44,7 +44,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Create the specified material
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedMetadata)]
-        public override IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+        public override Object Create(Object data, bool updateIfExists)
         {
             return base.Create(data, updateIfExists);
         }
@@ -54,7 +54,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// </summary>
         /// <returns></returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public override IdentifiedData Get(Guid id, Guid versionId)
+        public override Object Get(Guid id, Guid versionId)
         {
             return base.Get(id, versionId);
         }
@@ -63,7 +63,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Obsoletes the specified material
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedMetadata)]
-        public override IdentifiedData Obsolete(Guid key)
+        public override Object Obsolete(Guid key)
         {
             return base.Obsolete(key);
         }
@@ -72,7 +72,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query for the specified material
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public override IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public override IEnumerable<Object> Query(NameValueCollection queryParameters)
         {
             return base.Query(queryParameters);
         }
@@ -82,7 +82,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query for the specified material with restrictions
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public override IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public override IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
         {
             var retVal = base.Query(queryParameters, offset, count, out totalCount);
 
@@ -103,7 +103,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Update the specified material
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedMetadata)]
-        public override IdentifiedData Update(IdentifiedData data)
+        public override Object Update(Object data)
         {
             return base.Update(data);
         }

@@ -26,6 +26,7 @@ using SanteDB.Core.Services;
 using System;
 using System.Collections.Generic;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -44,6 +45,10 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 			ApplicationContext.Current.Started += (o, e) => this.repository = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 		}
 
+        /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
 
         /// <summary>
         /// Get capabilities
@@ -84,7 +89,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="data">The organization to be created.</param>
 		/// <param name="updateIfExists">Update the organization if it exists.</param>
 		/// <returns>Returns the newly create organization.</returns>
-		public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+		public Object Create(Object data, bool updateIfExists)
 		{
 			Bundle bundleData = data as Bundle;
 			bundleData?.Reconstitute();
@@ -119,7 +124,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="id">The id of the organization.</param>
 		/// <param name="versionId">The version id of the organization.</param>
 		/// <returns>Returns the organization.</returns>
-		public IdentifiedData Get(Guid id, Guid versionId)
+		public Object Get(Guid id, Guid versionId)
 		{
 			return this.repository.GetConceptClass(id);
 		}
@@ -129,7 +134,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// </summary>
 		/// <param name="key">The key of the organization to obsolete.</param>
 		/// <returns>Returns the obsoleted organization.</returns>
-		public IdentifiedData Obsolete(Guid key)
+		public Object Obsolete(Guid  key)
 		{
 			return this.repository.ObsoleteConceptClass(key);
 		}
@@ -139,7 +144,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// </summary>
 		/// <param name="queryParameters">The query parameters for which to use to query for the organization.</param>
 		/// <returns>Returns a list of organizations.</returns>
-		public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+		public IEnumerable<Object> Query(NameValueCollection queryParameters)
 		{
             int tr = 0;
 			return this.Query(queryParameters, 0, 100, out tr);
@@ -153,7 +158,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="count">The count of the query.</param>
 		/// <param name="totalCount">The total count of the query.</param>
 		/// <returns>Returns a list of organizations.</returns>
-		public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+		public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
 		{
             var filter = QueryExpressionParser.BuildLinqExpression<ConceptClass>(queryParameters);
             List<String> queryId = null;
@@ -168,7 +173,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// </summary>
 		/// <param name="data">The organization to be updated.</param>
 		/// <returns>Returns the updated organization.</returns>
-		public IdentifiedData Update(IdentifiedData data)
+		public Object Update(Object  data)
 		{
 			Bundle bundleData = data as Bundle;
 			bundleData?.Reconstitute();

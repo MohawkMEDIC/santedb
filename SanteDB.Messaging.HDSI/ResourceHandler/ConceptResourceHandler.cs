@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -54,16 +55,21 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// </summary>
         public string ResourceName => nameof(Concept);
 
-		/// <summary>
-		/// Gets the model type of the handler
-		/// </summary>
-		public Type Type => typeof(Concept);
+        /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
+
+        /// <summary>
+        /// Gets the model type of the handler
+        /// </summary>
+        public Type Type => typeof(Concept);
 
 		/// <summary>
 		/// Create the specified object in the database
 		/// </summary>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-		public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+		public Object Create(Object data, bool updateIfExists)
 		{
 			var conceptService = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 
@@ -88,7 +94,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Get the specified instance
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IdentifiedData Get(Guid id, Guid versionId)
+        public Object Get(Guid id, Guid versionId)
 		{
 			var conceptService = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 			return conceptService.GetConcept(id, versionId);
@@ -98,7 +104,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// Obsolete the specified concept
 		/// </summary>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-		public IdentifiedData Obsolete(Guid key)
+		public Object Obsolete(Guid  key)
 		{
 			var conceptService = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 			return conceptService.ObsoleteConcept(key);
@@ -108,7 +114,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query the specified data
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters)
 		{
             int tr = 0;
 			return this.Query(queryParameters, 0, 100, out tr);
@@ -118,7 +124,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query with offsets
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out Int32 totalCount)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out Int32 totalCount)
 		{
             var conceptService = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 
@@ -135,7 +141,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// Update the specified data
 		/// </summary>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-		public IdentifiedData Update(IdentifiedData data)
+		public Object Update(Object  data)
 		{
 			var conceptService = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 

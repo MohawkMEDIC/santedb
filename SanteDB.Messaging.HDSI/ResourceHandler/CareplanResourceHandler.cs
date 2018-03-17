@@ -34,6 +34,7 @@ using SanteDB.Core.Model.Acts;
 using System.Linq.Expressions;
 using SanteDB.Core.Security;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -52,6 +53,11 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
                 return ResourceCapability.Get | ResourceCapability.Search;
             }
         }
+        
+        /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
 
         /// <summary>
         /// Gets the resource name
@@ -78,7 +84,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Create a care plan
         /// </summary>
-        public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+        public Object Create(Object data, bool updateIfExists)
         {
 
             (data as Bundle)?.Reconstitute();
@@ -103,7 +109,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Gets a careplan by identifier
         /// </summary>
-        public IdentifiedData Get(Guid id, Guid versionId)
+        public Object Get(Guid id, Guid versionId)
         {
 
             Patient target = ApplicationContext.Current.GetService<IRepositoryService<Patient>>().Get(id);
@@ -122,7 +128,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Obsolete the care plan
         /// </summary>
-        public IdentifiedData Obsolete(Guid key)
+        public Object Obsolete(Guid  key)
         {
             throw new NotSupportedException();
         }
@@ -130,7 +136,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Query for care plan
         /// </summary>
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters)
         {
             int tr = 0;
             return this.Query(queryParameters, 0, 100, out tr);
@@ -139,7 +145,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Query for care plan objects... Constructs a care plan for all patients matching the specified query parameters
         /// </summary>
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
         {
             var repositoryService = ApplicationContext.Current.GetService<IRepositoryService<Patient>>();
             if (repositoryService == null)
@@ -170,7 +176,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Update care plan 
         /// </summary>
-        public IdentifiedData Update(IdentifiedData data)
+        public Object Update(Object  data)
         {
             throw new NotSupportedException();
         }

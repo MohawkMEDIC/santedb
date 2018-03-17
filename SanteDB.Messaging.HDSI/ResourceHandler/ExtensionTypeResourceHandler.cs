@@ -31,6 +31,7 @@ using SanteDB.Core.Security;
 using SanteDB.Core.Security.Attribute;
 using SanteDB.Core.Services;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -63,6 +64,11 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         }
 
         /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
+
+        /// <summary>
         /// Gets the type of the handler
         /// </summary>
         public Type Type
@@ -76,7 +82,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Readonly
         /// </summary>
-        public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+        public Object Create(Object data, bool updateIfExists)
         {
             throw new NotSupportedException();
         }
@@ -85,7 +91,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Get the extension
         /// </summary>
         [PolicyPermission(System.Security.Permissions.SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IdentifiedData Get(Guid id, Guid versionId)
+        public Object Get(Guid id, Guid versionId)
         {
             var repository = ApplicationContext.Current.GetService<IDataPersistenceService<ExtensionType>>();
             return repository?.Get<Guid>(new MARC.HI.EHRS.SVC.Core.Data.Identifier<Guid>(id, versionId), AuthenticationContext.Current.Principal, false);
@@ -94,7 +100,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Read only
         /// </summary>
-        public IdentifiedData Obsolete(Guid key)
+        public Object Obsolete(Guid  key)
         {
             throw new NotSupportedException();
         }
@@ -103,7 +109,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query the specified types
         /// </summary>
         [PolicyPermission(System.Security.Permissions.SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters)
         {
             int tr = 0;
             return this.Query(queryParameters, 0, 100, out tr);
@@ -113,7 +119,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query with offset and count
         /// </summary>
         [PolicyPermission(System.Security.Permissions.SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
         {
             var repository = ApplicationContext.Current.GetService<IDataPersistenceService<ExtensionType>>();
             var filter = QueryExpressionParser.BuildLinqExpression<ExtensionType>(queryParameters);
@@ -127,7 +133,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Readonly
         /// </summary>
-        public IdentifiedData Update(IdentifiedData data)
+        public Object Update(Object  data)
         {
             throw new NotSupportedException();
         }
