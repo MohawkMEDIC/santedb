@@ -18,9 +18,9 @@
  * Date: 2017-9-1
  */
 
-using SanteDB.Core.Alert.Alerting;
 using System;
 using System.Xml.Serialization;
+using SanteDB.Alerting.Alerting;
 
 namespace SanteDB.Core.Model.AMI.Alerting
 {

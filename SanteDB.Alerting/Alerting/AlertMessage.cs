@@ -1,30 +1,31 @@
 ﻿/*
  * Copyright 2015-2018 Mohawk College of Applied Arts and Technology
  *
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you 
- * may not use this file except in compliance with the License. You may 
- * obtain a copy of the License at 
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you
+ * may not use this file except in compliance with the License. You may
+ * obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the 
- * License for the specific language governing permissions and limitations under 
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * User: fyfej
  * Date: 2017-9-1
  */
-using Newtonsoft.Json;
-using SanteDB.Core.Model;
-using SanteDB.Core.Model.Security;
+
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
+using SanteDB.Core.Model;
+using SanteDB.Core.Model.Security;
 
-namespace SanteDB.Core.Alert.Alerting
+namespace SanteDB.Alerting.Alerting
 {
 	/// <summary>
 	/// Represents an alert message.
@@ -37,7 +38,6 @@ namespace SanteDB.Core.Alert.Alerting
 		/// </summary>
 		public AlertMessage()
 		{
-
 		}
 
 		/// <summary>
@@ -66,6 +66,16 @@ namespace SanteDB.Core.Alert.Alerting
 		public string Body { get; set; }
 
 		/// <summary>
+		/// Gets or sets the time of the alert.
+		/// </summary>
+		[JsonProperty("time"), XmlElement("time")]
+		public String DateTimeXml
+		{
+			get { return this.TimeStamp.DateTime.ToString("o"); }
+			set { this.TimeStamp = DateTime.Parse(value); }
+		}
+
+		/// <summary>
 		/// Gets or sets the status of the alert.
 		/// </summary>
 		[JsonProperty("flags"), XmlElement("flags")]
@@ -78,48 +88,39 @@ namespace SanteDB.Core.Alert.Alerting
 		public string From { get; set; }
 
 		/// <summary>
+		/// Gets or sets the time this was modified on
+		/// </summary>
+		[XmlIgnore, JsonIgnore]
+		public override DateTimeOffset ModifiedOn
+		{
+			get
+			{
+				return this.CreationTime;
+			}
+		}
+
+		/// <summary>
+		/// The recipient users used for query
+		/// </summary>
+		[JsonProperty("rcpt"), XmlElement("rcpt")]
+		public List<SecurityUser> RcptTo { get; set; }
+
+		/// <summary>
 		/// Gets or sets the subject of the alert.
 		/// </summary>
 		[JsonProperty("subject"), XmlElement("subject")]
 		public string Subject { get; set; }
 
-        /// <summary>
-        /// Date/time of the alert
-        /// </summary>
-        [XmlIgnore, JsonIgnore]
+		/// <summary>
+		/// Date/time of the alert
+		/// </summary>
+		[XmlIgnore, JsonIgnore]
 		public DateTimeOffset TimeStamp { get; set; }
-
-        /// <summary>
-        /// Gets or sets the time of the alert.
-        /// </summary>
-        [JsonProperty("time"), XmlElement("time")]
-        public String DateTimeXml {
-            get { return this.TimeStamp.DateTime.ToString("o"); }
-            set { this.TimeStamp = DateTime.Parse(value); }
-        }
 
 		/// <summary>
 		/// Gets or sets the recipient of the alert in a human readable form
 		/// </summary>
 		[JsonProperty("to"), XmlElement("to")]
 		public String To { get; set; }
-
-        /// <summary>
-        /// The recipient users used for query
-        /// </summary>
-        [JsonProperty("rcpt"), XmlElement("rcpt")]
-        public List<SecurityUser> RcptTo { get; set; }
-
-        /// <summary>
-        /// Gets or sets the time this was modified on
-        /// </summary>
-        [XmlIgnore, JsonIgnore]
-        public override DateTimeOffset ModifiedOn
-        {
-            get
-            {
-                return this.CreationTime;
-            }
-        }
-    }
+	}
 }

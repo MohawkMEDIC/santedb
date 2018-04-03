@@ -18,7 +18,6 @@
  * Date: 2017-9-1
  */
 
-using SanteDB.Core.Alert.Alerting;
 using SanteDB.Core.Applets.Model;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Model;
@@ -39,6 +38,7 @@ using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Xml.Schema;
+using SanteDB.Alerting.Alerting;
 
 namespace SanteDB.Messaging.AMI.Wcf
 {

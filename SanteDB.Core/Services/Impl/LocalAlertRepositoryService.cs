@@ -20,13 +20,14 @@
 using MARC.HI.EHRS.SVC.Core;
 using MARC.HI.EHRS.SVC.Core.Data;
 using MARC.HI.EHRS.SVC.Core.Services;
-using SanteDB.Core.Alert.Alerting;
 using SanteDB.Core.Exceptions;
 using SanteDB.Core.Security;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using SanteDB.Alerting;
+using SanteDB.Alerting.Alerting;
 
 namespace SanteDB.Core.Services.Impl
 {
