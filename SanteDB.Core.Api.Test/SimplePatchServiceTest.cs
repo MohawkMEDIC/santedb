@@ -14,7 +14,7 @@ using System.Linq;
 using SanteDB.Core.Model.Acts;
 using SanteDB.Core.Exceptions;
 
-namespace SanteDB.Core.PCL.Test
+namespace SanteDB.Core.Api.Test
 {
     /// <summary>
     /// Represents a unit test which tests the patching ability 

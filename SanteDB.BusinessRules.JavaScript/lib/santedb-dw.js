@@ -23,7 +23,7 @@
 
 var SanteDBWarehouse = SanteDBWarehouse || {
 
-    // SanteDB.Core.Data.Warehouse.DatamartDefinition, SanteDB.Core.PCL, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Data.Warehouse.DatamartDefinition, SanteDB.Core.Api, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
     /**
      * @class
      * @memberof SanteDBWarehouse
@@ -44,7 +44,7 @@ var SanteDBWarehouse = SanteDBWarehouse || {
             this.id = copyData.id;
         }
     },  // DatamartDefinition 
-    // SanteDB.Core.Data.Warehouse.DatamartSchema, SanteDB.Core.PCL, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Data.Warehouse.DatamartSchema, SanteDB.Core.Api, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
     /**
      * @class
      * @memberof SanteDBWarehouse
@@ -65,7 +65,7 @@ var SanteDBWarehouse = SanteDBWarehouse || {
             this.id = copyData.id;
         }
     },  // DatamartSchema 
-    // SanteDB.Core.Data.Warehouse.DatamartSchemaProperty, SanteDB.Core.PCL, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Data.Warehouse.DatamartSchemaProperty, SanteDB.Core.Api, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
     /**
      * @class
      * @memberof SanteDBWarehouse
@@ -88,7 +88,7 @@ var SanteDBWarehouse = SanteDBWarehouse || {
             this.id = copyData.id;
         }
     },  // DatamartSchemaProperty 
-    // SanteDB.Core.Data.Warehouse.DatamartStoredQuery, SanteDB.Core.PCL, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Data.Warehouse.DatamartStoredQuery, SanteDB.Core.Api, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
     /**
      * @class
      * @memberof SanteDBWarehouse
@@ -109,7 +109,7 @@ var SanteDBWarehouse = SanteDBWarehouse || {
             this.id = copyData.id;
         }
     },  // DatamartStoredQuery 
-    // SanteDB.Core.Data.Warehouse.DatamartStoredQueryDefinition, SanteDB.Core.PCL, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
+    // SanteDB.Core.Data.Warehouse.DatamartStoredQueryDefinition, SanteDB.Core.Api, Version=0.8.0.23380, Culture=neutral, PublicKeyToken=null
     /**
      * @class
      * @memberof SanteDBWarehouse

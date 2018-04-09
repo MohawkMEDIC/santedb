@@ -226,13 +226,8 @@ namespace SanteDB.Messaging.AMI.Wcf
 				{
 					new ServiceResourceOptions
 					{
-						ResourceName = null,
-						Verbs = new List<string> {"OPTIONS"}
-					},
-					new ServiceResourceOptions
-					{
 						ResourceName = "time",
-						Verbs = new List<string> {"GET"}
+						Capabilities = ResourceCapability.Get
 					}
 				},
 				Endpoints = ApplicationContext.Current.GetServices().OfType<IApiEndpointProvider>().Select(o =>

@@ -30,8 +30,8 @@ using SanteDB.Core.Applets.ViewModel.Description;
 using System.Collections;
 using SanteDB.Core.Model.Serialization;
 using SanteDB.Core.Extensions;
-using SanteDB.Core.Services;
 using SanteDB.Core.Model.Interfaces;
+using SanteDB.Core.Services;
 
 namespace SanteDB.Core.Applets.ViewModel.Json
 {

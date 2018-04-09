@@ -32,7 +32,7 @@ namespace SanteDB.Core.Diagnostics
     {
 
         // PCL trace-source
-        private TraceSource m_traceSource = new TraceSource("SanteDB.Core.PCL");
+        private TraceSource m_traceSource = new TraceSource("SanteDB.Core.Api");
 
         /// <summary>
         /// Initialize the trace writer

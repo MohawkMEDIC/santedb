@@ -67,9 +67,9 @@
       <Project>{f1a82a4f-4a57-47d7-ae76-444c8a4ff54a}</Project>
       <Name>SanteDB.Core.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SanteDB.Core.PCL\SanteDB.Core.PCL.csproj">
+    <ProjectReference Include="..\SanteDB.Core.Api\SanteDB.Core.Api.csproj">
       <Project>{3A45F695-47A2-464C-ACE6-BDABBFA39FBC}</Project>
-      <Name>SanteDB.Core.PCL</Name>
+      <Name>SanteDB.Core.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\SanteDB.Protocol.Xml\SanteDB.Protocol.Xml.csproj">
       <Project>{cad6bcb7-758b-4aa4-a5fe-a9fab8a4cf2f}</Project>

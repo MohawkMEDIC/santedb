@@ -36,6 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\SanteDB.Core.Api\SanteDB.Core.Api.csproj">
+      <Project>{3a45f695-47a2-464c-ace6-bdabbfa39fbc}</Project>
+      <Name>SanteDB.Core.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SanteDB.Core.Applets\SanteDB.Core.Applets.csproj">
       <Project>{39e61451-f4fe-493d-b754-5f06eb284aac}</Project>
       <Name>SanteDB.Core.Applets</Name>
@@ -43,10 +47,6 @@
     <ProjectReference Include="..\SanteDB.Core.Model\SanteDB.Core.Model.csproj">
       <Project>{f1a82a4f-4a57-47d7-ae76-444c8a4ff54a}</Project>
       <Name>SanteDB.Core.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SanteDB.Core.PCL\SanteDB.Core.PCL.csproj">
-      <Project>{3a45f695-47a2-464c-ace6-bdabbfa39fbc}</Project>
-      <Name>SanteDB.Core.PCL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
