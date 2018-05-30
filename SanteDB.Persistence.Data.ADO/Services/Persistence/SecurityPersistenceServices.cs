@@ -437,7 +437,7 @@ namespace SanteDB.Persistence.Data.ADO.Services.Persistence
 
 			retVal.Lockout = dbUser?.Lockout;
 
-			var rolesQuery = context.CreateSqlStatement<DbSecurityUserRole>().SelectFrom()
+			var rolesQuery = context.CreateSqlStatement<DbSecurityUserRole>().SelectFrom(typeof(DbSecurityRole))
 				.InnerJoin<DbSecurityRole>(o => o.RoleKey, o => o.Key)
 				.Where<DbSecurityUserRole>(o => o.UserKey == dbUser.Key);
 
@@ -486,7 +486,7 @@ namespace SanteDB.Persistence.Data.ADO.Services.Persistence
 		{
 			var user = base.Get(context, key, principal);
 			if (user == null) return null;
-			var rolesQuery = context.CreateSqlStatement<DbSecurityUserRole>().SelectFrom()
+			var rolesQuery = context.CreateSqlStatement<DbSecurityUserRole>().SelectFrom(typeof(DbSecurityRole))
 				.InnerJoin<DbSecurityRole>(o => o.RoleKey, o => o.Key)
 				.Where<DbSecurityUserRole>(o => o.UserKey == key);
 

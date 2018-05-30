@@ -223,7 +223,17 @@ namespace SanteDB.OrmLite
             SqlStatement selectStatement = null;
             KeyValuePair<SqlStatement, List<TableMapping>> cacheHit;
 
-            if (skipJoins)
+            // Is the query using any of the properties from this table?
+            var useKeys = !skipJoins ||
+                typeof(IVersionedEntity).IsAssignableFrom(typeof(TModel)) && query.Any(o => {
+                    var mPath = this.m_mapper.MapModelProperty(typeof(TModel), typeof(TModel).GetQueryProperty(QueryPredicate.Parse(o.Key).Path));
+                    if (mPath == null || mPath.Name == "ObsoletionTime" && o.Value.Equals("null"))
+                        return false;
+                    else
+                        return tableMap.Columns.Any(c => c.SourceProperty == mPath);
+                });
+
+            if (skipJoins && !useKeys)
             {
                 // If we're skipping joins with a versioned table, then we should really go for the root tablet not the versioned table
                 if (typeof(IVersionedEntity).IsAssignableFrom(typeof(TModel)))
@@ -408,7 +418,6 @@ namespace SanteDB.OrmLite
 
                             var guardConditions = queryParms.GroupBy(o => QueryPredicate.Parse(o.Key).Guard);
 
-                            int nGuards = 0;
                             foreach (var guardClause in guardConditions)
                             {
                                 var subQuery = guardClause.Select(o => new KeyValuePair<String, Object>(QueryPredicate.Parse(o.Key).ToString(QueryPredicatePart.SubPath), o.Value)).ToList();
@@ -444,22 +453,19 @@ namespace SanteDB.OrmLite
 
                                 // Sub path is specified
                                 if (String.IsNullOrEmpty(propertyPredicate.SubPath) && "null".Equals(parm.Value))
-                                    subQueryStatement.And($" {existsClause} NOT IN (");
+                                    subQueryStatement.And($" NOT EXISTS (");
                                 else
-                                    subQueryStatement.And($" {existsClause} IN (");
+                                    subQueryStatement.And($" EXISTS (");
 
-                                nGuards++;
-                                existsClause = $"{prefix}{subTableColumn.Table.TableName}.{subTableColumn.Name}";
                                 if (subQuery.Count(p => !p.Key.Contains(".")) == 0)
                                     subQueryStatement.Append(genMethod.Invoke(this, new Object[] { subQuery, prefix, true, new ColumnMapping[] { subTableColumn } }) as SqlStatement);
                                 else
                                     subQueryStatement.Append(genMethod.Invoke(this, new Object[] { subQuery, prefix, false, new ColumnMapping[] { subTableColumn } }) as SqlStatement);
 
-                            }
-
-                            // Unwind guards
-                            while (nGuards-- > 0)
+                                subQueryStatement.And($"{existsClause} = {prefix}{subTableMap.TableName}.{subTableColumn.Name}");
+                                //existsClause = $"{prefix}{subTableColumn.Table.TableName}.{subTableColumn.Name}";
                                 subQueryStatement.Append(")");
+                            }
 
                             if (subTableColumn != linkColumn)
                                 whereClause.And($"{tablePrefix}{localTable.TableName}.{localTable.GetColumn(linkColumn.ForeignKey.Column).Name} IN (").Append(subQueryStatement).Append(")");
@@ -492,6 +498,7 @@ namespace SanteDB.OrmLite
 
                             var fkTableDef = TableMapping.Get(linkColumn.ForeignKey.Table);
                             var fkColumnDef = fkTableDef.GetColumn(linkColumn.ForeignKey.Column);
+                            var prefix = IncrementSubQueryAlias(tablePrefix);
 
                             // Create the sub-query
                             //var genMethod = typeof(QueryBuilder).GetGenericMethod("CreateQuery", new Type[] { subProp.PropertyType }, new Type[] { subQuery.GetType(), typeof(ColumnMapping[]) });
@@ -501,19 +508,23 @@ namespace SanteDB.OrmLite
                             if (String.IsNullOrEmpty(propertyPredicate.CastAs))
                             {
                                 var genMethod = typeof(QueryBuilder).GetGenericMethod("CreateQuery", new Type[] { subProp.PropertyType }, new Type[] { subQuery.GetType(), typeof(string), typeof(bool), typeof(ColumnMapping[]) });
-                                subQueryStatement = genMethod.Invoke(this, new Object[] { subQuery, null, subSkipJoins, new ColumnMapping[] { fkColumnDef } }) as SqlStatement;
+                                subQueryStatement = genMethod.Invoke(this, new Object[] { subQuery, prefix, subSkipJoins, new ColumnMapping[] { fkColumnDef } }) as SqlStatement;
                             }
                             else // we need to cast!
                             {
                                 var castAsType = new SanteDB.Core.Model.Serialization.ModelSerializationBinder().BindToType("SanteDB.Core.Model", propertyPredicate.CastAs);
 
                                 var genMethod = typeof(QueryBuilder).GetGenericMethod("CreateQuery", new Type[] { castAsType }, new Type[] { subQuery.GetType(), typeof(String), typeof(bool), typeof(ColumnMapping[]) });
-                                subQueryStatement = genMethod.Invoke(this, new Object[] { subQuery, null, false, new ColumnMapping[] { fkColumnDef } }) as SqlStatement;
+                                subQueryStatement = genMethod.Invoke(this, new Object[] { subQuery, prefix, false, new ColumnMapping[] { fkColumnDef } }) as SqlStatement;
                             }
-                            cteStatements.Add(new SqlStatement(this.m_provider, $"{tablePrefix}cte{cteStatements.Count} AS (").Append(subQueryStatement).Append(")"));
+
+                            //cteStatements.Add(new SqlStatement(this.m_provider, $"{tablePrefix}cte{cteStatements.Count} AS (").Append(subQueryStatement).Append(")"));
                             //subQueryStatement.And($"{tablePrefix}{tableMapping.TableName}.{linkColumn.Name} = {sqName}{fkTableDef.TableName}.{fkColumnDef.Name} ");
 
-                            whereClause.And($"{tablePrefix}{tableMapping.TableName}.{linkColumn.Name} IN (SELECT {tablePrefix}cte{cteStatements.Count - 1}.{fkColumnDef.Name} FROM {tablePrefix}cte{cteStatements.Count - 1})");
+                            // Join up to the parent table
+                            subQueryStatement.And($"{tablePrefix}{tableMapping.TableName}.{linkColumn.Name} = {prefix}{fkTableDef.TableName}.{fkColumnDef.Name}");
+
+                            whereClause.And($"EXISTS (").Append(subQueryStatement).Append(")");
 
                         }
                     }
@@ -562,7 +573,6 @@ namespace SanteDB.OrmLite
         /// </summary>
         public SqlStatement CreateWhereCondition(Type tmodel, String propertyPath, Object value, String tablePrefix, List<TableMapping> scopedTables)
         {
-            SqlStatement retVal = new SqlStatement(this.m_provider);
 
             // Map the type
             var tableMapping = scopedTables.First();
@@ -582,10 +592,26 @@ namespace SanteDB.OrmLite
             if (lValue == null)
                 lValue = new List<Object>() { value };
 
+            return CreateSqlPredicate(tableAlias, columnData.Name, propertyInfo, lValue);
+        }
+
+        /// <summary>
+        /// Create the actual SQL predicate
+        /// </summary>
+        /// <param name="tableAlias">The alias for the table on which the predicate is based</param>
+        /// <param name="modelProperty">The model property information for type information</param>
+        /// <param name="column">The column data for the data model</param>
+        /// <param name="values">The values to be matched</param>
+        /// <returns></returns>
+        public SqlStatement CreateSqlPredicate(String tableAlias, String columnName, PropertyInfo modelProperty, IList values)
+        {
+
+            var retVal = new SqlStatement(this.m_provider);
+
             retVal.Append("(");
-            foreach (var itm in lValue)
+            foreach (var itm in values)
             {
-                retVal.Append($"{tableAlias}.{columnData.Name}");
+                retVal.Append($"{tableAlias}.{columnName}");
                 var semantic = " OR ";
                 var iValue = itm;
                 if (iValue is String)
@@ -596,45 +622,45 @@ namespace SanteDB.OrmLite
                         case '<':
                             semantic = " AND ";
                             if (sValue[1] == '=')
-                                retVal.Append(" <= ?", CreateParameterValue(sValue.Substring(2), propertyInfo.PropertyType));
+                                retVal.Append(" <= ?", CreateParameterValue(sValue.Substring(2), modelProperty.PropertyType));
                             else
-                                retVal.Append(" < ?", CreateParameterValue(sValue.Substring(1), propertyInfo.PropertyType));
+                                retVal.Append(" < ?", CreateParameterValue(sValue.Substring(1), modelProperty.PropertyType));
                             break;
                         case '>':
                             semantic = " AND ";
                             if (sValue[1] == '=')
-                                retVal.Append(" >= ?", CreateParameterValue(sValue.Substring(2), propertyInfo.PropertyType));
+                                retVal.Append(" >= ?", CreateParameterValue(sValue.Substring(2), modelProperty.PropertyType));
                             else
-                                retVal.Append(" > ?", CreateParameterValue(sValue.Substring(1), propertyInfo.PropertyType));
+                                retVal.Append(" > ?", CreateParameterValue(sValue.Substring(1), modelProperty.PropertyType));
                             break;
                         case '!':
                             semantic = " AND ";
                             if (sValue.Equals("!null"))
                                 retVal.Append(" IS NOT NULL");
                             else
-                                retVal.Append(" <> ?", CreateParameterValue(sValue.Substring(1), propertyInfo.PropertyType));
+                                retVal.Append(" <> ?", CreateParameterValue(sValue.Substring(1), modelProperty.PropertyType));
                             break;
                         case '~':
                             if (sValue.Contains("*") || sValue.Contains("?"))
-                                retVal.Append(" ILIKE ? ", CreateParameterValue(sValue.Substring(1).Replace("*", "%"), propertyInfo.PropertyType));
+                                retVal.Append(" ILIKE ? ", CreateParameterValue(sValue.Substring(1).Replace("*", "%"), modelProperty.PropertyType));
                             else
-                                retVal.Append(" ILIKE '%' || ? || '%'", CreateParameterValue(sValue.Substring(1), propertyInfo.PropertyType));
+                                retVal.Append(" ILIKE '%' || ? || '%'", CreateParameterValue(sValue.Substring(1), modelProperty.PropertyType));
                             break;
                         case '^':
-                            retVal.Append(" ILIKE ? || '%'", CreateParameterValue(sValue.Substring(1), propertyInfo.PropertyType));
+                            retVal.Append(" ILIKE ? || '%'", CreateParameterValue(sValue.Substring(1), modelProperty.PropertyType));
                             break;
                         default:
                             if (sValue.Equals("null"))
                                 retVal.Append(" IS NULL");
                             else
-                                retVal.Append(" = ? ", CreateParameterValue(sValue, propertyInfo.PropertyType));
+                                retVal.Append(" = ? ", CreateParameterValue(sValue, modelProperty.PropertyType));
                             break;
                     }
                 }
                 else
-                    retVal.Append(" = ? ", CreateParameterValue(iValue, propertyInfo.PropertyType));
+                    retVal.Append(" = ? ", CreateParameterValue(iValue, modelProperty.PropertyType));
 
-                if (lValue.IndexOf(itm) < lValue.Count - 1)
+                if (values.IndexOf(itm) < values.Count - 1)
                     retVal.Append(semantic);
             }
 

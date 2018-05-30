@@ -60,14 +60,15 @@ namespace SanteDB.Core.Services.Impl
             /// </summary>
             [XmlText]
             public byte[] XmlData { get; set; }
-           
+
             /// <summary>
             /// Save the data to a stream
             /// </summary>
             public static QueueEntry Create(Object data)
             {
                 XmlSerializer xsz = new XmlSerializer(data.GetType());
-                using (var ms = new MemoryStream()) {
+                using (var ms = new MemoryStream())
+                {
                     xsz.Serialize(ms, data);
                     return new QueueEntry()
                     {
@@ -102,7 +103,8 @@ namespace SanteDB.Core.Services.Impl
             /// <summary>
             /// Save the queue entry on the stream
             /// </summary>
-            public void Save(Stream str) { 
+            public void Save(Stream str)
+            {
                 var xsz = new XmlSerializer(typeof(QueueEntry));
                 xsz.Serialize(str, this);
             }
@@ -215,11 +217,26 @@ namespace SanteDB.Core.Services.Impl
                 fsWatch.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime;
                 fsWatch.Created += (o, e) =>
                 {
-                    this.Queued?.Invoke(this, new PersistentQueueEventArgs(queueName, Path.GetFileNameWithoutExtension(e.FullPath)));
+                    try
+                    {
+                        this.Queued?.Invoke(this, new PersistentQueueEventArgs(queueName, Path.GetFileNameWithoutExtension(e.FullPath)));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.m_tracer.TraceEvent(TraceEventType.Error, ex.HResult, "FileSystem Watcher reported error on queue (Changed) -> {0}", ex);
+                    }
+
                 };
                 fsWatch.Changed += (o, e) =>
                 {
-                    this.Queued?.Invoke(this, new PersistentQueueEventArgs(queueName, Path.GetFileNameWithoutExtension(e.FullPath)));
+                    try
+                    {
+                        this.Queued?.Invoke(this, new PersistentQueueEventArgs(queueName, Path.GetFileNameWithoutExtension(e.FullPath)));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.m_tracer.TraceEvent(TraceEventType.Error, ex.HResult, "FileSystem Watcher reported error on queue (Changed) -> {0}", ex);
+                    }
                 };
                 fsWatch.EnableRaisingEvents = true;
                 this.m_watchers.Add(queueName, fsWatch);
@@ -232,7 +249,7 @@ namespace SanteDB.Core.Services.Impl
                 this.Queued?.Invoke(this, new PersistentQueueEventArgs(queueName, Path.GetFileNameWithoutExtension(itm)));
             }
 
-            
+
         }
 
         /// <summary>
@@ -240,7 +257,7 @@ namespace SanteDB.Core.Services.Impl
         /// </summary>
         public void Dispose()
         {
-            foreach(var itm in this.m_watchers)
+            foreach (var itm in this.m_watchers)
             {
                 this.m_tracer.TraceInformation("Disposing queue {0}", itm.Key);
                 itm.Value.Dispose();

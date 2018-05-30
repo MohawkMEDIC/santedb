@@ -457,10 +457,16 @@ namespace SanteDB.OrmLite
         public SqlStatement<T> SelectFrom()
         {
             var tableMap = TableMapping.Get(typeof(T));
-            return this.Append(new SqlStatement<T>(this.m_provider, $"SELECT * FROM {tableMap.TableName} AS {tableMap.TableName} ")
-            {
-                m_alias = tableMap.TableName
-            });
+            if(this.m_provider.Features.HasFlag(SqlEngineFeatures.StrictSubQueryColumnNames))
+                return this.Append(new SqlStatement<T>(this.m_provider, $"SELECT {String.Join(",", tableMap.Columns.Select(c=> $"{tableMap.TableName}.{c.Name}").ToArray())} FROM {tableMap.TableName} AS {tableMap.TableName} ")
+                {
+                    m_alias = tableMap.TableName
+                });
+            else
+                return this.Append(new SqlStatement<T>(this.m_provider, $"SELECT * FROM {tableMap.TableName} AS {tableMap.TableName} ")
+                {
+                    m_alias = tableMap.TableName
+                });
         }
 
         /// <summary>

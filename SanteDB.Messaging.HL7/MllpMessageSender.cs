@@ -33,7 +33,7 @@ namespace SanteDB.Messaging.HL7
 	/// <summary>
 	/// Represents an MLLP message sender.
 	/// </summary>
-	internal class MllpMessageSender
+	public class MllpMessageSender
 	{
 		/// <summary>
 		/// The internal reference to the client certificate.

@@ -204,7 +204,7 @@ namespace SanteDB.Persistence.Data.ADO.Services.Persistence
             SqlStatement domainQuery = null;
             var expr = m_mapper.MapModelExpression<TModel, TDomain>(query, false);
             if (expr != null)
-                domainQuery = context.CreateSqlStatement<TDomain>().SelectFrom()
+                domainQuery = context.CreateSqlStatement<TDomain>().SelectFrom(typeof(TDomain), typeof(TDomainKey))
                     .InnerJoin<TDomain, TDomainKey>(o => o.Key, o => o.Key)
                     .Where<TDomain>(expr).Build();
             else
