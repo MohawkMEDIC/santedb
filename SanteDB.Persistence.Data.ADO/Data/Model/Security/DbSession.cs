@@ -40,7 +40,7 @@ namespace SanteDB.Persistence.Data.ADO.Data.Model.Security
         /// <summary>
         /// Identifies the user key to which the session belongs
         /// </summary>
-        [Column("usr_id"), NotNull]
+        [Column("usr_id")]
         public Guid UserKey { get; set; }
 
         /// <summary>

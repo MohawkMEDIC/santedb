@@ -107,6 +107,10 @@ namespace SanteDB.Persistence.Data.ADO.Services
                         Audience = aud,
                         RefreshToken = BitConverter.ToString(refreshToken).Replace("-", "")
                     };
+
+                    if (dbSession.ApplicationKey == dbSession.UserKey) // SID == Application = Application Grant
+                        dbSession.UserKey = Guid.Empty;
+
                     dbSession = context.Insert(dbSession);
 
                     var credentials = this.CreateSigningCredentials();

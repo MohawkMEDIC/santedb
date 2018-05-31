@@ -119,7 +119,7 @@ namespace SanteDB.Authentication.OAuth2.Wcf
             // Client principal
             IPrincipal clientPrincipal = ClaimsPrincipal.Current;
             // Client is not present so look in body
-            if (clientPrincipal == null)
+            if (clientPrincipal == null || clientPrincipal == Core.Security.AuthenticationContext.AnonymousPrincipal)
             {
                 String client_identity = tokenRequest["client_id"],
                     client_secret = tokenRequest["client_secret"];
@@ -149,6 +149,8 @@ namespace SanteDB.Authentication.OAuth2.Wcf
                 {
                     case OAuthConstants.GrantNameClientCredentials:
                         principal = clientPrincipal;
+                        // Demand "Login As Service" permission
+                        new PolicyPermission(System.Security.Permissions.PermissionState.Unrestricted, PermissionPolicyIdentifiers.LoginAsService, clientPrincipal).Demand();
                         break;
                     case OAuthConstants.GrantNamePassword:
 
@@ -249,11 +251,12 @@ namespace SanteDB.Authentication.OAuth2.Wcf
 
             // System claims
             List<Claim> claims = new List<Claim>(
-                    roleProvider.GetAllRoles(oizPrincipal.Identity.Name).Select(r => new Claim(ClaimsIdentity.DefaultRoleClaimType, r))
+                oizPrincipal is ApplicationPrincipal ? new List<Claim>() : roleProvider.GetAllRoles(oizPrincipal.Identity.Name).Select(r => new Claim(ClaimsIdentity.DefaultRoleClaimType, r))
             )
             {
                 new Claim("iss", this.m_configuration.IssuerName),
-                new Claim(ClaimTypes.Name, oizPrincipal.Identity.Name)
+                new Claim(ClaimTypes.Name, oizPrincipal.Identity.Name),
+                new Claim("typ", oizPrincipal.GetType().Name)
             };
 
             // Additional claims

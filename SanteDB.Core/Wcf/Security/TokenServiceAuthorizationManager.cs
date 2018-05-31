@@ -140,7 +140,8 @@ namespace SanteDB.Core.Wcf.Security
                                     .Select(x => Convert.ToByte(authorization.Substring(x, 2), 16))
                                     .ToArray()
             );
-            var principal = ApplicationContext.Current.GetService<ISessionIdentityProviderService>().Authenticate(session);
+
+            IPrincipal principal = ApplicationContext.Current.GetService<ISessionIdentityProviderService>().Authenticate(session);
 
             operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Identities"] = (principal as ClaimsPrincipal).Identities;
             operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] = principal;

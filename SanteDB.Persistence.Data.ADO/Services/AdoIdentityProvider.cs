@@ -528,16 +528,11 @@ namespace SanteDB.Persistence.Data.ADO.Services
 
                     var auth = context.FirstOrDefault<CompositeResult<DbSession, DbSecurityApplication, DbSecurityUser>>(sql);
 
-                    var evt = new AuthenticatingEventArgs(auth.Object3.UserName);
-                    this.Authenticating?.Invoke(this, evt);
-                    if (evt.Cancel)
-                        throw new SecurityException("Authentication cancelled");
-
-                    var principal = AdoClaimsIdentity.Create(auth.Object3, true).CreateClaimsPrincipal();
+                    var principal = auth.Object1.UserKey == Guid.Empty ?
+                        new ApplicationPrincipal(new SanteDB.Core.Security.ApplicationIdentity(auth.Object2.Key, auth.Object2.PublicId, true))
+                        : AdoClaimsIdentity.Create(auth.Object3, true).CreateClaimsPrincipal();
 
                     // TODO: Load additional claims made about the user on the session
-
-                    this.Authenticated?.Invoke(this, new AuthenticatedEventArgs(auth.Object3.UserName, principal, true));
                     return principal;
                 }
             }
