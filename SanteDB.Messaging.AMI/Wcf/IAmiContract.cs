@@ -21,11 +21,8 @@
 using SanteDB.Core.Applets.Model;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Model;
-using SanteDB.Core.Model.AMI.Alerting;
 using SanteDB.Core.Model.AMI.Applet;
 using SanteDB.Core.Model.AMI.Auth;
-using SanteDB.Core.Model.AMI.BusinessRules;
-using SanteDB.Core.Model.AMI.DataTypes;
 using SanteDB.Core.Model.AMI.Diagnostics;
 using SanteDB.Core.Model.AMI.Logging;
 using SanteDB.Core.Model.AMI.Security;
@@ -49,7 +46,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 	[ServiceKnownType(typeof(Entity))]
 	[ServiceKnownType(typeof(ExtensionType))]
 	[ServiceKnownType(typeof(AlertMessage))]
-	[ServiceKnownType(typeof(AlertMessageInfo))]
+	[ServiceKnownType(typeof(AlertMessage))]
 	[ServiceKnownType(typeof(SecurityApplication))]
 	[ServiceKnownType(typeof(SecurityApplicationInfo))]
 	[ServiceKnownType(typeof(TfaRequestInfo))]
@@ -79,7 +76,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 	[ServiceKnownType(typeof(SubmissionRequest))]
 	[ServiceKnownType(typeof(ServiceOptions))]
 	[ServiceKnownType(typeof(X509Certificate2Info))]
-	[ServiceKnownType(typeof(AssigningAuthorityInfo))]
+	[ServiceKnownType(typeof(AssigningAuthority))]
 	[ServiceKnownType(typeof(CodeSystem))]
 	[ServiceKnownType(typeof(LogFileInfo))]
 	[ServiceKnownType(typeof(AmiCollection<SubmissionInfo>))]
@@ -91,10 +88,9 @@ namespace SanteDB.Messaging.AMI.Wcf
 	[ServiceKnownType(typeof(AmiCollection<SecurityPolicyInfo>))]
 	[ServiceKnownType(typeof(AmiCollection<TfaMechanismInfo>))]
 	[ServiceKnownType(typeof(AmiCollection<TfaRequestInfo>))]
-	[ServiceKnownType(typeof(AmiCollection<BusinessRuleInfo>))]
-	[ServiceKnownType(typeof(AmiCollection<AssigningAuthorityInfo>))]
+	[ServiceKnownType(typeof(AmiCollection<AssigningAuthority>))]
 	[ServiceKnownType(typeof(AmiCollection<SecurityDevice>))]
-	[ServiceKnownType(typeof(AmiCollection<AlertMessageInfo>))]
+	[ServiceKnownType(typeof(AmiCollection<AlertMessage>))]
 	[ServiceKnownType(typeof(AmiCollection<SecurityUserInfo>))]
 	[ServiceKnownType(typeof(AmiCollection<LogFileInfo>))]
 	[ServiceKnownType(typeof(AmiCollection<CodeSystem>))]
@@ -127,7 +123,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns the created alert.</returns>
 		[WebInvoke(UriTemplate = "/alert", BodyStyle = WebMessageBodyStyle.Bare, Method = "POST")]
 		[SwaggerWcfPath("Create Alert", "Creates an alert in the system. This alert can be sent to mutiple users or all users")]
-		AlertMessageInfo CreateAlert(AlertMessageInfo alertMessageInfo);
+        AlertMessage CreateAlert(AlertMessage alertMessageInfo);
 
 		/// <summary>
 		/// Creates an applet.
@@ -154,7 +150,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns the created assigning authority.</returns>
 		[WebInvoke(UriTemplate = "/assigningAuthority", BodyStyle = WebMessageBodyStyle.Bare, Method = "POST")]
 		[SwaggerWcfPath("Create Assigning Authority", "Creates an assigning authority. An assigning authority represents an authority which can be used to assign identifiers to entities")]
-		AssigningAuthorityInfo CreateAssigningAuthority(AssigningAuthorityInfo assigningAuthorityInfo);
+		AssigningAuthority CreateAssigningAuthority(AssigningAuthority assigningAuthorityInfo);
 
 		#region Auditing
 
@@ -256,7 +252,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns the deleted assigning authority.</returns>
 		[WebInvoke(UriTemplate = "/assigningAuthority/{assigningAuthorityId}", BodyStyle = WebMessageBodyStyle.Bare, Method = "DELETE")]
 		[SwaggerWcfPath("Delete Assignging Authority", "Deletes an assigning authority")]
-		AssigningAuthorityInfo DeleteAssigningAuthority(string assigningAuthorityId);
+        AssigningAuthority DeleteAssigningAuthority(string assigningAuthorityId);
 
 		/// <summary>
 		/// Deletes a specified certificate.
@@ -338,7 +334,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns the alert.</returns>
 		[WebGet(UriTemplate = "/alert/{alertId}", BodyStyle = WebMessageBodyStyle.Bare)]
 		[SwaggerWcfPath("Get Alert", "Retrieves an alert by id")]
-		AlertMessageInfo GetAlert(string alertId);
+        AlertMessage GetAlert(string alertId);
 
 		/// <summary>
 		/// Gets a list of alert for a specific query.
@@ -346,7 +342,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns a list of alert which match the specific query.</returns>
 		[WebGet(UriTemplate = "/alert", BodyStyle = WebMessageBodyStyle.Bare)]
 		[SwaggerWcfPath("Get Alerts", "Retrieves alerts based on a query")]
-		AmiCollection<AlertMessageInfo> GetAlerts();
+		AmiCollection<AlertMessage> GetAlerts();
 
 		/// <summary>
 		/// Gets a specific applet.
@@ -388,7 +384,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns a list of assigning authorities which match the specific query.</returns>
 		[WebGet(UriTemplate = "/assigningAuthority", BodyStyle = WebMessageBodyStyle.Bare)]
 		[SwaggerWcfPath("Get Assigning Authorities", "Retrieves assigning authorities based on a query")]
-		AmiCollection<AssigningAuthorityInfo> GetAssigningAuthorities();
+		AmiCollection<AssigningAuthority> GetAssigningAuthorities();
 
 		/// <summary>
 		/// Gets a specific assigning authority.
@@ -397,7 +393,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns the assigning authority.</returns>
 		[WebGet(UriTemplate = "/assigningAuthority/{assigningAuthorityId}", BodyStyle = WebMessageBodyStyle.Bare)]
 		[SwaggerWcfPath("Get Assigning Authority", "Retrieves an assigning authority by id")]
-		AssigningAuthorityInfo GetAssigningAuthority(string assigningAuthorityId);
+        AssigningAuthority GetAssigningAuthority(string assigningAuthorityId);
 
 		/// <summary>
 		/// Gets a specific certificate.
@@ -638,7 +634,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <param name="alert">The alert containing the updated information.</param>
 		/// <returns>Returns the updated alert.</returns>
 		[WebInvoke(UriTemplate = "/alert/{alertId}", BodyStyle = WebMessageBodyStyle.Bare, Method = "PUT")]
-		AlertMessageInfo UpdateAlert(string alertId, AlertMessageInfo alert);
+        AlertMessage UpdateAlert(string alertId, AlertMessage alert);
 
 		/// <summary>
 		/// Updates an applet.
@@ -665,7 +661,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <param name="assigningAuthorityInfo">The assigning authority containing the updated information.</param>
 		/// <returns>Returns the updated assigning authority.</returns>
 		[WebInvoke(UriTemplate = "/assigningAuthority/{assigningAuthorityId}", BodyStyle = WebMessageBodyStyle.Bare, Method = "PUT")]
-		AssigningAuthorityInfo UpdateAssigningAuthority(string assigningAuthorityId, AssigningAuthorityInfo assigningAuthorityInfo);
+        AssigningAuthority UpdateAssigningAuthority(string assigningAuthorityId, AssigningAuthority assigningAuthorityInfo);
 
 		/// <summary>
 		/// Updates the code system.

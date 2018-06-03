@@ -19,7 +19,6 @@
  */
 
 using MARC.HI.EHRS.SVC.Core;
-using SanteDB.Core.Model.AMI.Alerting;
 using SanteDB.Core.Model.AMI.Security;
 using SanteDB.Core.Model.Query;
 using SanteDB.Core.Services;
@@ -42,7 +41,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// </summary>
 		/// <param name="alertMessageInfo">The alert message to be created.</param>
 		/// <returns>Returns the created alert.</returns>
-		public AlertMessageInfo CreateAlert(AlertMessageInfo alertMessageInfo)
+		public AlertMessage CreateAlert(AlertMessage alertMessageInfo)
 		{
 			var alertRepositoryService = ApplicationContext.Current.GetService<IAlertRepositoryService>();
 
@@ -51,9 +50,9 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new InvalidOperationException($"{nameof(IAlertRepositoryService)} not found");
 			}
 
-			var createdAlert = alertRepositoryService.Insert(alertMessageInfo.AlertMessage);
+			var createdAlert = alertRepositoryService.Insert(alertMessageInfo);
 
-			return new AlertMessageInfo(createdAlert);
+			return createdAlert;
 		}
 
 		/// <summary>
@@ -61,7 +60,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// </summary>
 		/// <param name="alertId">The id of the alert to retrieve.</param>
 		/// <returns>Returns the alert.</returns>
-		public AlertMessageInfo GetAlert(string alertId)
+		public AlertMessage GetAlert(string alertId)
 		{
 			var key = Guid.Empty;
 
@@ -79,14 +78,14 @@ namespace SanteDB.Messaging.AMI.Wcf
 
 			var alert = alertRepository.Get(key);
 
-			return new AlertMessageInfo(alert);
+			return alert;
 		}
 
 		/// <summary>
 		/// Gets a list of alert for a specific query.
 		/// </summary>
 		/// <returns>Returns a list of alert which match the specific query.</returns>
-		public AmiCollection<AlertMessageInfo> GetAlerts()
+		public AmiCollection<AlertMessage> GetAlerts()
 		{
 			var parameters = WebOperationContext.Current.IncomingRequest.UriTemplateMatch.QueryParameters;
 
@@ -104,11 +103,11 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new InvalidOperationException($"{nameof(IAlertRepositoryService)} not found");
 			}
 
-			var alerts = new AmiCollection<AlertMessageInfo>();
+			var alerts = new AmiCollection<AlertMessage>();
 
 			int totalCount = 0;
 
-			alerts.CollectionItem = alertRepository.Find(expression, 0, null, out totalCount).Select(a => new AlertMessageInfo(a)).ToList();
+			alerts.CollectionItem = alertRepository.Find(expression, 0, null, out totalCount).ToList();
 			alerts.Size = totalCount;
 
 			return alerts;
@@ -120,7 +119,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <param name="alertId">The id of the alert to be updated.</param>
 		/// <param name="alert">The alert containing the updated information.</param>
 		/// <returns>Returns the updated alert.</returns>
-		public AlertMessageInfo UpdateAlert(string alertId, AlertMessageInfo alert)
+		public AlertMessage UpdateAlert(string alertId, AlertMessage alert)
 		{
 			var key = Guid.Empty;
 
@@ -136,9 +135,9 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new InvalidOperationException($"{nameof(IAlertRepositoryService)} not found");
 			}
 
-			var updatedAlert = alertRepository.Save(alert.AlertMessage);
+			var updatedAlert = alertRepository.Save(alert);
 
-			return new AlertMessageInfo(updatedAlert);
+			return updatedAlert;
 		}
 	}
 }
