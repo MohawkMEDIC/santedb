@@ -1,5 +1,4 @@
-﻿using SanteDB.Core.Alert.Alerting;
-using SanteDB.Core.Applets.Model;
+﻿using SanteDB.Core.Applets.Model;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Model;
 using SanteDB.Core.Model.AMI.Applet;
@@ -19,6 +18,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
+using SanteDB.Alerting.Alerting;
 
 namespace SanteDB.Messaging.AMI.Wcf
 {

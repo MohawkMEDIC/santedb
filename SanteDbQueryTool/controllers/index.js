@@ -91,7 +91,7 @@ angular.module('layout').controller('IndexController', ['$scope', '$rootScope', 
                     // Set the supported options
                     $rootScope.configuration.resources = e.resource;
                     $scope.search.resourceType = null;
-                    $scope.search.contentType = "application/json+oiz-viewmodel";
+                    $scope.search.contentType = "application/json";
                     $scope.search.query = { _lean: true }
                 }
             });

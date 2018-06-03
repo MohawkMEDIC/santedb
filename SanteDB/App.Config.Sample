@@ -755,7 +755,7 @@
       <add type="SanteDB.Core.Services.Impl.LocalAssigningAuthorityRepositoryService, SanteDB.Core, Version=1.1.0.0"/>
       <add type="SanteDB.Core.Services.Impl.LocalStockManagementRepositoryService, SanteDB.Core, Version=1.1.0.0"/>
       <add type="SanteDB.Core.Services.Impl.LocalEntityRepositoryService, SanteDB.Core, Version=1.1.0.0"/>
-      <add type="SanteDB.Core.Services.Impl.SimplePatchService, SanteDB.Core.PCL, Version=1.1.0.0"/>
+      <add type="SanteDB.Core.Services.Impl.SimplePatchService, SanteDB.Core.Api, Version=1.1.0.0"/>
       <add type="SanteDB.Core.Services.Impl.LocalBatchRepositoryService, SanteDB.Core, Version=1.1.0.0"/>
       <add type="SanteDB.Core.Services.Impl.ThreadPoolService, SanteDB.Core, Version=1.1.0.0"/>
       <add type="SanteDB.Core.Services.Impl.LocalServiceManager, SanteDB.Core, Version=1.1.0.0"/>
@@ -765,7 +765,7 @@
       <add type="SanteDB.Core.Security.LocalPolicyDecisionService, SanteDB.Core, Version=1.1.0.0"/>
 
       <!-- Change this if you wish to use a custom phonetic algorithm calculation service -->
-      <add type="SanteDB.Core.Services.Impl.NullPhoneticAlgorithmHandler, SanteDB.Core.PCL, Version=1.1.0.0"/>
+      <add type="SanteDB.Core.Services.Impl.NullPhoneticAlgorithmHandler, SanteDB.Core.Api, Version=1.1.0.0"/>
 
       <!--
       Enable this service if you wish for sherlock diagnostic reports to go to a JIRA server
@@ -827,7 +827,7 @@
       
       <!-- This service provides simple generation of a care plan using the protocol repository. More complex care plans can be calculated
       by overriding this implementation with a custom implementation -->
-      <add type="SanteDB.Core.Protocol.SimpleCarePlanService, SanteDB.Core.PCL, Version=1.1.0.0"/>
+      <add type="SanteDB.Core.Protocol.SimpleCarePlanService, SanteDB.Core.Api, Version=1.1.0.0"/>
       
       <!-- 
       Enable this service to store data warehousing information to an ADO.NET source

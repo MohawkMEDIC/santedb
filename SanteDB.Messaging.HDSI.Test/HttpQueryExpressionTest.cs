@@ -18,7 +18,6 @@
  * Date: 2017-9-1
  */
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SanteDB.Core.Alert.Alerting;
 using SanteDB.Core.Model.Acts;
 using SanteDB.Core.Model.DataTypes;
 using SanteDB.Core.Model.Entities;

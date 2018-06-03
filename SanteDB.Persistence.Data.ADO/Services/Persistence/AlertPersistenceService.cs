@@ -24,7 +24,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using MARC.HI.EHRS.SVC.Core;
-using SanteDB.Core.Alert.Alerting;
+using SanteDB.Alerting.Alerting;
 using SanteDB.OrmLite;
 using SanteDB.Persistence.Data.ADO.Data.Model;
 using SanteDB.Persistence.Data.ADO.Data.Model.Alerts;

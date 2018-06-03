@@ -93,6 +93,7 @@
         "Person",
         "UserEntity",
         "Place",
+        "Organization",
         "Material",
         "ManufacturedMaterial",
         "Concept"
@@ -117,6 +118,7 @@
         "Material",
         "ManufacturedMaterial",
         "Concept",
+        "Organization",
         "ConceptSet"
       ]
     },
@@ -132,6 +134,7 @@
         "SubstanceAdministration",
         "PatientEncounter",
         "Procedure",
+        "Organization",
         "Entity",
         "Patient",
         "Person",
@@ -249,7 +252,7 @@
       ]
     },
     "typeConcept": {
-      "name": "Act Type",
+      "name": "Type Concept",
       "type": "concept",
       "scope": [
         "QuantityObservation",
@@ -258,6 +261,7 @@
         "Act",
         "SubstanceAdministration",
         "PatientEncounter",
+        "Organization",
         "Procedure"
       ]
     },
@@ -319,6 +323,7 @@
         "Provider",
         "UserEntity",
         "Material",
+        "Organization",
         "ManufacturedMaterial"
       ]
     },
@@ -433,6 +438,7 @@
         "Material",
         "ManufacturedMaterial",
         "Concept",
+        "Organization",
         "ConceptSet"
 
       ]
@@ -449,6 +455,7 @@
         "SubstanceAdministration",
         "PatientEncounter",
         "Procedure",
+        "Organization",
         "Entity",
         "Patient",
         "Person",

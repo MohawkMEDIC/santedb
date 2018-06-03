@@ -172,6 +172,11 @@ namespace SanteDB.OrmLite
                         using (var rdr = dbc.ExecuteReader())
                             return this.ReaderToCollection<TModel>(rdr).ToList();
                     }
+                    catch (TimeoutException)
+                    {
+                        dbc.Cancel();
+                        throw;
+                    }
                     finally
                     {
                         if (!this.IsPreparedCommand(dbc))
@@ -251,7 +256,7 @@ namespace SanteDB.OrmLite
         /// <summary>
         /// Map expando object
         /// </summary>
-        private TModel MapExpando<TModel>(IDataReader rdr) 
+        private TModel MapExpando<TModel>(IDataReader rdr)
         {
             var retVal = new ExpandoObject() as IDictionary<String, Object>;
             for (int i = 0; i < rdr.FieldCount; i++)
@@ -313,6 +318,11 @@ namespace SanteDB.OrmLite
                             return this.ReaderToResult(returnType, rdr);
 
                     }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
+                    }
                     finally
                     {
 #if DBPERF
@@ -351,6 +361,11 @@ namespace SanteDB.OrmLite
                         using (var rdr = dbc.ExecuteReader())
                             return this.ReaderToResult<TModel>(rdr);
                     }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
+                    }
                     finally
                     {
                         if (!this.IsPreparedCommand(dbc))
@@ -386,6 +401,11 @@ namespace SanteDB.OrmLite
                     {
                         using (var rdr = dbc.ExecuteReader())
                             return this.ReaderToResult<TModel>(rdr);
+                    }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
                     }
                     finally
                     {
@@ -425,6 +445,11 @@ namespace SanteDB.OrmLite
                     {
                         using (var rdr = dbc.ExecuteReader())
                             return this.ReaderToResult<TModel>(rdr);
+                    }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
                     }
                     finally
                     {
@@ -473,13 +498,18 @@ namespace SanteDB.OrmLite
                         }
 
                     }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
+                    }
                     finally
                     {
 #if DBPERF
                         this.PerformanceMonitor(stmt, sw);
 #endif
                         if (!this.IsPreparedCommand(dbc))
-                        dbc.Dispose();
+                            dbc.Dispose();
                     }
                 }
 
@@ -513,6 +543,11 @@ namespace SanteDB.OrmLite
                     try
                     {
                         return (bool)dbc.ExecuteScalar();
+                    }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
                     }
                     finally
                     {
@@ -549,6 +584,11 @@ namespace SanteDB.OrmLite
                     try
                     {
                         return (bool)dbc.ExecuteScalar();
+                    }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
                     }
                     finally
                     {
@@ -587,6 +627,11 @@ namespace SanteDB.OrmLite
                     {
                         return (int)dbc.ExecuteScalar();
                     }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
+                    }
                     finally
                     {
                         if (!this.IsPreparedCommand(dbc))
@@ -622,6 +667,11 @@ namespace SanteDB.OrmLite
                     try
                     {
                         return Convert.ToInt32(dbc.ExecuteScalar());
+                    }
+                    catch (TimeoutException)
+                    {
+                        dbc.Cancel();
+                        throw;
                     }
                     finally
                     {
@@ -675,8 +725,13 @@ namespace SanteDB.OrmLite
                     var dbc = this.m_provider.CreateCommand(this, query);
                     try
                     {
-                        using (var rdr = dbc.ExecuteReader()) 
+                        using (var rdr = dbc.ExecuteReader())
                             return this.ReaderToCollection<TModel>(rdr).ToList();
+                    }
+                    catch (Exception)
+                    {
+                        dbc.Cancel();
+                        throw;
                     }
                     finally
                     {
@@ -684,7 +739,7 @@ namespace SanteDB.OrmLite
                         this.PerformanceMonitor(query, sw);
 #endif
                         if (!this.IsPreparedCommand(dbc))
-                        dbc.Dispose();
+                            dbc.Dispose();
                     }
                 }
 
@@ -731,14 +786,18 @@ namespace SanteDB.OrmLite
                             return this.ReaderToCollection<TModel>(rdr).ToList();
 
                     }
-
+                    catch (TimeoutException)
+                    {
+                        dbc.Cancel();
+                        throw;
+                    }
                     finally
                     {
 #if DBPERF
                         this.PerformanceMonitor(query, sw);
 #endif
                         if (!this.IsPreparedCommand(dbc))
-                             dbc.Dispose();
+                            dbc.Dispose();
                     }
                 }
 
@@ -830,10 +889,10 @@ namespace SanteDB.OrmLite
                                     }
                         }
                         // There are returned keys and the provider requires an output parameter to hold the keys
-                        else if(returnKeys.Any() && this.m_provider.Features.HasFlag(SqlEngineFeatures.ReturnedInsertsAsParms))
+                        else if (returnKeys.Any() && this.m_provider.Features.HasFlag(SqlEngineFeatures.ReturnedInsertsAsParms))
                         {
                             // Define output parameters
-                            foreach(var rt in returnKeys)
+                            foreach (var rt in returnKeys)
                             {
                                 var parm = dbc.CreateParameter();
                                 parm.ParameterName = rt.Name;
@@ -845,7 +904,7 @@ namespace SanteDB.OrmLite
                             dbc.ExecuteNonQuery();
 
                             // Get the parameter values
-                            foreach(IDataParameter parm in dbc.Parameters)
+                            foreach (IDataParameter parm in dbc.Parameters)
                             {
                                 if (parm.Direction != ParameterDirection.Output) continue;
 
@@ -861,7 +920,7 @@ namespace SanteDB.OrmLite
 
                             // But... the query wants the keys so we have to query them back if the RETURNING clause fields aren't populated in the source object
                             if (returnKeys.Count() > 0 &&
-                                returnKeys.Any(o=>o.SourceProperty.GetValue(value) == (o.SourceProperty.PropertyType.IsValueType ? Activator.CreateInstance(o.SourceProperty.PropertyType) : null)))
+                                returnKeys.Any(o => o.SourceProperty.GetValue(value) == (o.SourceProperty.PropertyType.IsValueType ? Activator.CreateInstance(o.SourceProperty.PropertyType) : null)))
                             {
                                 if (!this.IsPreparedCommand(dbc))
                                     dbc.Dispose();
@@ -923,7 +982,8 @@ namespace SanteDB.OrmLite
                 lock (this.m_lockObject)
                 {
                     var dbc = this.m_provider.CreateCommand(this, query);
-                    try { 
+                    try
+                    {
                         dbc.ExecuteNonQuery();
                     }
                     finally
@@ -967,7 +1027,8 @@ namespace SanteDB.OrmLite
                 lock (this.m_lockObject)
                 {
                     var dbc = this.m_provider.CreateCommand(this, query);
-                    try { 
+                    try
+                    {
                         dbc.ExecuteNonQuery();
                     }
                     finally
@@ -1026,7 +1087,8 @@ namespace SanteDB.OrmLite
                 lock (this.m_lockObject)
                 {
                     var dbc = this.m_provider.CreateCommand(this, query);
-                    try { 
+                    try
+                    {
                         dbc.ExecuteNonQuery();
                     }
                     finally
@@ -1064,7 +1126,8 @@ namespace SanteDB.OrmLite
                 lock (this.m_lockObject)
                 {
                     var dbc = this.m_provider.CreateCommand(this, stmt);
-                    try { 
+                    try
+                    {
                         dbc.ExecuteNonQuery();
                     }
                     finally

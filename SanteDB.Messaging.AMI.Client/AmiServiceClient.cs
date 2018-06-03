@@ -17,7 +17,7 @@
  * User: fyfej
  * Date: 2017-9-1
  */
-using SanteDB.Core.Alert.Alerting;
+
 using SanteDB.Core.Applets.Model;
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop;
@@ -37,6 +37,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using SanteDB.Alerting.Alerting;
 
 namespace SanteDB.Messaging.AMI.Client
 {

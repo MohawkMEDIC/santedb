@@ -19,7 +19,6 @@
  */
 
 using MARC.HI.EHRS.SVC.Core;
-using SanteDB.Core.Alert.Alerting;
 using SanteDB.Core.Model.AMI.Alerting;
 using SanteDB.Core.Model.AMI.Security;
 using SanteDB.Core.Model.Query;
@@ -28,6 +27,8 @@ using System;
 using System.Data;
 using System.Linq;
 using System.ServiceModel.Web;
+using SanteDB.Alerting;
+using SanteDB.Alerting.Alerting;
 
 namespace SanteDB.Messaging.AMI.Wcf
 {
