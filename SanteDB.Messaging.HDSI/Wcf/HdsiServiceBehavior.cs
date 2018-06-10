@@ -558,6 +558,9 @@ namespace SanteDB.Messaging.HDSI.Wcf
                 if (handler != null)
                 {
 
+                    if (id != body.Key.ToString())
+                        throw new InvalidOperationException("Cross identity update detected");
+
                     var retVal = handler.Update(body) as IdentifiedData;
 
                     var versioned = retVal as IVersionedEntity;

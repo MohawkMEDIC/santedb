@@ -43,7 +43,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		private readonly CertTool certTool;
 
 		// Configuration
-		private readonly AmiConfiguration configuration = ApplicationContext.Current.GetService<IConfigurationManager>().GetSection("SanteDB.messaging.ami") as AmiConfiguration;
+		private readonly AmiConfiguration configuration = ApplicationContext.Current.GetService<IConfigurationManager>().GetSection("santedb.messaging.ami") as AmiConfiguration;
 
 		/// <summary>
 		/// Creates the AMI behavior

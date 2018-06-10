@@ -67,7 +67,7 @@ namespace SanteDB.Messaging.HL7.Services
 		{
 			var configurationManager = ApplicationContext.Current.GetService<IConfigurationManager>();
 
-			this.configuration = configurationManager.GetSection("SanteDB.messaging.hl7.notification.pixpdq") as NotificationConfiguration;
+			this.configuration = configurationManager.GetSection("santedb.messaging.hl7.notification.pixpdq") as NotificationConfiguration;
 
 			this.threadPool = new WaitThreadPool(this.configuration.ConcurrencyLevel);
 		}

@@ -104,6 +104,8 @@ namespace SanteDB.Messaging.Common
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
+            else if (!this.Capabilities.HasFlag(ResourceCapability.Create))
+                throw new NotSupportedException();
 
             var bundle = data as Bundle;
 
@@ -126,17 +128,23 @@ namespace SanteDB.Messaging.Common
         /// <summary>
         /// Read clinical data
         /// </summary>
-        public virtual Object Get(Guid id, Guid versionId)
+        public virtual Object Get(object id, object versionId)
         {
-            return this.m_repository.Get(id, versionId);
+            if (!this.Capabilities.HasFlag(ResourceCapability.Get) &&
+                !this.Capabilities.HasFlag(ResourceCapability.GetVersion))
+                throw new NotSupportedException();
+            return this.m_repository.Get((Guid)id, (Guid)versionId);
         }
 
         /// <summary>
         /// Obsolete data
         /// </summary>
-        public virtual Object Obsolete(Guid key)
+        public virtual Object Obsolete(object key)
         {
-            return this.m_repository.Obsolete(key);
+            if (!this.Capabilities.HasFlag(ResourceCapability.Delete))
+                throw new NotSupportedException();
+
+            return this.m_repository.Obsolete((Guid)key);
         }
 
         /// <summary>
@@ -153,6 +161,9 @@ namespace SanteDB.Messaging.Common
         /// </summary>
         public virtual IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
         {
+            if (!this.Capabilities.HasFlag(ResourceCapability.Search))
+                throw new NotSupportedException();
+
             var queryExpression = QueryExpressionParser.BuildLinqExpression<TResource>(queryParameters, null, false);
             List<String> query = null;
 
@@ -180,6 +191,9 @@ namespace SanteDB.Messaging.Common
         /// </summary>
         public virtual Object Update(Object data)
         {
+            if (!this.Capabilities.HasFlag(ResourceCapability.Update))
+                throw new NotSupportedException();
+
             Bundle bundleData = data as Bundle;
             bundleData?.Reconstitute();
             var processData = bundleData?.Entry ?? data;
