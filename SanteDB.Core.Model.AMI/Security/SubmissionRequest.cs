@@ -40,7 +40,7 @@ namespace SanteDB.Core.Model.AMI.Security
 		/// Gets or sets the contact name
 		/// </summary>
 		[XmlElement("contact")]
-		public String AdminContactName { get; set; }
+		public string AdminContactName { get; set; }
 
 		/// <summary>
 		/// Gets or sets the cmc request

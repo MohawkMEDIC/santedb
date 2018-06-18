@@ -73,15 +73,18 @@
     <Compile Include="Configuration\AmiConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\CertificationAuthorityConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceHandler\AlertResourceHandler.cs" />
+    <Compile Include="ResourceHandler\AppletResourceHandler.cs" />
+    <Compile Include="ResourceHandler\AssigningAuthorityResourceHandler.cs" />
+    <Compile Include="ResourceHandler\AuditResourceHandler.cs" />
+    <Compile Include="ResourceHandler\CertificateSigningRequestHandler.cs" />
+    <Compile Include="ResourceHandler\ResourceHandlerBase.cs" />
     <Compile Include="Wcf\AmiBehavior.Audit.cs" />
     <Compile Include="Wcf\AmiBehavior.ExtensionType.cs" />
     <Compile Include="Wcf\AmiBehavior.CodeSystem.cs" />
-    <Compile Include="Wcf\AmiBehavior.AssigningAuthority.cs" />
     <Compile Include="Wcf\AmiBehavior.Certificate.cs" />
-    <Compile Include="Wcf\AmiBehavior.Applet.cs" />
     <Compile Include="Wcf\AmiBehavior.SecurityApplication.cs" />
     <Compile Include="Wcf\AmiBehavior.cs" />
-    <Compile Include="Wcf\AmiBehavior.Alert.cs" />
     <Compile Include="Wcf\AmiBehavior.SecurityPolicy.cs" />
     <Compile Include="Wcf\AmiBehavior.SecurityDevice.cs" />
     <Compile Include="Wcf\AmiBehavior.SecurityRole.cs" />
@@ -129,9 +132,7 @@
     </None>
     <Compile Include="Wcf\AmiBehavior.SecurityUser.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ResourceHandler\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -39,40 +39,6 @@ namespace SanteDB.Messaging.AMI.Wcf
 	/// </summary>
 	public partial class AmiBehavior
 	{
-		// Certificate tool
-		private readonly CertTool certTool;
-
-		// Configuration
-		private readonly AmiConfiguration configuration = ApplicationContext.Current.GetService<IConfigurationManager>().GetSection("santedb.messaging.ami") as AmiConfiguration;
-
-		/// <summary>
-		/// Creates the AMI behavior
-		/// </summary>
-		public AmiBehavior()
-		{
-			this.certTool = new CertTool
-			{
-				CertificationAuthorityName = this.configuration?.CaConfiguration.Name,
-				ServerName = this.configuration?.CaConfiguration.ServerName
-			};
-		}
-
-		/// <summary>
-		/// Accepts a certificate signing request.
-		/// </summary>
-		/// <param name="id">The id of the certificate signing request to be accepted.</param>
-		/// <returns>Returns the acceptance result.</returns>
-		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedAdministration)]
-		public SubmissionResult AcceptCsr(string rawId)
-		{
-			int id = Int32.Parse(rawId);
-			this.certTool.Approve(id);
-			var submission = this.certTool.GetRequestStatus(id);
-
-			var result = new SubmissionResult(submission.Message, submission.RequestId, (SubmissionStatus)submission.Outcome, submission.AuthorityResponse);
-			result.Certificate = null;
-			return result;
-		}
 
 		/// <summary>
 		/// Deletes a specified certificate.
@@ -121,10 +87,6 @@ namespace SanteDB.Messaging.AMI.Wcf
 			return Encoding.UTF8.GetBytes(result.AuthorityResponse);
 		}
 
-		/// <summary>
-		/// Gets a list of certificates.
-		/// </summary>
-		/// <returns>Returns a list of certificates.</returns>
 		public AmiCollection<X509Certificate2Info> GetCertificates()
 		{
 			var collection = new AmiCollection<X509Certificate2Info>();
@@ -150,77 +112,5 @@ namespace SanteDB.Messaging.AMI.Wcf
 			return Encoding.UTF8.GetBytes(this.certTool.GetCRL());
 		}
 
-		/// <summary>
-		/// Gets a specific certificate signing request.
-		/// </summary>
-		/// <param name="id">The id of the certificate signing request to be retrieved.</param>
-		/// <returns>Returns the certificate signing request.</returns>
-		public SubmissionResult GetCsr(string rawId)
-		{
-			int id = Int32.Parse(rawId);
-			var submission = this.certTool.GetRequestStatus(id);
-
-			var result = new SubmissionResult(submission.Message, submission.RequestId, (SubmissionStatus)submission.Outcome, submission.AuthorityResponse);
-			return result;
-		}
-
-		/// <summary>
-		/// Gets a list of submitted certificate signing requests.
-		/// </summary>
-		/// <returns>Returns a list of certificate signing requests.</returns>
-		public AmiCollection<SubmissionInfo> GetCsrs()
-		{
-			AmiCollection<SubmissionInfo> collection = new AmiCollection<SubmissionInfo>();
-			var certs = this.certTool.GetCertificates();
-			foreach (var cert in certs)
-			{
-				SubmissionInfo info = new SubmissionInfo();
-				foreach (var kv in cert.Attribute)
-				{
-					var key = kv.Key.Replace("Request.", "");
-					var pi = typeof(CertificateInfo).GetProperty(key, BindingFlags.Public | BindingFlags.Instance);
-					pi?.SetValue(info, kv.Value, null);
-				}
-				info.XmlStatusCode = (SubmissionStatus)this.certTool.GetRequestStatus(Int32.Parse(info.RequestID)).Outcome;
-				if (info.XmlStatusCode == SubmissionStatus.Submission)
-					collection.CollectionItem.Add(info);
-			}
-			return collection;
-		}
-
-		/// <summary>
-		/// Rejects a specified certificate signing request.
-		/// </summary>
-		/// <param name="certId">The id of the certificate signing request to be rejected.</param>
-		/// <param name="reason">The reason the certificate signing request is to be rejected.</param>
-		/// <returns>Returns the rejection result.</returns>
-		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedAdministration)]
-		public SubmissionResult RejectCsr(string rawId, SanteDB.Core.Model.AMI.Security.RevokeReason reason)
-		{
-			int id = Int32.Parse(rawId);
-			this.certTool.DenyRequest(id);
-			var status = this.certTool.GetRequestStatus(id);
-
-			var result = new SubmissionResult(status.Message, status.RequestId, (SubmissionStatus)status.Outcome, status.AuthorityResponse);
-			result.Certificate = null;
-			return result;
-		}
-
-		/// <summary>
-		/// Submits a specific certificate signing request.
-		/// </summary>
-		/// <param name="s">The certificate signing request.</param>
-		/// <returns>Returns the submission result.</returns>
-		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedAdministration)]
-		public SubmissionResult SubmitCsr(SubmissionRequest s)
-		{
-			var submission = this.certTool.SubmitRequest(s.CmcRequest, s.AdminContactName, s.AdminAddress);
-
-			var result = new SubmissionResult(submission.Message, submission.RequestId, (SubmissionStatus)submission.Outcome, submission.AuthorityResponse);
-			if (this.configuration.CaConfiguration.AutoApprove)
-				return this.AcceptCsr(result.RequestId.ToString());
-			else
-				return result;
-		}
 	}
 }
