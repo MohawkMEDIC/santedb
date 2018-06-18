@@ -124,13 +124,7 @@ namespace SanteDB.Messaging.AMI.ResourceHandler
             var certs = this.m_certTool.GetCertificates();
             foreach (var cert in certs)
             {
-                SubmissionInfo info = new SubmissionInfo();
-                foreach (var kv in cert.Attribute)
-                {
-                    var key = kv.Key.Replace("Request.", "");
-                    var pi = typeof(CertificateInfo).GetProperty(key, BindingFlags.Public | BindingFlags.Instance);
-                    pi?.SetValue(info, kv.Value, null);
-                }
+                SubmissionInfo info = SubmissionInfo.FromAttributes(cert.Attribute);
                 info.XmlStatusCode = (SubmissionStatus)this.m_certTool.GetRequestStatus(Int32.Parse(info.RequestID)).Outcome;
                 if (info.XmlStatusCode == SubmissionStatus.Submission)
                     collection.Add(info);
