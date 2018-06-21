@@ -28,6 +28,7 @@ using SanteDB.Core.Model.DataTypes;
 using MARC.HI.EHRS.SVC.Core;
 using SanteDB.Core.Services;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -46,6 +47,11 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
                 return ResourceCapability.Search;
             }
         }
+
+        /// <summary>
+        /// Gets the scope of this handler
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
 
         /// <summary>
         /// Get the resource name
@@ -72,7 +78,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Create not supported
         /// </summary>
-        public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+        public Object Create(Object data, bool updateIfExists)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +86,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Get not supported
         /// </summary>
-        public IdentifiedData Get(Guid id, Guid versionId)
+        public Object Get(Guid id, Guid versionId)
         {
             throw new NotImplementedException();
         }
@@ -88,7 +94,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Obsolete not supported
         /// </summary>
-        public IdentifiedData Obsolete(Guid key)
+        public Object Obsolete(Guid  key)
         {
             throw new NotImplementedException();
         }
@@ -96,7 +102,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Query the template definitions
         /// </summary>
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters)
         {
             int tr = 0;
             return this.Query(queryParameters, 0, 100, out tr);
@@ -105,7 +111,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Query the properties
         /// </summary>
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
         {
             var metaService = ApplicationContext.Current.GetService<IMetadataRepositoryService>();
             if (metaService == null)
@@ -114,7 +120,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
                 return metaService.FindTemplateDefinitions(QueryExpressionParser.BuildLinqExpression<TemplateDefinition>(queryParameters), offset, count, out totalCount);
         }
 
-        public IdentifiedData Update(IdentifiedData data)
+        public Object Update(Object  data)
         {
             throw new NotImplementedException();
         }

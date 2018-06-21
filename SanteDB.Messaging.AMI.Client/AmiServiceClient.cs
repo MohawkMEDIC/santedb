@@ -22,10 +22,8 @@ using SanteDB.Core.Applets.Model;
 using SanteDB.Core.Http;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Interop.Clients;
-using SanteDB.Core.Model.AMI.Alerting;
 using SanteDB.Core.Model.AMI.Applet;
 using SanteDB.Core.Model.AMI.Auth;
-using SanteDB.Core.Model.AMI.DataTypes;
 using SanteDB.Core.Model.AMI.Diagnostics;
 using SanteDB.Core.Model.AMI.Logging;
 using SanteDB.Core.Model.AMI.Security;
@@ -71,9 +69,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="id">The id of the assigning authority to retrieve.</param>
 		/// <returns>Returns the assigning authority.</returns>
-		public AssigningAuthorityInfo AssigningAuthority(string id)
+		public AlertMessage AssigningAuthority(string id)
 		{
-			return this.Client.Get<AssigningAuthorityInfo>($"assigningAuthority/{id}");
+			return this.Client.Get<AlertMessage>($"assigningAuthority/{id}");
 		}
 
 		/// <summary>
@@ -81,9 +79,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="alertMessageInfo">The alert message to be created.</param>
 		/// <returns>Returns the created alert message.</returns>
-		public AlertMessageInfo CreateAlert(AlertMessageInfo alertMessageInfo)
+		public AlertMessage CreateAlert(AlertMessage alertMessageInfo)
 		{
-			return this.Client.Post<AlertMessageInfo, AlertMessageInfo>("alert", this.Client.Accept, alertMessageInfo);
+			return this.Client.Post<AlertMessage, AlertMessage>("alert", this.Client.Accept, alertMessageInfo);
 		}
 
 		/// <summary>
@@ -115,9 +113,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="assigningAuthorityInfo">The assigning authority to be created.</param>
 		/// <returns>Returns the created assigning authority.</returns>
-		public AssigningAuthorityInfo CreateAssigningAuthority(AssigningAuthorityInfo assigningAuthorityInfo)
+		public AssigningAuthority CreateAssigningAuthority(AssigningAuthority assigningAuthorityInfo)
 		{
-			return this.Client.Post<AssigningAuthorityInfo, AssigningAuthorityInfo>("assigningAuthority", this.Client.Accept, assigningAuthorityInfo);
+			return this.Client.Post<AssigningAuthority, AssigningAuthority>("assigningAuthority", this.Client.Accept, assigningAuthorityInfo);
 		}
 
 		
@@ -206,9 +204,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="assigningAuthorityId">The id of the assigning authority to be deleted.</param>
 		/// <returns>Returns the deleted assigning authority.</returns>
-		public AssigningAuthorityInfo DeleteAssigningAuthority(string assigningAuthorityId)
+		public AssigningAuthority DeleteAssigningAuthority(string assigningAuthorityId)
 		{
-			return this.Client.Delete<AssigningAuthorityInfo>($"assigningAuthority/{assigningAuthorityId}");
+			return this.Client.Delete<AssigningAuthority>($"assigningAuthority/{assigningAuthorityId}");
 		}
 
 		/// <summary>
@@ -313,9 +311,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="id">The id of the alert to retrieve.</param>
 		/// <returns>Returns the alert.</returns>
-		public AlertMessageInfo GetAlert(string id)
+		public AlertMessage GetAlert(string id)
 		{
-			return this.Client.Get<AlertMessageInfo>($"alert/{id}");
+			return this.Client.Get<AlertMessage>($"alert/{id}");
 		}
 
         /// <summary>
@@ -331,9 +329,9 @@ namespace SanteDB.Messaging.AMI.Client
         /// </summary>
         /// <param name="query">The query expression to use to find the alerts.</param>
         /// <returns>Returns a collection of alerts which match the specified criteria.</returns>
-        public AmiCollection<AlertMessageInfo> GetAlerts(Expression<Func<AlertMessage, bool>> query)
+        public AmiCollection<AlertMessage> GetAlerts(Expression<Func<AlertMessage, bool>> query)
 		{
-			return this.Client.Get<AmiCollection<AlertMessageInfo>>("alert", QueryExpressionBuilder.BuildQuery(query).ToArray());
+			return this.Client.Get<AmiCollection<AlertMessage>>("alert", QueryExpressionBuilder.BuildQuery(query).ToArray());
 		}
 
 		/// <summary>
@@ -379,9 +377,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// </summary>
 		/// <param name="query">The query expression to use to find the assigning authorities.</param>
 		/// <returns>Returns a collection of assigning authorities which match the specified criteria.</returns>
-		public AmiCollection<AssigningAuthorityInfo> GetAssigningAuthorities(Expression<Func<AssigningAuthority, bool>> query)
+		public AmiCollection<AssigningAuthority> GetAssigningAuthorities(Expression<Func<AssigningAuthority, bool>> query)
 		{
-			return this.Client.Get<AmiCollection<AssigningAuthorityInfo>>("assigningAuthority", QueryExpressionBuilder.BuildQuery(query).ToArray());
+			return this.Client.Get<AmiCollection<AssigningAuthority>>("assigningAuthority", QueryExpressionBuilder.BuildQuery(query).ToArray());
 		}
 
 		/// <summary>
@@ -675,9 +673,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// <param name="alertId">The id of the alert to be updated.</param>
 		/// <param name="alertMessageInfo">The alert message info containing the updated information.</param>
 		/// <returns>Returns the updated alert.</returns>
-		public AlertMessageInfo UpdateAlert(string alertId, AlertMessageInfo alertMessageInfo)
+		public AlertMessage UpdateAlert(string alertId, AlertMessage alertMessageInfo)
 		{
-			return this.Client.Put<AlertMessageInfo, AlertMessageInfo>($"alert/{alertId}", this.Client.Accept, alertMessageInfo);
+			return this.Client.Put<AlertMessage, AlertMessage>($"alert/{alertId}", this.Client.Accept, alertMessageInfo);
 		}
 
 		/// <summary>
@@ -713,9 +711,9 @@ namespace SanteDB.Messaging.AMI.Client
 		/// <param name="assigningAuthorityId">The id of the assigning authority to be updated.</param>
 		/// <param name="assigningAuthorityInfo">The assigning authority info containing the updated information.</param>
 		/// <returns>Returns the updated assigning authority.</returns>
-		public AssigningAuthorityInfo UpdateAssigningAuthority(string assigningAuthorityId, AssigningAuthorityInfo assigningAuthorityInfo)
+		public AssigningAuthority UpdateAssigningAuthority(string assigningAuthorityId, AssigningAuthority assigningAuthorityInfo)
 		{
-			return this.Client.Put<AssigningAuthorityInfo, AssigningAuthorityInfo>($"assigningAuthority/{assigningAuthorityId}", this.Client.Accept, assigningAuthorityInfo);
+			return this.Client.Put<AssigningAuthority, AssigningAuthority>($"assigningAuthority/{assigningAuthorityId}", this.Client.Accept, assigningAuthorityInfo);
 		}
 
 		/// <summary>

@@ -19,7 +19,6 @@
  */
 
 using MARC.HI.EHRS.SVC.Core;
-using SanteDB.Core.Model.AMI.DataTypes;
 using SanteDB.Core.Model.AMI.Security;
 using SanteDB.Core.Model.DataTypes;
 using SanteDB.Core.Model.Query;
@@ -41,7 +40,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <param name="assigningAuthorityInfo">The assigning authority to be created.</param>
 		/// <returns>Returns the created assigning authority.</returns>
 		/// <exception cref="System.InvalidOperationException">If the IAssigningAuthorityRepositoryService is not found.</exception>
-		public AssigningAuthorityInfo CreateAssigningAuthority(AssigningAuthorityInfo assigningAuthorityInfo)
+		public AssigningAuthority CreateAssigningAuthority(AssigningAuthority assigningAuthorityInfo)
 		{
 			var assigningAuthorityRepositoryService = ApplicationContext.Current.GetService<IAssigningAuthorityRepositoryService>();
 
@@ -50,10 +49,11 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new InvalidOperationException($"{nameof(IAssigningAuthorityRepositoryService)} not found");
 			}
 
-			var createdAssigningAuthority = assigningAuthorityRepositoryService.Insert(assigningAuthorityInfo.AssigningAuthority);
+			var createdAssigningAuthority = assigningAuthorityRepositoryService.Insert(assigningAuthorityInfo);
 
-			return new AssigningAuthorityInfo(createdAssigningAuthority);
-		}
+            return createdAssigningAuthority;
+
+        }
 
 		/// <summary>
 		/// Deletes an assigning authority.
@@ -62,7 +62,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns the deleted assigning authority.</returns>
 		/// <exception cref="System.ArgumentException">Assigning authority not found.</exception>
 		/// <exception cref="System.InvalidOperationException">If the IAssigningAuthorityRepositoryService is not found.</exception>
-		public AssigningAuthorityInfo DeleteAssigningAuthority(string assigningAuthorityId)
+		public AssigningAuthority DeleteAssigningAuthority(string assigningAuthorityId)
 		{
 			Guid id;
 
@@ -78,11 +78,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new InvalidOperationException($"{nameof(IAssigningAuthorityRepositoryService)} not found");
 			}
 
-			return new AssigningAuthorityInfo
-			{
-				AssigningAuthority = assigningAuthorityService.Obsolete(id),
-				Id = id
-			};
+            return assigningAuthorityService.Obsolete(id);
 		}
 
 		/// <summary>
@@ -91,7 +87,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns a list of assigning authorities which match the specific query.</returns>
 		/// <exception cref="System.ArgumentException"></exception>
 		/// <exception cref="System.InvalidOperationException">If the IAssigningAuthorityRepositoryService is not found.</exception>
-		public AmiCollection<AssigningAuthorityInfo> GetAssigningAuthorities()
+		public AmiCollection<AssigningAuthority> GetAssigningAuthorities()
 		{
 			var parameters = WebOperationContext.Current.IncomingRequest.UriTemplateMatch.QueryParameters;
 
@@ -109,11 +105,11 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new InvalidOperationException($"{nameof(IAssigningAuthorityRepositoryService)} not found");
 			}
 
-			var assigningAuthorities = new AmiCollection<AssigningAuthorityInfo>();
+			var assigningAuthorities = new AmiCollection<AssigningAuthority>();
 
 			var totalCount = 0;
 
-			assigningAuthorities.CollectionItem = assigningAuthorityRepositoryService.Find(expression, 0, null, out totalCount).Select(a => new AssigningAuthorityInfo(a)).ToList();
+			assigningAuthorities.CollectionItem = assigningAuthorityRepositoryService.Find(expression, 0, null, out totalCount).ToList();
 			assigningAuthorities.Size = totalCount;
 
 			return assigningAuthorities;
@@ -126,7 +122,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns the assigning authority.</returns>
 		/// <exception cref="System.ArgumentException">If the assigning authority is not found.</exception>
 		/// <exception cref="System.InvalidOperationException">If the IAssigningAuthorityRepositoryService is not found.</exception>
-		public AssigningAuthorityInfo GetAssigningAuthority(string assigningAuthorityId)
+		public AssigningAuthority GetAssigningAuthority(string assigningAuthorityId)
 		{
 			Guid id;
 
@@ -142,7 +138,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new InvalidOperationException($"{nameof(IAssigningAuthorityRepositoryService)} not found");
 			}
 
-			return new AssigningAuthorityInfo(assigningAuthorityRepositoryService.Get(id));
+			return assigningAuthorityRepositoryService.Get(id);
 		}
 
 		/// <summary>
@@ -153,7 +149,7 @@ namespace SanteDB.Messaging.AMI.Wcf
 		/// <returns>Returns the updated assigning authority.</returns>
 		/// <exception cref="System.ArgumentException">If the assigning authority is not found.</exception>
 		/// <exception cref="System.InvalidOperationException">If the IAssigningAuthorityRepositoryService is not found.</exception>
-		public AssigningAuthorityInfo UpdateAssigningAuthority(string assigningAuthorityId, AssigningAuthorityInfo assigningAuthorityInfo)
+		public AssigningAuthority UpdateAssigningAuthority(string assigningAuthorityId, AssigningAuthority assigningAuthorityInfo)
 		{
 			Guid id;
 
@@ -162,9 +158,9 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new ArgumentException($"{nameof(assigningAuthorityId)} must be a valid GUID");
 			}
 
-			if (id != assigningAuthorityInfo.Id)
+			if (id != assigningAuthorityInfo.Key)
 			{
-				throw new ArgumentException($"Unable to update assigning authority using id: {id}, and id: {assigningAuthorityInfo.Id}");
+				throw new ArgumentException($"Unable to update assigning authority using id: {id}, and id: {assigningAuthorityInfo.Key}");
 			}
 
 			var assigningAuthorityRepositoryService = ApplicationContext.Current.GetService<IAssigningAuthorityRepositoryService>();
@@ -174,9 +170,9 @@ namespace SanteDB.Messaging.AMI.Wcf
 				throw new InvalidOperationException($"{nameof(IAssigningAuthorityRepositoryService)} not found");
 			}
 
-			var result = assigningAuthorityRepositoryService.Save(assigningAuthorityInfo.AssigningAuthority);
+			var result = assigningAuthorityRepositoryService.Save(assigningAuthorityInfo);
 
-			return new AssigningAuthorityInfo(result);
+			return result;
 		}
 	}
 }

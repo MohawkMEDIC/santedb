@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -46,6 +47,11 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		{
 			ApplicationContext.Current.Started += (o, e) => this.repository = ApplicationContext.Current.GetService<IIdentifierTypeRepositoryService>();
 		}
+
+        /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
 
         /// <summary>
         /// Get capabilities for this resource handler
@@ -87,7 +93,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="updateIfExists">Update the identifier type if it exists.</param>
         /// <returns>Returns the newly created identifier type.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedMetadata)]
-        public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+        public Object Create(Object data, bool updateIfExists)
 		{
 			Bundle bundleData = data as Bundle;
 			bundleData?.Reconstitute();
@@ -123,7 +129,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="versionId">The version id of the identifier type.</param>
         /// <returns></returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IdentifiedData Get(Guid id, Guid versionId)
+        public Object Get(Guid id, Guid versionId)
 		{
 			return this.repository.Get(id, versionId);
 		}
@@ -134,7 +140,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="key">The key of the identifier type to obsolete.</param>
         /// <returns>Returns the obsoleted identifier type.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedMetadata)]
-        public IdentifiedData Obsolete(Guid key)
+        public Object Obsolete(Guid  key)
 		{
 			return this.repository.Obsolete(key);
 		}
@@ -145,7 +151,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="queryParameters">The query parameters for which to use to query for the identifier type.</param>
         /// <returns>Returns a list of identifier types.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters)
 		{
             int tr = 00;
             return this.Query(queryParameters, 0, 100, out tr);
@@ -160,7 +166,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="totalCount">The total count of the query.</param>
         /// <returns>Returns a list of identifier types.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
 		{
             var filter = QueryExpressionParser.BuildLinqExpression<IdentifierType>(queryParameters);
             List<String> queryId = null;
@@ -176,7 +182,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="data">The identifier type to be updated.</param>
         /// <returns>Returns the updated identifier type.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedMetadata)]
-        public IdentifiedData Update(IdentifiedData data)
+        public Object Update(Object  data)
 		{
 			Bundle bundleData = data as Bundle;
 			bundleData?.Reconstitute();

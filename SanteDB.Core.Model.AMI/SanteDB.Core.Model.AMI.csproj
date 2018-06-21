@@ -55,7 +55,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alerting\AlertMessageInfo.cs" />
     <Compile Include="AmiCollection.cs" />
     <Compile Include="Applet\AppletManifestInfo.cs" />
     <Compile Include="Auth\SecurityApplicationInfo.cs" />
@@ -65,8 +64,6 @@
     <Compile Include="Auth\TfaRequestInfo.cs" />
     <Compile Include="Auth\SecurityUserInfo.cs" />
     <Compile Include="Auth\TfaMechanismInfo.cs" />
-    <Compile Include="BusinessRules\BusinessRuleInfo.cs" />
-    <Compile Include="DataTypes\AssigningAuthorityInfo.cs" />
     <Compile Include="Diagnostics\DiagnosticApplicationInfo.cs" />
     <Compile Include="Diagnostics\DiagnosticEnvironmentInfo.cs" />
     <Compile Include="Diagnostics\DiagnosticAttachmentInfo.cs" />

@@ -47,7 +47,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="updateIfExists">Whether to update the entity if it exits.</param>
         /// <returns>Returns the created entity.s</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.WriteClinicalData)]
-        public override IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+        public override Object Create(Object data, bool updateIfExists)
 		{
             return base.Create(data, updateIfExists);
 		}
@@ -59,7 +59,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="versionId">The version id of the entity.</param>
         /// <returns>Returns the entity.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadClinicalData)]
-        public override IdentifiedData Get(Guid id, Guid versionId)
+        public override Object Get(Guid id, Guid versionId)
         {
             return base.Get(id, versionId);
         }
@@ -70,7 +70,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="key">The key of the entity to be obsoleted.</param>
         /// <returns>Returns the obsoleted entity.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.DeleteClinicalData)]
-        public override IdentifiedData Obsolete(Guid key)
+        public override Object Obsolete(Guid key)
         {
             return base.Obsolete(key);
         }
@@ -81,7 +81,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="queryParameters">The query parameters to use to search for the entity.</param>
         /// <returns>Returns a list of entities.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.QueryClinicalData)]
-        public override IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public override IEnumerable<Object> Query(NameValueCollection queryParameters)
         {
             return base.Query(queryParameters);
         }
@@ -95,7 +95,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="totalCount">The total count of the query.</param>
         /// <returns>Returns a list of entities.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.QueryClinicalData)]
-        public override IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public override IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
         {
             return base.Query(queryParameters, offset, count, out totalCount);
         }
@@ -106,7 +106,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="data">The entity to be updated.</param>
         /// <returns>Returns the updated entity.</returns>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.WriteClinicalData)]
-        public override IdentifiedData Update(IdentifiedData data)
+        public override Object Update(Object data)
         {
             return base.Update(data);
         }

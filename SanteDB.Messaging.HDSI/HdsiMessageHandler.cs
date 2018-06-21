@@ -22,6 +22,7 @@ using MARC.HI.EHRS.SVC.Core.Services;
 using SanteDB.Core.Interop;
 using SanteDB.Core.Wcf;
 using SanteDB.Core.Wcf.Security;
+using SanteDB.Messaging.Common;
 using SanteDB.Messaging.HDSI.Configuration;
 using SanteDB.Messaging.HDSI.ResourceHandler;
 using SanteDB.Messaging.HDSI.Wcf;

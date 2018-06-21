@@ -32,6 +32,7 @@ using SanteDB.Core.Security;
 using SanteDB.Core.Security.Attribute;
 using System.Security.Permissions;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -45,10 +46,16 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// </summary>
 		private IConceptRepositoryService repository;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ReferenceTermResourceHandler"/> class.
-		/// </summary>
-		public ReferenceTermResourceHandler()
+
+        /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReferenceTermResourceHandler"/> class.
+        /// </summary>
+        public ReferenceTermResourceHandler()
 		{
 			ApplicationContext.Current.Started += (o, e) => { this.repository = ApplicationContext.Current.GetService<IConceptRepositoryService>(); };
 		}
@@ -81,7 +88,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="updateIfExists">Updates the resource if the resource exists.</param>
 		/// <returns>Returns the created resource.</returns>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-        public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+        public Object Create(Object data, bool updateIfExists)
 		{
 			var bundleData = data as Bundle;
 
@@ -118,7 +125,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="id">The id of the resource.</param>
 		/// <param name="versionId">The version id of the resource.</param>
 		/// <returns>Returns the resource.</returns>
-		public IdentifiedData Get(Guid id, Guid versionId)
+		public Object Get(Guid id, Guid versionId)
 		{
 			return this.repository.GetReferenceTerm(id);
 		}
@@ -129,7 +136,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="key">The key of the resource to obsolete.</param>
 		/// <returns>Returns the obsoleted resource.</returns>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-        public IdentifiedData Obsolete(Guid key)
+        public Object Obsolete(Guid  key)
 		{
 			return this.repository.ObsoleteReferenceTerm(key);
 		}
@@ -140,7 +147,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="queryParameters">The query parameters of the resource.</param>
 		/// <returns>Returns a collection of resources.</returns>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters)
 		{
             int tr = 0;
             return this.Query(queryParameters, 0, 100, out tr);
@@ -155,7 +162,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="totalCount">The total count of the results.</param>
 		/// <returns>Returns a collection of resources.</returns>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
 		{
             var filter = QueryExpressionParser.BuildLinqExpression<ReferenceTerm>(queryParameters);
             List<String> queryId = null;
@@ -171,7 +178,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="data">The resource data to be updated.</param>
 		/// <returns>Returns the updated resource.</returns>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-        public IdentifiedData Update(IdentifiedData data)
+        public Object Update(Object  data)
 		{
 			var bundleData = data as Bundle;
 

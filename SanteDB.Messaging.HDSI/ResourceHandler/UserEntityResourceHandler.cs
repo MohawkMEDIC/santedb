@@ -40,7 +40,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Create the specified user entity
         /// </summary>
-        public override IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+        public override Object Create(Object data, bool updateIfExists)
         {
             // Additional security: User should 
             var securityUser = ApplicationContext.Current.GetService<ISecurityRepositoryService>().GetUser(AuthenticationContext.Current.Principal.Identity);
@@ -54,7 +54,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Gets the specified user 
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public override IdentifiedData Get(Guid id, Guid versionId)
+        public override Object Get(Guid id, Guid versionId)
         {
             return base.Get(id, versionId);
         }
@@ -63,7 +63,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Obsolete
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.UnrestrictedMetadata)]
-        public override IdentifiedData Obsolete(Guid key)
+        public override Object Obsolete(Guid key)
         {
             return base.Obsolete(key);
         }
@@ -72,7 +72,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query the specified data
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public override IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public override IEnumerable<Object> Query(NameValueCollection queryParameters)
         {
             return base.Query(queryParameters);
         }
@@ -81,7 +81,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query specified user
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public override IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public override IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
         {
             return base.Query(queryParameters, offset, count, out totalCount);
         }
@@ -89,7 +89,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <summary>
         /// Update specified data
         /// </summary>
-        public override IdentifiedData Update(IdentifiedData data)
+        public override Object Update(Object data)
         {
             // Additional security: User should be admin be editing themselves
             var securityUser = ApplicationContext.Current.GetService<ISecurityRepositoryService>().GetUser(AuthenticationContext.Current.Principal.Identity);

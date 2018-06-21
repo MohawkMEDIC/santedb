@@ -173,6 +173,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SanteDbQueryTool", "SanteDb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanteDB.Tools.DataQueryService", "SanteDB.Tools.DataQueryService\SanteDB.Tools.DataQueryService.csproj", "{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanteDB.Messaging.Common", "SanteDB.Messaging.Common\SanteDB.Messaging.Common.csproj", "{135CBEA7-7B25-4DB0-B9EE-62D61B87B8B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -456,6 +458,12 @@ Global
 		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.SignedRelease|Any CPU.ActiveCfg = Release|Any CPU
 		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3}.SignedRelease|Any CPU.Build.0 = Release|Any CPU
+		{135CBEA7-7B25-4DB0-B9EE-62D61B87B8B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{135CBEA7-7B25-4DB0-B9EE-62D61B87B8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{135CBEA7-7B25-4DB0-B9EE-62D61B87B8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{135CBEA7-7B25-4DB0-B9EE-62D61B87B8B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{135CBEA7-7B25-4DB0-B9EE-62D61B87B8B0}.SignedRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{135CBEA7-7B25-4DB0-B9EE-62D61B87B8B0}.SignedRelease|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -522,6 +530,7 @@ Global
 		{11407ADB-E336-4C0C-AF8E-EA6B601BA69E} = {60153C83-F4A3-423A-B67F-27695D9FB4BB}
 		{BBACB540-CB59-4945-8B3A-11DAA6AE0E87} = {743B3DB9-DFAD-4E1F-8C4A-7A485C7EC709}
 		{5660297C-6DB6-45FE-BF1D-DE254E35A5B3} = {743B3DB9-DFAD-4E1F-8C4A-7A485C7EC709}
+		{135CBEA7-7B25-4DB0-B9EE-62D61B87B8B0} = {2B42E7E5-EE67-4D86-81EB-4AF674CE2C85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BB7B522-4CD2-40A7-A2E5-C4365150718C}

@@ -27,6 +27,7 @@ using SanteDB.Core.Services;
 using System;
 using System.Collections.Generic;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -55,6 +56,12 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
             }
         }
 
+
+        /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
+
         /// <summary>
         /// The name of the resource
         /// </summary>
@@ -80,7 +87,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Create an assigning authority - not supported
 		/// </summary>
-		public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+		public Object Create(Object data, bool updateIfExists)
 		{
 			throw new NotSupportedException();
 		}
@@ -89,7 +96,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// Get the assigning authority
 		/// </summary>
 		[PolicyPermission(System.Security.Permissions.SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-		public IdentifiedData Get(Guid id, Guid versionId)
+		public Object Get(Guid id, Guid versionId)
 		{
 			return this.m_repository.GetAssigningAuthority(id);
 		}
@@ -97,7 +104,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Obsoletes an assigning authority
 		/// </summary>
-		public IdentifiedData Obsolete(Guid key)
+		public Object Obsolete(Guid  key)
 		{
 			throw new NotSupportedException();
 		}
@@ -106,7 +113,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// Queries for assigning authority
 		/// </summary>
 		[PolicyPermission(System.Security.Permissions.SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-		public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+		public IEnumerable<Object> Query(NameValueCollection queryParameters)
 		{
 			return this.m_repository.FindAssigningAuthority(QueryExpressionParser.BuildLinqExpression<AssigningAuthority>(queryParameters));
 		}
@@ -115,7 +122,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// Query for the specified AA
 		/// </summary>
 		[PolicyPermission(System.Security.Permissions.SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-		public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+		public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
 		{
 			return this.m_repository.FindAssigningAuthority(QueryExpressionParser.BuildLinqExpression<AssigningAuthority>(queryParameters), offset, count, out totalCount);
 		}
@@ -123,7 +130,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Update assigning authority
 		/// </summary>
-		public IdentifiedData Update(IdentifiedData data)
+		public Object Update(Object  data)
 		{
 			throw new NotSupportedException();
 		}

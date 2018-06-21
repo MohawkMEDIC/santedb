@@ -62,7 +62,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// <param name="count"></param>
         /// <param name="totalCount"></param>
         /// <returns></returns>
-        public override IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public override IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
         {
             if (queryParameters.ContainsKey("modifiedOn"))
                 queryParameters.Remove("modifiedOn");

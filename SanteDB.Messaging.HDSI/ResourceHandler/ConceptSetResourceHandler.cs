@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -49,6 +50,11 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		{
 			ApplicationContext.Current.Started += (o, e) => this.repositoryService = ApplicationContext.Current.GetService<IConceptRepositoryService>();
 		}
+
+        /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
 
         /// <summary>
         /// Get the capabilities of this handler
@@ -75,7 +81,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// Creates the specified data
 		/// </summary>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-		public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+		public Object Create(Object data, bool updateIfExists)
 		{
 			if (data == null)
 			{
@@ -104,7 +110,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Gets the specified conceptset
 		/// </summary>
-		public IdentifiedData Get(Guid id, Guid versionId)
+		public Object Get(Guid id, Guid versionId)
 		{
 			if (versionId != Guid.Empty)
 			{
@@ -118,7 +124,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// Obsolete the specified concept set
 		/// </summary>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-		public IdentifiedData Obsolete(Guid key)
+		public Object Obsolete(Guid  key)
 		{
 			return this.repositoryService.ObsoleteConceptSet(key);
 		}
@@ -127,7 +133,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// Perform query
 		/// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters)
 		{
             int tr = 0;
             return this.Query(queryParameters, 0, 100, out tr);
@@ -137,7 +143,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
         /// Query with specified parameter data
         /// </summary>
         [PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.ReadMetadata)]
-        public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+        public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
 		{
             var filter = QueryExpressionParser.BuildLinqExpression<ConceptSet>(queryParameters);
             List<String> queryId = null;
@@ -153,7 +159,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="data"></param>
 		/// <returns></returns>
 		[PolicyPermission(SecurityAction.Demand, PolicyId = PermissionPolicyIdentifiers.AdministerConceptDictionary)]
-		public IdentifiedData Update(IdentifiedData data)
+		public Object Update(Object  data)
 		{
 			if (data == null)
 			{

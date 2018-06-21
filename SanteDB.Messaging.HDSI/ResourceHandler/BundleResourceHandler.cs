@@ -25,6 +25,7 @@ using SanteDB.Core.Services;
 using System;
 using System.Collections.Generic;
 using SanteDB.Core.Interop;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.ResourceHandler
 {
@@ -45,6 +46,11 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		{
 			ApplicationContext.Current.Started += (o, e) => this.repositoryService = ApplicationContext.Current.GetService<IBatchRepositoryService>();
 		}
+
+        /// <summary>
+        /// Gets the scope
+        /// </summary>
+        public Type Scope => typeof(Wcf.IHdsiServiceContract);
 
         /// <summary>
         /// Get capabilities
@@ -73,7 +79,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <param name="data">The data to create.</param>
 		/// <param name="updateIfExists">Whether to update an existing entity.</param>
 		/// <returns>Returns the created bundle.</returns>
-		public IdentifiedData Create(IdentifiedData data, bool updateIfExists)
+		public Object Create(Object data, bool updateIfExists)
 		{
 			if (data == null)
 			{
@@ -102,7 +108,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Gets the specified data
 		/// </summary>
-		public IdentifiedData Get(Guid id, Guid versionId)
+		public Object Get(Guid id, Guid versionId)
 		{
 			throw new NotSupportedException();
 		}
@@ -110,7 +116,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Obsoletes the bundle
 		/// </summary>
-		public IdentifiedData Obsolete(Guid key)
+		public Object Obsolete(Guid  key)
 		{
 			throw new NotSupportedException();
 		}
@@ -118,7 +124,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Query for bundle
 		/// </summary>
-		public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters)
+		public IEnumerable<Object> Query(NameValueCollection queryParameters)
 		{
 			throw new NotSupportedException();
 		}
@@ -126,7 +132,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// <summary>
 		/// Query bundle
 		/// </summary>
-		public IEnumerable<IdentifiedData> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
+		public IEnumerable<Object> Query(NameValueCollection queryParameters, int offset, int count, out int totalCount)
 		{
 			throw new NotSupportedException();
 		}
@@ -136,7 +142,7 @@ namespace SanteDB.Messaging.HDSI.ResourceHandler
 		/// </summary>
 		/// <param name="data">The data to be updated.</param>
 		/// <returns>Returns the updated data.</returns>
-		public IdentifiedData Update(IdentifiedData data)
+		public Object Update(Object  data)
 		{
 			if (data == null)
 			{

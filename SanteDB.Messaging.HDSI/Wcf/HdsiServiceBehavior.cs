@@ -62,6 +62,7 @@ using MARC.HI.EHRS.SVC.Core.Exceptions;
 using System.ServiceModel.Channels;
 using SwaggerWcf.Attributes;
 using System.ComponentModel;
+using SanteDB.Messaging.Common;
 
 namespace SanteDB.Messaging.HDSI.Wcf
 {
@@ -109,11 +110,11 @@ namespace SanteDB.Messaging.HDSI.Wcf
 
             try
             {
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
                 if (handler != null)
                 {
 
-                    var retVal = handler.Create(body, false);
+                    var retVal = handler.Create(body, false) as IdentifiedData;
 
                     var versioned = retVal as IVersionedEntity;
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.Created;
@@ -167,10 +168,10 @@ namespace SanteDB.Messaging.HDSI.Wcf
             this.ThrowIfNotReady();
             try
             {
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
                 if (handler != null)
                 {
-                    var retVal = handler.Create(body, true);
+                    var retVal = handler.Create(body, true) as IdentifiedData;
                     var versioned = retVal as IVersionedEntity;
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.Created;
                     WebOperationContext.Current.OutgoingResponse.ETag = retVal.Tag;
@@ -227,10 +228,10 @@ namespace SanteDB.Messaging.HDSI.Wcf
             {
 
 
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
                 if (handler != null)
                 {
-                    var retVal = handler.Get(Guid.Parse(id), Guid.Empty);
+                    var retVal = handler.Get(Guid.Parse(id), Guid.Empty) as IdentifiedData;
                     if (retVal == null)
                         throw new FileNotFoundException(id);
 
@@ -292,10 +293,10 @@ namespace SanteDB.Messaging.HDSI.Wcf
             this.ThrowIfNotReady();
             try
             {
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
                 if (handler != null)
                 {
-                    var retVal = handler.Get(Guid.Parse(id), Guid.Parse(versionId));
+                    var retVal = handler.Get(Guid.Parse(id), Guid.Parse(versionId)) as IdentifiedData;
                     if (retVal == null)
                         throw new FileNotFoundException(id);
 
@@ -382,7 +383,7 @@ namespace SanteDB.Messaging.HDSI.Wcf
             this.ThrowIfNotReady();
             try
             {
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
 
                 if (handler != null)
                 {
@@ -440,7 +441,7 @@ namespace SanteDB.Messaging.HDSI.Wcf
             this.ThrowIfNotReady();
             try
             {
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
                 if (handler != null)
                 {
                     String offset = WebOperationContext.Current.IncomingRequest.UriTemplateMatch.QueryParameters["_offset"],
@@ -464,7 +465,7 @@ namespace SanteDB.Messaging.HDSI.Wcf
                     bool.TryParse(lean, out parsedLean);
 
 
-                    var retVal = handler.Query(query, Int32.Parse(offset ?? "0"), Int32.Parse(count ?? "100"), out totalResults).Select(o=>o.GetLocked()).ToList();
+                    var retVal = handler.Query(query, Int32.Parse(offset ?? "0"), Int32.Parse(count ?? "100"), out totalResults).OfType<IdentifiedData>().Select(o=>o.GetLocked()).ToList();
                     WebOperationContext.Current.OutgoingResponse.LastModified = retVal.OrderByDescending(o => o.ModifiedOn).FirstOrDefault()?.ModifiedOn.DateTime ?? DateTime.Now;
 
 
@@ -553,11 +554,11 @@ namespace SanteDB.Messaging.HDSI.Wcf
             this.ThrowIfNotReady();
             try
             {
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
                 if (handler != null)
                 {
 
-                    var retVal = handler.Update(body);
+                    var retVal = handler.Update(body) as IdentifiedData;
 
                     var versioned = retVal as IVersionedEntity;
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.OK;
@@ -613,11 +614,11 @@ namespace SanteDB.Messaging.HDSI.Wcf
             this.ThrowIfNotReady();
             try
             {
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
                 if (handler != null)
                 {
 
-                    var retVal = handler.Obsolete(Guid.Parse(id));
+                    var retVal = handler.Obsolete(Guid.Parse(id)) as IdentifiedData;
 
                     var versioned = retVal as IVersionedEntity;
 
@@ -729,13 +730,13 @@ namespace SanteDB.Messaging.HDSI.Wcf
                 var versionId = Guid.ParseExact(match, "N");
 
                 // First we load
-                var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+                var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
 
                 if (handler == null)
                     throw new FileNotFoundException(resourceType);
 
                 // Next we get the current version
-                var existing = handler.Get(Guid.Parse(id), Guid.Empty);
+                var existing = handler.Get(Guid.Parse(id), Guid.Empty) as IdentifiedData;
                 var force = Convert.ToBoolean(WebOperationContext.Current.IncomingRequest.Headers["X-Patch-Force"] ?? "false");
 
                 if (existing == null)
@@ -753,7 +754,7 @@ namespace SanteDB.Messaging.HDSI.Wcf
                 {
                     // Force load all properties for existing
                     var applied = ApplicationContext.Current.GetService<IPatchService>().Patch(body, existing, force);
-                    var data = handler.Update(applied);
+                    var data = handler.Update(applied) as IdentifiedData;
                     WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.NoContent;
                     WebOperationContext.Current.OutgoingResponse.ETag = data.Tag;
                     WebOperationContext.Current.OutgoingResponse.LastModified = applied.ModifiedOn.DateTime;
@@ -866,7 +867,7 @@ namespace SanteDB.Messaging.HDSI.Wcf
         public ServiceResourceOptions Options(string resourceType)
         {
 
-            var handler = ResourceHandlerUtil.Current.GetResourceHandler(resourceType);
+            var handler = ResourceHandlerUtil.Current.GetResourceHandler<IHdsiServiceContract>(resourceType);
             if (handler == null)
                 throw new FileNotFoundException(resourceType);
             else
